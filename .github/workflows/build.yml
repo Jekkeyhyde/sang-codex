@@ -1,0 +1,28 @@
+name: build
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  msvc:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Build (MSVC)
+        shell: cmd
+        run: |
+          cd native
+          rc /nologo /fo res.res res.rc
+          cl /nologo /utf-8 /O2 /DUNICODE /D_UNICODE /D_WIN32_WINNT=0x0A00 main.c res.res /Fe:SANG_Codex.exe /link /SUBSYSTEM:WINDOWS /ENTRY:wWinMainCRTStartup user32.lib gdi32.lib uxtheme.lib shell32.lib
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SANG_Codex
+          path: native/SANG_Codex.exe
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: native/SANG_Codex.exe
