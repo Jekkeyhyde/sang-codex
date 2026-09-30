@@ -160,11 +160,27 @@ body{background:radial-gradient(1200px 600px at 20% -10%,#16244a 0%,transparent 
 .list::-webkit-scrollbar,.det::-webkit-scrollbar,.cons-p::-webkit-scrollbar{width:0}
 .toast{color:var(--gold)!important}
 @media (max-width:700px){.list{max-height:30%!important}}
+.by{font:500 10px/1.2 Inter,sans-serif;color:#5f6b85;margin-top:2px;letter-spacing:.2px}.by b{color:#b89548;font-weight:600}
+@media (min-width:900px){
+ .win{display:grid!important;grid-template-columns:minmax(360px,38%) 1fr;grid-template-rows:auto auto auto auto auto auto minmax(0,1fr);
+   grid-template-areas:"brand brand" "top top" "tabs tabs" "cfg cfg" "chips chips" "hint hint" "list det";max-width:1500px;margin:0 auto}
+ .brand{grid-area:brand}.top{grid-area:top}.tabs{grid-area:tabs;max-width:520px}.cfg{grid-area:cfg}.chips{grid-area:chips;flex-wrap:wrap!important}.hint{grid-area:hint}
+ .list{grid-area:list;max-height:none!important;height:auto;overflow:auto;margin:6px 6px 14px 14px!important;min-height:0}
+ .det{grid-area:det;margin:6px 14px 14px 6px!important;min-height:0;overflow:auto}
+ .cons-p{grid-area:list;margin:6px 6px 14px 14px!important;min-height:0;overflow:auto}
+ .row .tt{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.3}
+ .det{padding:20px 24px 24px!important}
+}
+
+@media (min-width:900px){.row{flex-shrink:0}.win.cons .det{display:none!important}.win.cons .cons-p{grid-column:1 / -1;margin:6px 14px 14px!important}
+.win.cons .cons-p{display:grid!important;grid-template-columns:minmax(360px,38%) 1fr;gap:18px;align-items:start}
+.win.cons .cons-p .res{grid-column:2;grid-row:1 / span 20;border-top:0!important;margin-top:0!important;padding-top:0!important;position:sticky;top:0}
+.win.cons .cons-p .grp{grid-column:1}}
 </style></head><body>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs">Памятка · Орландо</div></div></div><div class="tools" id="tools"></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs">Памятка · Орландо</div><div class="by">vibecoded by <b>Andrew Santana</b></div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
