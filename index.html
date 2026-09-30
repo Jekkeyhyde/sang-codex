@@ -4,8 +4,9 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<meta name="theme-color" content="#0f1729">
+<meta name="theme-color" content="#070b16">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SANG Codex">
 <style>
 :root{--bg:#0f1729;--panel:#182338;--txt:#ecf0f6;--gold:#ffd26e;--muted:#96a5be;--sel:#344e7a;--on:#286e46;--line:#253350;--desk:#e9edf3;--deskT:#14213a;
@@ -94,10 +95,76 @@ body{background:var(--bg)}
 .chip{flex:0 0 auto;padding:4px 11px;font-size:12px}
 .opt{padding:5px 11px}
 .row{height:calc(var(--fs) + 14px)}
+
+:root{--bg:#070b16;--panel:#0f1629;--panel2:#141d35;--line:rgba(255,255,255,.07);--txt:#e9eef7;--muted:#8d9ab3;--gold:#f2c35b;--gold2:#e8b54a;--sel:#1b2a4d;--on:#1f7a52;--r:14px}
+body{background:radial-gradient(1200px 600px at 20% -10%,#16244a 0%,transparent 60%),radial-gradient(900px 500px at 110% 10%,#2a1f0a 0%,transparent 55%),var(--bg)!important;font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif}
+.win{background:transparent!important}
+.brand{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 6px}
+.logo{display:flex;align-items:center;gap:10px}
+.bt{font:800 17px/1.1 Inter,"Segoe UI",sans-serif;letter-spacing:.3px;background:linear-gradient(90deg,#fff,#f2c35b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bs{font:500 11px/1.2 Inter,sans-serif;color:var(--muted);margin-top:2px}
+.tools{display:flex;gap:6px}
+.tools .b{width:34px;height:34px;min-width:0;padding:0;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--txt);font:600 12px Inter,sans-serif}
+.tools .b:hover,.tools .b.on{background:rgba(242,195,91,.14);border-color:rgba(242,195,91,.35);color:var(--gold)}
+.top{padding:6px 14px 4px!important}
+.q{height:46px;border-radius:14px!important;padding:0 14px 0 42px!important;background:rgba(255,255,255,.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238d9ab3' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 14px center/18px!important;border:1px solid var(--line)!important;font-size:16px!important;transition:border-color .15s,box-shadow .15s}
+.q:focus{border-color:rgba(242,195,91,.5)!important;box-shadow:0 0 0 4px rgba(242,195,91,.12)}
+.tabs{margin:8px 14px 2px;padding:4px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;gap:4px!important}
+.tab{border-radius:10px!important;background:transparent!important;color:var(--muted)!important;font:600 13px Inter,sans-serif!important;padding:9px 0!important;transition:all .15s}
+.tab.on{background:linear-gradient(180deg,#223566,#1a2a52)!important;color:#fff!important;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.cfg{padding:8px 14px 0!important}
+.cfg input{height:38px;border-radius:10px!important;background:rgba(255,255,255,.06)!important;border:1px solid var(--line)!important;font:13px Inter,sans-serif!important}
+.chips{padding:10px 14px 2px!important;gap:6px!important}
+.chip{border-radius:999px!important;padding:6px 13px!important;background:rgba(255,255,255,.05)!important;border:1px solid var(--line)!important;color:var(--muted)!important;font:600 12px Inter,sans-serif!important}
+.chip.on{background:rgba(242,195,91,.13)!important;border-color:rgba(242,195,91,.45)!important;color:var(--gold)!important}
+.hint{padding:6px 16px 4px!important;font:12px Inter,sans-serif!important;color:#66728b!important}
+.list{margin:4px 12px 0!important;background:transparent!important;display:flex;flex-direction:column;gap:6px;padding:2px}
+.row{height:auto!important;min-height:calc(var(--fs) + 22px);padding:9px 12px!important;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid var(--line);gap:10px!important;transition:background .12s,border-color .12s}
+.row:hover{background:rgba(255,255,255,.06)}
+.row.sel{background:linear-gradient(90deg,rgba(242,195,91,.13),rgba(34,53,102,.5))!important;border-color:rgba(242,195,91,.4)}
+.row .n{font:700 12px Inter,sans-serif;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.07);color:var(--gold);white-space:nowrap}
+.row .n.sit{background:rgba(242,195,91,.15);font-size:13px;padding:3px 7px}
+.row .n[data-g="uk"]{background:rgba(239,91,91,.16);color:#ff9d9d}
+.row .n[data-g="ak"]{background:rgba(240,160,64,.16);color:#ffc27a}
+.row .n[data-g="pk"]{background:rgba(52,211,193,.14);color:#7fe7da}
+.row .n[data-g="ust"]{background:rgba(165,140,240,.16);color:#c7b6ff}
+.row .n[data-g="ng"]{background:rgba(96,165,250,.16);color:#9cc7ff}
+.row .n[data-g="rul"]{background:rgba(63,191,117,.15);color:#8fe3b2}
+.row .tt{color:var(--txt)}
+.det,.cons-p{margin:8px 12px 12px!important;border-radius:var(--r);background:linear-gradient(180deg,rgba(20,29,53,.92),rgba(13,19,36,.92))!important;border:1px solid var(--line);padding:14px 14px 18px!important;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.det .h{font-size:calc(var(--fs) + 5px)!important;font-weight:800!important;color:var(--gold)!important;text-shadow:0 0 18px rgba(242,195,91,.25)}
+.det .p{display:inline-block;margin-top:.7em;padding:6px 10px;border-radius:10px;background:rgba(242,195,91,.1);border:1px solid rgba(242,195,91,.25)}
+.sec{margin-top:1.15em!important}
+.sec .lab{display:flex;align-items:center;gap:8px;font:800 11px Inter,sans-serif!important;letter-spacing:1px!important;color:#9aa6c0!important}
+.sec .lab::after{content:"";flex:1;height:1px;background:var(--line)}
+.say{border:1px solid var(--line)!important;border-left:3px solid var(--gold)!important;border-radius:12px!important;background:rgba(255,255,255,.04)!important;padding:10px 12px!important;margin:7px 0!important;position:relative;transition:transform .08s,background .12s}
+.say:active{transform:scale(.99)}
+.say::after{content:"⧉";position:absolute;right:10px;top:8px;color:#5f6b85;font-size:13px}
+.say.copied{border-left-color:#3fbf75!important;background:rgba(63,191,117,.08)!important}
+.steps{list-style:none;padding-left:0!important;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 34px!important;margin:2px 0!important}
+.steps li::before{content:counter(s);position:absolute;left:0;top:5px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(242,195,91,.15);color:var(--gold);font:800 12px Inter,sans-serif}
+.warn{background:rgba(255,160,122,.08);border:1px solid rgba(255,160,122,.25);border-radius:10px;padding:8px 10px;margin:6px 0;color:#ffc4ae!important}
+.arts .a{padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.035);border:1px solid var(--line);margin:6px 0!important}
+.full{border-left:2px solid rgba(255,255,255,.12);padding-left:10px;color:#c9d2e3!important}
+.chatbtn,.copyall{border-radius:10px!important;padding:7px 12px!important;font:600 12px Inter,sans-serif!important}
+.chatbtn{background:rgba(96,165,250,.16)!important;color:#bcd8ff!important;border:1px solid rgba(96,165,250,.3)!important}
+.copyall{background:rgba(63,191,117,.16)!important;color:#aef0c9!important;border:1px solid rgba(63,191,117,.35)!important}
+.grp .lab{font:800 11px Inter,sans-serif!important;letter-spacing:1px}
+.opt{border-radius:999px!important;background:rgba(255,255,255,.045)!important;border:1px solid var(--line)!important;padding:7px 12px!important;font:500 13px Inter,sans-serif!important;transition:all .12s}
+.opt.on{background:rgba(242,195,91,.14)!important;border-color:rgba(242,195,91,.5)!important;color:var(--gold)!important}
+.verdict{border-radius:12px!important;padding:11px 13px!important;font:700 14px Inter,sans-serif!important}
+.v-ok{background:rgba(63,191,117,.14)!important;border:1px solid rgba(63,191,117,.4);color:#9ff0bf!important}
+.v-no{background:rgba(239,91,91,.13)!important;border:1px solid rgba(239,91,91,.4);color:#ffb4b4!important}
+.v-warn{background:rgba(242,195,91,.12)!important;border:1px solid rgba(242,195,91,.4);color:#ffe08a!important}
+.list::-webkit-scrollbar,.det::-webkit-scrollbar,.cons-p::-webkit-scrollbar{width:0}
+.toast{color:var(--gold)!important}
+@media (max-width:700px){.list{max-height:30%!important}}
 </style></head><body>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs">Памятка · Орландо</div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
@@ -158,7 +225,8 @@ function search(){let rawIn=$('q').value.trim().replace(/([а-яёa-z])(\d)/gi,'
   {const toks=qo.trim().split(' ').map(t=>t.length>2?t:'\u0000'),hit=new Set();let multi=0,exp=0;a._k.forEach(o=>{if(o.w>1){if(qo.includes(o.k)){multi++;o.k.trim().split(' ').forEach(t=>toks.forEach((tk,i)=>{if(tk.startsWith(t))hit.add(i)}));}}else{let f=false;toks.forEach((tk,i)=>{if(tk.startsWith(o.k.trim())){hit.add(i);f=true}});if(!f&&q.includes(o.k))exp++;}});const base=a.t==='sit'?6:((a.code==='УК'||a.code==='АК')?5:3);s+=hit.size*base+multi*3+Math.min(exp,2)*(a.t==='sit'?2:1);}return s;});
  const top=Math.max(0,...sc),min=raw?Math.max(1,Math.floor(top/3)):1;
  shown=sc.map((s,i)=>[s,i]).filter(x=>x[0]>=min).sort((a,b)=>b[0]-a[0]||a[1]-b[1]).slice(0,grp==='all'?60:2000).map(x=>x[1]);cur=0;renderList();renderDet();}
-function rowHTML(a,k){const lab=a.t==='sit'?`<span class="n sit">🎯</span>`:`<span class="n">${esc(a.num)}${a.stars?'&nbsp;&nbsp;'+esc(a.stars):''}</span>`;
+function cg(c){if(c==='УК')return 'uk';if(c==='АК')return 'ak';if(c==='ПК')return 'pk';if(['ДУ','УВС','КУ'].includes(c))return 'ust';if(c==='НГ'||c==='Прил1')return 'ng';return 'rul';}
+function rowHTML(a,k){const lab=a.t==='sit'?`<span class="n sit">🎯</span>`:`<span class="n" data-g="${cg(a.code)}">${esc(a.num)}${a.stars?' '+esc(a.stars):''}</span>`;
  return `<div class="row${k===cur?' sel':''}" data-k="${k}">${lab}<span class="tt">${esc(a.title)}</span></div>`;}
 function renderList(){$('list').innerHTML=shown.map((i,k)=>rowHTML(IT[i],k)).join('');const s=$('list').querySelector('.sel');if(s)s.scrollIntoView({block:'nearest'});}
 let CHAT={parts:[],i:0,key:''};
@@ -173,7 +241,7 @@ function sayBlock(lines){SAYLINES=lines;return `<div class="sec"><div class="lab
 function sayBlockOld(lines){return `<div class="sec"><div class="lab">🗣 Говорить</div>${lines.map(l=>`<div class="say">«${esc(me(l))}»</div>`).join('')}</div>`;}
 function stepsBlock(st,lab='✅ Действия'){return st.length?`<div class="sec"><div class="lab">${lab}</div><ol class="steps">${st.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`:'';}
 function warnBlock(w){return w&&w.length?`<div class="sec"><div class="lab">⚠️ Важно</div>${w.map(x=>`<div class="warn">${esc(x)}</div>`).join('')}</div>`:'';}
-function artText(a){const tx=(a.full&&a.full.length<=320)?a.full:a.title;return `<div class="a"><b>${esc(a.num)}</b>${a.stars?' '+esc(a.stars):''} — ${esc(tx)}<br><span style="color:var(--gold);font-weight:700">${esc(a.pun)}</span>${a.jur?` <span class="j">· ${esc(a.jur)}</span>`:''}</div>`;}
+function artText(a){const tx=a.title;return `<div class="a"><b>${esc(a.num)}</b>${a.stars?' '+esc(a.stars):''} — ${esc(tx)}<br><span style="color:var(--gold);font-weight:700">${esc(a.pun)}</span>${a.jur?` <span class="j">· ${esc(a.jur)}</span>`:''}</div>`;}
 function autoScript(a){
  if(a.code==='УК'){const mil=/Военн/.test(a.jur);
   return {say:['Национальная гвардия! Стоять, руки вверх!','Вы задержаны. Руки за спину.','Национальная гвардия штата San-Andreas, [звание] [фамилия]. Моё удостоверение.',`Вы задержаны по статье ${a.num.slice(3)} Уголовного кодекса — ${short(a)}.`,'Сейчас будет проведён первичный обыск.','Вы будете переданы сотрудникам правоохранительных органов.'],
@@ -321,6 +389,7 @@ $('tSearch').onclick=()=>setTab(false);$('tCons').onclick=()=>setTab(true);
 $('chips').innerHTML=GROUPS.map(g=>`<button class="chip${g[0]==='all'?' on':''}" data-g="${g[0]}">${g[1]}</button>`).join('');
 $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));search();});
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
+['minus','plus','font','gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
 </body></html>
