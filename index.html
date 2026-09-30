@@ -191,7 +191,7 @@ body{background:radial-gradient(1200px 600px at 20% -10%,#16244a 0%,transparent 
  .brand .bt{font-size:16px}
  .tools .b{width:30px;height:30px;font-size:11px}
 }
-</style></head><body>
+.consreset{float:right;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:3px 10px;font:600 11px Inter,sans-serif;cursor:pointer;text-transform:none;letter-spacing:0}.grp .lab{display:block}</style></head><body>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
@@ -284,7 +284,7 @@ function artText(a){const tx=a.title;return `<div class="a"><b>${esc(a.num)}</b>
 function autoScript(a){
  if(a.code==='УК'){const mil=/Военн/.test(a.jur);
   return {say:['Национальная гвардия! Стоять, руки вверх!','Вы задержаны. Руки за спину.','Национальная гвардия штата San-Andreas, [звание] [фамилия]. Моё удостоверение.',`Вы задержаны по статье ${a.num.slice(3)} Уголовного кодекса — ${short(a)}.`,'Сейчас будет проведён первичный обыск.','Вы будете переданы сотрудникам правоохранительных органов.'],
-   steps:mil?['Военная статья — ваша компетенция (ПК 36)','Задерживаете сами: наручники → удостоверение → статья → Миранда (ПК 17)','Военнослужащий — вызвать MP и ОГП (ПК 19, ПГО 1.14)','Видео с начала']:['Задерживать только на Форте/около, на Кайо-Перико или если нарушение против SANG (ПГО 7.3)','Наручники (от Сержанта) → удостоверение → статья вслух → первичный обыск','Передать FIB / LSPD / LSCSD','Видео с начала']};}
+   steps:mil?['Военная статья — ваша компетенция (ПК 36)','Задерживаете сами: наручники → удостоверение → статья вслух → передать MP (Миранду читает MP)','Военнослужащий — вызвать MP и ОГП (ПК 19, ПГО 1.14)','Видео с начала']:['Задерживать только на Форте/около, на Кайо-Перико или если нарушение против SANG (ПГО 7.3)','Наручники (от Сержанта) → удостоверение → статья вслух → первичный обыск','Передать FIB / LSPD / LSCSD','Видео с начала']};}
  if(a.code==='АК')return {say:[`Прекратите. Это нарушение статьи ${a.num.slice(3)} Административного кодекса — ${short(a)}.`,'Выполните законное требование, иначе будете задержаны по статье 17.6 Уголовного кодекса.'],
    steps:['Штраф SANG не выписывает (АК 2.2) — только требование прекратить','Не выполнил — УК 17.6, задержание и передача','Или вызвать LSPD / LSCSD']};
  if(a.code==='ДУ')return {say:[`Боец, [фамилия], прекратить. Это нарушение пункта ${a.num.slice(3)} Дисциплинарного устава.`],
@@ -316,66 +316,81 @@ win.addEventListener('wheel',e=>{if(e.ctrlKey){e.preventDefault();fs=Math.min(30
 const PLACES=[['kayo','Кайо-Перико'],['air','Аэропорт Кайо'],['fort','Форт-Занкудо'],['carrier','Авианосец'],['white','Белая зона у Форта'],['blaine','Округ Блейн'],['city','Город Лос-Сантос']];
 const WHO=[['civ','Гражданский'],['gov','Госслужащий'],['sang','Военный SANG']];
 const FACTS=[
- ['shot','Стрелял в военных','УК 17.1','посягательство на жизнь военнослужащего при исполнении',1],
- ['hit','Ударил / угрожал военному','УК 17.2','применение насилия в отношении военнослужащего при исполнении',1],
- ['insult','Оскорбил военного','УК 17.3','оскорбление представителя власти при исполнении',1],
- ['disobey','Не выполнил требование','УК 17.6','неповиновение законному требованию',0],
- ['run','Убегал / скрывался','УК 16.12','уклонение от задержания',0],
- ['grow','Выращивал / поливал','УК 13.1','незаконное кустарное производство наркотических веществ',0],
- ['steal','Угнал транспорт','УК 10.5','неправомерное завладение транспортным средством',0],
- ['stealgov','Угнал гос. транспорт','УК 10.5.1','неправомерное завладение государственным транспортным средством',0],
- ['rob','Грабёж / разбой с оружием','УК 10.4','разбой',0],
- ['hostage','Держал заложника','УК 7.1','похищение человека',0],
+ ['shot','Стрелял в военных','УК 17.1','посягательство на жизнь военнослужащего при исполнении'],
+ ['hit','Ударил / угрожал военному','УК 17.2','применение насилия в отношении военнослужащего при исполнении'],
+ ['insult','Оскорбил военного','УК 17.3','оскорбление представителя власти при исполнении'],
+ ['disobey','Не выполнил требование','УК 17.6','неповиновение законному требованию'],
+ ['run','Убегал / скрывался','УК 16.12','уклонение от задержания'],
+ ['beat','Побои / драка','УК 6.1 ч.1','побои'],
+ ['threat','Угрожал убийством','УК 6.6','угроза убийством'],
+ ['kill','Убийство','УК 6.2 ч.1','убийство'],
+ ['grow','Выращивал / поливал','УК 13.1','незаконное кустарное производство наркотических веществ'],
+ ['steal','Угнал транспорт','УК 10.5','неправомерное завладение транспортным средством'],
+ ['stealgov','Угнал гос. транспорт','УК 10.5.1','неправомерное завладение государственным транспортным средством'],
+ ['stealgun','Украл оружие / со склада','УК 12.10','хищение оружия'],
+ ['damage','Повредил гос. имущество','УК 10.8','уничтожение или повреждение государственного имущества'],
+ ['rob','Грабёж / разбой с оружием','УК 10.4','разбой'],
+ ['hostage','Держал заложника','УК 7.1','похищение человека'],
+ ['bribe','Предлагал взятку','УК 15.5','дача взятки должностному лицу'],
+ ['fakedoc','Поддельный документ','УК 17.8','подделка документа'],
 ];
 const WEAP=[['none','Нет оружия'],['lic','С лицензией'],['nolic','Без лицензии'],['fake','Лицензия поддельная'],['gov','Гос. образца (серийник GOV/FIB/LSPD/SHPD/SANG/EMS/WN)']];
 const WX=[['incar','Было в машине'],['drawn','Доставал на людях'],['govgear','Броня / спецсредства гос. образца'],['bomb','Взрывчатка']];
 const DRUGS=[['none','Нет'],['lt3','Меньше 3 г'],['ge3','От 3 г'],['gt25','Свыше 25 г / сбыт']];
-const MIL=[['m181','Не выполнил приказ (вред службе)','УК 18.1','неисполнение приказа начальника'],['m182','Самоволка / неявка','УК 18.2','самовольное оставление места службы'],['m183','Дезертирство','УК 18.3','дезертирство']];
-let C={place:'kayo',who:'civ',drug:'none',weap:'none',wx:new Set(),f:new Set(),event:false,vp:false,access:false,request:false,duty:true};
+const MIL=[['m181','Не выполнил приказ (вред службе)','УК 18.1','неисполнение приказа начальника'],['m182','Самоволка / неявка','УК 18.2','самовольное оставление места службы'],['m183','Дезертирство','УК 18.3','дезертирство'],['m185','Уничтожил военную технику / оружие','УК 18.5','умышленное уничтожение военной техники'],['m143','Разгласил военную тайну','УК 14.3','разглашение государственной тайны'],['m154','Взял взятку','УК 15.4','получение взятки должностным лицом']];
+const MILCODES=['УК 18.1','УК 18.2','УК 18.3','УК 18.5'];
+const C0=()=>({place:'kayo',who:'civ',drug:'none',weap:'none',wx:new Set(),f:new Set(),event:false,vp:false,access:false,request:false,duty:true,dead:false});
+let C=C0();
 function opt(group,val,label,on){return `<label class="opt${on?' on':''}" data-g="${group}" data-v="${val}"><input type="checkbox">${esc(label)}</label>`;}
 function renderCons(){
  const el=$('cons');const isM=C.who==='sang';
- let x=`<div class="grp"><div class="lab">📍 Где</div><div class="opts">${PLACES.map(p=>opt('place',p[0],p[1],C.place===p[0])).join('')}</div></div>`;
+ let x=`<div class="grp"><div class="lab">📍 Где <button class="consreset" id="consreset">Сбросить</button></div><div class="opts">${PLACES.map(p=>opt('place',p[0],p[1],C.place===p[0])).join('')}</div></div>`;
  x+=`<div class="grp"><div class="lab">👤 Кто</div><div class="opts">${WHO.map(p=>opt('who',p[0],p[1],C.who===p[0])).join('')}${C.who==='gov'?opt('flag','duty','При исполнении',C.duty):''}</div></div>`;
- x+=`<div class="grp"><div class="lab">⚡ Что сделал</div><div class="opts">${FACTS.map(f=>opt('f',f[0],f[1],C.f.has(f[0]))).join('')}${isM?MIL.map(f=>opt('f',f[0],f[1],C.f.has(f[0]))).join(''):''}</div></div>`;
+ x+=`<div class="grp"><div class="lab">⚡ Что сделал</div><div class="opts">${FACTS.map(f=>opt('f',f[0],f[1],C.f.has(f[0]))).join('')}</div></div>`;
+ if(isM)x+=`<div class="grp"><div class="lab">🎖 Военные преступления (свой боец)</div><div class="opts">${MIL.map(f=>opt('f',f[0],f[1],C.f.has(f[0]))).join('')}</div></div>`;
  x+=`<div class="grp"><div class="lab">🔫 Оружие</div><div class="opts">${WEAP.map(p=>opt('weap',p[0],p[1],C.weap===p[0])).join('')}</div><div class="opts" style="margin-top:4px">${WX.map(p=>opt('wx',p[0],p[1],C.wx.has(p[0]))).join('')}</div></div>`;
  x+=`<div class="grp"><div class="lab">🌿 Наркотики при себе</div><div class="opts">${DRUGS.map(p=>opt('drug',p[0],p[1],C.drug===p[0])).join('')}</div></div>`;
- x+=`<div class="grp"><div class="lab">⚙ Обстановка</div><div class="opts">${opt('flag','event','Идёт нападение (мероприятие)',C.event)}${opt('flag','vp','ЧС / военное положение',C.vp)}${opt('flag','access','Есть доступ / пропуск',C.access)}${opt('flag','request','Выехали по запросу LSPD/FIB',C.request)}</div></div>`;
+ x+=`<div class="grp"><div class="lab">⚙ Обстановка</div><div class="opts">${opt('flag','event','Идёт нападение (мероприятие)',C.event)}${opt('flag','vp','ЧС / военное положение',C.vp)}${opt('flag','access','Есть доступ / пропуск',C.access)}${opt('flag','request','Выехали по запросу LSPD/FIB',C.request)}${opt('flag','dead','Убит / уже в больнице',C.dead)}</div></div>`;
  x+=`<div class="res" id="res">${consResult()}</div>`;
  el.innerHTML=x;}
+function vnum(n){return n.slice(3).replace(' ч.',' часть ');}
 function consResult(){
  const arts=[],phr=[],steps=[],warn=[];let verdict='',vcls='v-ok';
  const add=(n,p)=>{if(!arts.find(a=>a.n===n))arts.push({n,p})};
- const isGov=C.who==='gov',isM=C.who==='sang';
+ const isGov=C.who==='gov',isM=C.who==='sang',civ=C.who==='civ';
+ const evPlace=C.event&&(C.place==='kayo'||C.place==='fort');
  const guarded=['kayo','fort','carrier'].includes(C.place);
  const govDutyKayo=isGov&&C.duty&&C.place==='kayo';
- if(guarded&&!C.access&&!govDutyKayo&&!(C.place==='kayo'&&C.event)){if(isGov)add('УК 12.7 ч.3','проникновение на особо охраняемый объект должностным лицом');else if(!isM)add('УК 12.7 ч.2','незаконное нахождение на особо охраняемом объекте');}
+ if(guarded&&!C.access&&!govDutyKayo){if(isGov)add('УК 12.7 ч.3','проникновение на особо охраняемый объект должностным лицом');else if(!isM)add('УК 12.7 ч.2','незаконное нахождение на особо охраняемом объекте');}
  FACTS.forEach(f=>{if(C.f.has(f[0]))add(f[2],f[3])});
- MIL.forEach(f=>{if(C.f.has(f[0]))add(f[2],f[3])});
- const civ=C.who==='civ';
+ if(isM)MIL.forEach(f=>{if(C.f.has(f[0]))add(f[2],f[3])});
  if(C.weap==='nolic'){add('УК 12.8 ч.2','незаконное ношение оружия');if(C.wx.has('incar'))add('УК 12.8 ч.1','незаконная перевозка оружия в транспортном средстве');}
  if(C.weap==='fake'){add('УК 17.8','использование поддельной лицензии');add('УК 12.8 ч.2','незаконное ношение оружия');if(C.wx.has('incar'))add('УК 12.8 ч.1','незаконная перевозка оружия в транспортном средстве');}
  if(C.weap==='gov'&&civ)add('УК 12.8.1','ношение гражданским оружия государственного образца');
  if(C.wx.has('govgear')&&civ)add('УК 12.8.1','ношение гражданским спецсредств государственного образца');
  if(C.wx.has('bomb'))add('УК 12.9','незаконное ношение взрывчатки');
  if(C.wx.has('drawn')&&C.weap!=='none'){if(civ)add('АК 5.4 ч.1','обнажение оружия гражданским лицом');else add('АК 5.4 ч.2','обнажение служебного оружия без законных оснований');}
- if(C.f.has('govgear')&&C.who!=='civ'){const i=arts.findIndex(a=>a.n==='УК 12.8.1');if(i>=0)arts.splice(i,1);}
  if(C.drug==='lt3')add('АК 8.1','незаконное хранение наркотических веществ менее 3 грамм');
  if(C.drug==='ge3')add(isGov||isM?'УК 13.4':'УК 13.2',isGov||isM?'наркотики у сотрудника государственной структуры':'незаконное хранение наркотических средств');
  if(C.drug==='gt25')add(isGov||isM?'УК 13.4':'УК 13.2.1',isGov||isM?'наркотики у сотрудника государственной структуры':'хранение наркотических средств в крупном размере или с целью сбыта');
  const against=['shot','hit','insult'].some(k=>C.f.has(k));
- const milCrime=isM&&MIL.some(f=>C.f.has(f[0]));
+ const milCrime=isM&&arts.some(a=>MILCODES.includes(a.n));
  const zone=['kayo','fort','white','carrier'].includes(C.place);
  const ukArts=arts.filter(a=>a.n.startsWith('УК'));
  if(!arts.length){verdict='⛔ Нет оснований для задержания — отметь, что он сделал.';vcls='v-no';}
+ else if(C.dead){verdict='⛔ Задерживать нельзя: он убит и уже в больнице (ПГО 8.2, WARN). Передай данные и видео LSPD / FIB — они выдают розыск.';vcls='v-no';}
  else if(!ukArts.length){verdict='⚠️ Только АК — задерживать нельзя, штраф выписывает полиция (АК 2.2). Требование прекратить, иначе 17.6.';vcls='v-warn';}
- else if(zone||against||milCrime||C.vp){verdict='✅ Можно задерживать'+(C.place==='carrier'?' (Авианосец — дислокация НГ по закону о НГ ст. 2, но в ПГО 7.3 прямо не назван)':'')+(zone?'':against?' — нарушение против SANG (ПГО 7.3)':milCrime?' — военное преступление (ПГО 7.3, исключение)':' — ЧС / ВП (ПГО 7.3, исключение)');}
+ else if(zone||against||milCrime||C.vp){verdict='✅ Можно задерживать'+(evPlace?' — но только после окончания нападения':'')+(C.place==='carrier'?' (Авианосец — дислокация НГ по закону о НГ ст. 2, но в ПГО 7.3 прямо не назван)':'')+(zone?'':against?' — нарушение против SANG (ПГО 7.3)':milCrime?' — военное преступление (ПГО 7.3, исключение)':' — ЧС / ВП (ПГО 7.3, исключение)');if(evPlace)vcls='v-warn';}
  else{verdict='⛔ Задерживать нельзя: не зона SANG и нарушение не против вас (ПГО 7.3, Demorgan 50–90). Вызови LSPD / LSCSD / FIB и передай данные.';vcls='v-no';}
- if(C.place==='kayo'&&C.event){warn.push('Идёт нападение на Кайо-Перико: наручники и тепловизор запрещены (Кайо 2.1, Demorgan 60–90). Задержать причастных — только после нападения. 12.7 во время мероприятия не ставлю.');}
+ if(C.place==='kayo'&&C.event)warn.push('Идёт нападение на Кайо-Перико: наручники и тепловизор запрещены (Кайо 2.1, Demorgan 60–90). Задержать причастных — только после нападения.');
+ if(C.place==='fort'&&C.event)warn.push('Идёт нападение на Форт-Занкудо: наручники запрещены (Форт 3.5, Demorgan 35). Задержать причастных — только после нападения.');
+ if(C.event&&!(C.place==='kayo'||C.place==='fort'))warn.push('Нападения-мероприятия бывают только на Форт и Кайо-Перико — здесь это обычная ситуация.');
+ if((C.place==='fort'||C.place==='carrier')&&!C.event&&!isM&&!C.access)warn.push('Посторонний на Форте или Авианосце: задержать; нет возможности — огонь на поражение без предупреждения (закон о НГ ст. 2 ч.7).');
  if(C.place==='air')warn.push('Аэропорт Кайо-Перико — открытая территория, 12.7 нет (Приложение №1 ст. 3).');
  if(C.place==='white')warn.push('Белая зона до КПП — свободна для граждан (ПГО 7.3). 12.7 нет; можно спросить цель и документы (Прил. №1 ст. 7). Не ушёл по требованию — 17.6.');
- if(C.place==='city'&&!C.request&&!C.f.has('run'))warn.push('В городе без основания (запрос, погоня, доставка задержанного и т.д.) — АК 9.5, штраф 20.000$ (закон о НГ ст. 2).');
+ if(C.place==='city'&&!C.request&&!C.f.has('run'))warn.push('В городе без основания (запрос, погоня, доставка задержанного) — АК 9.5, штраф 20.000$ (закон о НГ ст. 2).');
  if(C.place==='city')warn.push('Город — зона LSPD: вызвать их по /dep.');
+ if(C.place==='blaine')warn.push('Округ Блейн: в 2 км от Форта можно останавливать и досматривать подозрительных (закон о НГ ст. 7), но задерживать — только если нарушение против SANG или ЧС/ВП.');
  if(govDutyKayo)warn.push('Госслужащий при исполнении имеет доступ на Кайо-Перико — 12.7 нет (Прил. №1 ст. 4 «ж»).');
  if(isGov&&C.duty&&(C.place==='fort'||C.place==='carrier'))warn.push('На Форт и Авианосец госслужащим доступ только в указанных случаях (спецоперация по защите Форта, закреплённые ОГП, EMS на проверке, поставки с Авианосца — Прил. №1 ст. 4). Если так — отметь «Есть доступ».');
  if(isGov)warn.push('Госслужащий: вызвать его руководство и ОГП, ждать до 15 мин (ПК 19). В КПЗ — только после решения прокурора (ПГО 1.14). Нельзя задерживать, пока он сам ведёт задержание (ПГО 1.20).');
@@ -384,42 +399,51 @@ function consResult(){
  if(C.weap!=='none')warn.push('Спроси лицензию на оружие или коллекционера (КУ 3.12). Изъятие — только через функционал (ПГО 1.6), на видео.');
  if(C.weap==='gov'&&!civ)warn.push('Оружие гос. образца у госслужащего — если табельное своей структуры, это не нарушение.');
  if(C.f.has('shot'))warn.push('Стреляют по вам — ответный огонь сразу, без предупреждения (закон о НГ 20.1). В толпе — нельзя (20.2).');
- if(C.place==='kayo'&&!C.event&&(C.weap!=='none'||C.f.has('shot')))warn.push('На Кайо-Перико огонь по вооружённым — без предупреждения (Правила зон 2.3).');
+ if(C.place==='kayo'&&(C.weap!=='none'||C.f.has('shot')))warn.push('Кайо-Перико — Red zone: огонь по вооружённым без предупреждения (Зоны 2.3).');
  if(C.f.has('run'))warn.push('Не догнал — задержать позже по этой ситуации нельзя без розыска (ПГО 8.7). Боло SANG не ставит — передай данные LSPD / FIB.');
- const cuffs=!(C.place==='kayo'&&C.event);
- const canDet=vcls==='v-ok';
+ if(C.f.has('bribe'))warn.push('Отказ от взятки — вслух и на видео.');
+ if(C.f.has('kill'))warn.push('Убийство военного или двух и более лиц — уже УК 6.3. Вызвать EMS.');
+ const cuffs=!evPlace;
+ const canDet=vcls==='v-ok'||(vcls==='v-warn'&&evPlace);
  if(canDet){
   phr.push('Национальная гвардия! Стоять! Руки вверх!');
   if(cuffs)phr.push('Вы задержаны. Руки за спину.');
   phr.push('Национальная гвардия штата San-Andreas, [звание] [фамилия]. Моё удостоверение.');
-  const list=arts.filter(a=>a.n.startsWith('УК')).map(a=>`статье ${a.n.slice(3).replace(' ч.',' часть ')} Уголовного кодекса — ${a.p}`);
+  const list=arts.filter(a=>a.n.startsWith('УК')).map(a=>`статье ${vnum(a.n)} Уголовного кодекса — ${a.p}`);
   phr.push('Вы задержаны по '+list.join(', по ')+'.');
   phr.push('Сейчас будет проведён первичный обыск. Есть при себе оружие, колюще-режущие предметы, наркотики?');
   if(C.weap!=='none')phr.push('Предъявите лицензию на оружие или лицензию коллекционера.');
   phr.push(isM?'Вы будете переданы Military Police.':'Вы будете доставлены и переданы сотрудникам правоохранительных органов.');
   steps.push('Видео — с первого шага (ПК 32, ПГО 8.4)');
-  if(cuffs)steps.push('Наручники — от Сержанта (ДУ 4.42)');
-  steps.push('Удостоверение, статьи вслух полностью (ПГО 1.8)','Первичный обыск, изъятие через функционал (ПГО 1.6)');
+  if(cuffs)steps.push('Наручники — от Сержанта (ДУ 4.42)');else steps.push('Наручники — только после окончания нападения');
+  steps.push('Удостоверение, основание и статьи вслух полностью (ПГО 1.8, закон о НГ ст. 10)','Первичный обыск, изъятие через функционал (ПГО 1.6)');
+  steps.push('Миранду читает тот, кому передаёте ('+(isM?'MP':'полиция / FIB')+'). До неё не допрашивать — показания недопустимы (ПК 12)');
   if(isGov)steps.push('Вызвать руководство задержанного и ОГП (ПК 19)');
-  if(isM)steps.push('Вызвать MP; военная статья — компетенция SANG (ПК 36)');else steps.push('Вызвать FIB / LSPD / LSCSD по /dep или везти самим (ПГО 7.3), не затягивать (ПГО 1.4)');
+  if(isM)steps.push('Вызвать MP');else steps.push('Вызвать FIB / LSPD / LSCSD по /dep или везти самим (ПГО 7.3), не затягивать (ПГО 1.4)');
   steps.push('Час задержания идёт с наручников (ПК 20)');
- }else if(arts.length){
-  phr.push('Прекратите. Вы нарушаете '+arts.map(a=>`${a.n.startsWith('АК')?'статью '+a.n.slice(3)+' Административного кодекса':'статью '+a.n.slice(3)+' Уголовного кодекса'} — ${a.p}`).join(', ')+'.');
+ }else if(arts.length&&!C.dead){
+  phr.push('Прекратите. Вы нарушаете '+arts.map(a=>`статью ${vnum(a.n)} ${a.n.startsWith('АК')?'Административного':'Уголовного'} кодекса — ${a.p}`).join(', ')+'.');
   phr.push('Выполните законное требование, иначе будете задержаны по статье 17.6 Уголовного кодекса.');
   steps.push('Требование прекратить','Вызвать LSPD / LSCSD / FIB и передать данные');
  }
  const maxSt=arts.map(a=>(byNum[a.n]&&byNum[a.n].stars||'').length).reduce((m,v)=>Math.max(m,v),0);
  let r=`<div class="verdict ${vcls}">${esc(verdict)}</div>`;
- if(arts.length){r+=`<div class="sec"><div class="lab">📋 Статьи${maxSt?` · розыск до ${'★'.repeat(maxSt)}`:''}</div><div class="arts">${arts.map(a=>{const b=byNum[a.n];return b?`<div class="a"><b>${esc(b.num)}</b>${b.stars?' '+esc(b.stars):''} — ${esc(b.title)}<br><span style="color:var(--gold);font-weight:700">${esc(b.pun)}</span></div>`:`<div class="a"><b>${esc(a.n)}</b></div>`}).join('')}</div><div class="muted" style="font-size:12px">Несколько статей — поглощение более строгим; при задержании можно сложить до 10 лет (УК 5.2).</div></div>`;}
+ if(arts.length){r+=`<div class="sec"><div class="lab">📋 Статьи${maxSt?` · розыск до ${'★'.repeat(maxSt)}`:''}</div><div class="arts">${arts.map(a=>{const b=byNum[a.n];return b?`<div class="a"><b>${esc(b.num)}</b>${b.stars?' '+esc(b.stars):''} — ${esc(b.title)}<br><span style="color:var(--gold);font-weight:700">${esc(b.pun)}</span></div>`:`<div class="a"><b>${esc(a.n)}</b></div>`}).join('')}</div>${arts.length>1?'<div class="muted" style="font-size:12px">Несколько статей — окончательное наказание по поглощению более строгим (УК 5.2 ч.4). Полное сложение (не больше 10 лет) — только если новое преступление выявлено в ходе задержания (ч.6). Назначает тот, кто оформляет дело.</div>':''}</div>`;}
  if(phr.length){r+=`<div class="sec"><div class="lab">🗣 Говорить</div><button class="copyall" id="copyall">Скопировать всю речь</button><button class="chatbtn" id="chatcons">💬 В чат — по частям</button>${phr.map(l=>`<div class="say">«${esc(me(l))}»</div>`).join('')}</div>`;}
  r+=stepsBlock(steps)+warnBlock(warn);
+ if(canDet||C.dead){const t=new Date();const hh=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
+  const pl=PLACES.find(p=>p[0]===C.place)[1];const nums=arts.filter(a=>a.n.startsWith('УК')).map(a=>a.n.slice(3)).join(', ');
+  const dep=C.dead?`/dep [SANG] Нарушитель [ID, приметы] погиб при задержании и направлен в больницу, ${pl}. Статьи: УК ${nums}. Видео есть. Прошу выдать розыск.`:(isM?`/r [SANG] Задержан военнослужащий [звание, фамилия], ${pl}, ${hh}. Статьи: УК ${nums}. Прошу MP.`:`/dep [SANG] Задержан [ID, имя], ${pl}, время задержания ${hh}. Статьи: УК ${nums}. Прошу принять задержанного.`);
+  r+=`<div class="sec"><div class="lab">📻 Передача по рации</div><div class="say">«${esc(me(dep))}»</div></div>`;}
  const fulls=arts.map(a=>byNum[a.n]).filter(a=>a&&a.full);
  if(fulls.length&&canDet)r+=`<div class="sec"><div class="lab">📖 Если просит расшифровать</div>${fulls.map(a=>`<div class="full" style="margin:.3em 0"><b style="font-style:normal;color:var(--gold)">${esc(a.num)}</b> — «${esc(a.full.replace(/\n+/g,' '))}»</div>`).join('')}</div>`;
  consResult.phr=phr;return r;}
+
 $('cons').addEventListener('click',e=>{
  if(e.target.id==='chatcons'){chatCopy(e.target,consResult.phr||[]);return;}
  if(e.target.id==='copyall'){const t=(consResult.phr||[]).map(me).join('\n');try{navigator.clipboard.writeText(t)}catch(_){}flash('Речь скопирована');return;}
  const s=e.target.closest('.say');if(s){const t=s.textContent.replace(/^«|»$/g,'');try{navigator.clipboard.writeText(t)}catch(_){}s.classList.add('copied');setTimeout(()=>s.classList.remove('copied'),900);return;}
+ if(e.target.id==='consreset'){C=C0();const sc=0;renderCons();return;}
  const o=e.target.closest('.opt');if(!o)return;e.preventDefault();const g=o.dataset.g,v=o.dataset.v;
  if(g==='place')C.place=v;else if(g==='who'){C.who=v;if(v!=='sang')MIL.forEach(f=>C.f.delete(f[0]));}else if(g==='drug')C.drug=v;else if(g==='weap')C.weap=v;else if(g==='wx'){C.wx.has(v)?C.wx.delete(v):C.wx.add(v);}else if(g==='f'){C.f.has(v)?C.f.delete(v):C.f.add(v);}else if(g==='flag')C[v]=!C[v];
  const sc=$('cons').scrollTop;renderCons();$('cons').scrollTop=sc;});
