@@ -191,7 +191,13 @@ body{background:radial-gradient(1200px 600px at 20% -10%,#16244a 0%,transparent 
  .brand .bt{font-size:16px}
  .tools .b{width:30px;height:30px;font-size:11px}
 }
-.consreset{float:right;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:3px 10px;font:600 11px Inter,sans-serif;cursor:pointer;text-transform:none;letter-spacing:0}.grp .lab{display:block}</style></head><body>
+.consreset{float:right;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:3px 10px;font:600 11px Inter,sans-serif;cursor:pointer;text-transform:none;letter-spacing:0}.grp .lab{display:block}
+@media (min-width:900px){
+ .win{grid-template-areas:"brand brand" "top top" "cfg cfg" "chips chips" "hint hint" "list det" "x x" !important;grid-template-rows:auto auto auto auto auto minmax(0,1fr) 0 !important}
+ .top{grid-area:top!important;padding-right:calc(14px + 330px + 10px)!important}
+ .tabs{grid-area:top!important;justify-self:end;align-self:center;width:330px;max-width:330px!important;margin:4px 14px 0 0!important}
+}
+</style></head><body>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
