@@ -233,7 +233,7 @@ function inGrp(a){if(grp==='all')return true;if(grp==='sit')return a.t==='sit';i
 const SYN={'стрел':'огонь выстрел стрельб','шмаля':'стрел огонь','пальн':'стрел огонь','удар':'насили напал бьет','бьет':'удар насили','избил':'удар насили побои','тачк':'авто транспорт машин','машин':'авто транспорт','угна':'угон завладен','ствол':'оружие','пушк':'оружие','нарк':'наркот','трав':'наркот куст','бронь':'бронежилет','броник':'бронежилет','маск':'маска лицо','мент':'полиц','коп':'полиц','гос':'государствен','фз':'форт','форт':'занкудо','остров':'кайо перико','кайо':'остров','матер':'мат оскорб','послал':'оскорб','обзыва':'оскорб','убег':'скрыл уклон','сбеж':'скрыл уклон','документ':'удостовер паспорт','мусор':'полиц','фэбээр':'fib','фбр':'fib','фибов':'fib','лспд':'lspd полиц','шериф':'lscsd','вертушк':'вертолет','тазер':'шокер спецсредств','гоп':'грабеж','барыг':'сбыт наркот','закладк':'сбыт наркот','мочкан':'убил','завалил':'убил','грохнул':'убил','заковал':'наручник','браслет':'наручник','ксива':'удостовер','корочк':'удостовер','личк':'личный транспорт','хаммер':'военн машин','броневик':'военн машин','база':'форт','взлетк':'впп','рация':'рации доклад','афк':'бездейств','самовол':'самовольн','кпз':'арест','ордер':'обыск','наркота':'наркот','лиценз':'лицензия оружие','серийн':'серийник гос ствол','ствол':'оружие','пушк':'оружие','увал':'увольнит','отпуск':'отпуск'};
 function expand(q){let add='';Object.keys(SYN).forEach(k=>{if(q.includes(k))add+=' '+SYN[k]});return q+add+' ';}
 const HINT='Что случилось? · ↑↓ листать · клик по фразе — копировать';
-let fs=13,fi=0,shown=[],cur=0,topOn=true;
+let fs=12,fi=0,shown=[],cur=0,topOn=true;
 const $=id=>document.getElementById(id),win=$('win');
 const low=s=>(' '+String(s).toLowerCase().replace(/ё/g,'е')+' ');
 const esc=s=>String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
@@ -453,7 +453,7 @@ $('chips').innerHTML=GROUPS.map(g=>`<button class="chip${g[0]==='all'?' on':''}"
 $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));search();});
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
 ['minus','plus','font','gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});
-try{if(localStorage.getItem('ps_fsv')!=='2'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','2');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;if(b>=0&&b<5)fi=b;}catch(_){}
+try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','3');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;if(b>=0&&b<5)fi=b;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
 </body></html>
