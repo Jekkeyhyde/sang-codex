@@ -176,11 +176,15 @@ body{background:radial-gradient(1200px 600px at 20% -10%,#16244a 0%,transparent 
 .win.cons .cons-p{display:grid!important;grid-template-columns:minmax(360px,38%) 1fr;gap:18px;align-items:start}
 .win.cons .cons-p .res{grid-column:2;grid-row:1 / span 20;border-top:0!important;margin-top:0!important;padding-top:0!important;position:sticky;top:0}
 .win.cons .cons-p .grp{grid-column:1}}
+.mk{flex:0 0 auto;font-size:13px}.mk.f{color:var(--gold)}.mk.r{opacity:.7}
+.favb{float:right;margin:-2px 0 6px 10px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 11px;font:600 12px Inter,sans-serif;cursor:pointer}
+.favb.on{background:rgba(242,195,91,.14);border-color:rgba(242,195,91,.45);color:var(--gold)}
+.bd{color:#8fb0e0}
 </style></head><body>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs">Памятка · Орландо</div><div class="by">vibecoded by <b>Andrew Santana</b></div></div></div><div class="tools" id="tools"></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs">Памятка · Орландо · <span class="bd">база от 30.09.2026</span></div><div class="by">vibecoded by <b>Andrew Santana</b></div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
@@ -218,7 +222,7 @@ function inGrp(a){if(grp==='all')return true;if(grp==='sit')return a.t==='sit';i
 const SYN={'стрел':'огонь выстрел стрельб','шмаля':'стрел огонь','пальн':'стрел огонь','удар':'насили напал бьет','бьет':'удар насили','избил':'удар насили побои','тачк':'авто транспорт машин','машин':'авто транспорт','угна':'угон завладен','ствол':'оружие','пушк':'оружие','нарк':'наркот','трав':'наркот куст','бронь':'бронежилет','броник':'бронежилет','маск':'маска лицо','мент':'полиц','коп':'полиц','гос':'государствен','фз':'форт','форт':'занкудо','остров':'кайо перико','кайо':'остров','матер':'мат оскорб','послал':'оскорб','обзыва':'оскорб','убег':'скрыл уклон','сбеж':'скрыл уклон','документ':'удостовер паспорт','мусор':'полиц','фэбээр':'fib','фбр':'fib','фибов':'fib','лспд':'lspd полиц','шериф':'lscsd','вертушк':'вертолет','тазер':'шокер спецсредств','гоп':'грабеж','барыг':'сбыт наркот','закладк':'сбыт наркот','мочкан':'убил','завалил':'убил','грохнул':'убил','заковал':'наручник','браслет':'наручник','ксива':'удостовер','корочк':'удостовер','личк':'личный транспорт','хаммер':'военн машин','броневик':'военн машин','база':'форт','взлетк':'впп','рация':'рации доклад','афк':'бездейств','самовол':'самовольн','кпз':'арест','ордер':'обыск','наркота':'наркот','лиценз':'лицензия оружие','серийн':'серийник гос ствол','ствол':'оружие','пушк':'оружие','увал':'увольнит','отпуск':'отпуск'};
 function expand(q){let add='';Object.keys(SYN).forEach(k=>{if(q.includes(k))add+=' '+SYN[k]});return q+add+' ';}
 const HINT='Что случилось? · ↑↓ листать · клик по фразе — копировать';
-let fs=14,fi=0,shown=[],cur=0,topOn=true;
+let fs=13,fi=0,shown=[],cur=0,topOn=true;
 const $=id=>document.getElementById(id),win=$('win');
 const low=s=>(' '+String(s).toLowerCase().replace(/ё/g,'е')+' ');
 const esc=s=>String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
@@ -240,10 +244,18 @@ function search(){let rawIn=$('q').value.trim().replace(/([а-яёa-z])(\d)/gi,'
   q.split(' ').filter(w=>w.length>2).forEach(w=>{const orig=qo.includes(' '+w+' ');const st=w.length>6?w.slice(0,w.length-2):w;if(!orig){if(a._t.includes(st))s+=2;return;}if(a._t.includes(st))s+=a.t==='sit'?3:5;else if(st.length>3&&a._f.includes(st))s+=1;if(st.length>3&&a._d.includes(st))s+=4});
   {const toks=qo.trim().split(' ').map(t=>t.length>2?t:'\u0000'),hit=new Set();let multi=0,exp=0;a._k.forEach(o=>{if(o.w>1){if(qo.includes(o.k)){multi++;o.k.trim().split(' ').forEach(t=>toks.forEach((tk,i)=>{if(tk.startsWith(t))hit.add(i)}));}}else{let f=false;toks.forEach((tk,i)=>{if(tk.startsWith(o.k.trim())){hit.add(i);f=true}});if(!f&&q.includes(o.k))exp++;}});const base=a.t==='sit'?6:((a.code==='УК'||a.code==='АК')?5:3);s+=hit.size*base+multi*3+Math.min(exp,2)*(a.t==='sit'?2:1);}return s;});
  const top=Math.max(0,...sc),min=raw?Math.max(1,Math.floor(top/3)):1;
- shown=sc.map((s,i)=>[s,i]).filter(x=>x[0]>=min).sort((a,b)=>b[0]-a[0]||a[1]-b[1]).slice(0,grp==='all'?60:2000).map(x=>x[1]);cur=0;renderList();renderDet();}
+ shown=sc.map((s,i)=>[s,i]).filter(x=>x[0]>=min).sort((a,b)=>b[0]-a[0]||a[1]-b[1]).slice(0,grp==='all'?60:2000).map(x=>x[1]);
+ if(!raw&&grp==='all'){const top=[...FAV,...REC.filter(n=>!FAV.includes(n))].map(n=>NUMIDX[n]).filter(i=>i!==undefined);shown=[...top,...shown.filter(i=>!top.includes(i))];}
+ cur=0;renderList();renderDet();if(raw)recLater();}
+let FAV=[],REC=[];try{FAV=JSON.parse(localStorage.getItem('ps_fav')||'[]');REC=JSON.parse(localStorage.getItem('ps_rec')||'[]')}catch(_){}
+function saveFR(){try{localStorage.setItem('ps_fav',JSON.stringify(FAV));localStorage.setItem('ps_rec',JSON.stringify(REC))}catch(_){}}
+const NUMIDX={};IT.forEach((a,i)=>{if(!(a.num in NUMIDX))NUMIDX[a.num]=i});
+function markRec(){if(!shown.length)return;const n=IT[shown[cur]].num;REC=[n,...REC.filter(x=>x!==n)].slice(0,5);saveFR();}
+let recT=null;function recLater(){clearTimeout(recT);recT=setTimeout(markRec,2500);}
 function cg(c){if(c==='УК')return 'uk';if(c==='АК')return 'ak';if(c==='ПК')return 'pk';if(['ДУ','УВС','КУ'].includes(c))return 'ust';if(c==='НГ'||c==='Прил1')return 'ng';return 'rul';}
 function rowHTML(a,k){const lab=a.t==='sit'?`<span class="n sit">🎯</span>`:`<span class="n" data-g="${cg(a.code)}">${esc(a.num)}${a.stars?' '+esc(a.stars):''}</span>`;
- return `<div class="row${k===cur?' sel':''}" data-k="${k}">${lab}<span class="tt">${esc(a.title)}</span></div>`;}
+ const emp=!$('q').value.trim();const mk=emp&&FAV.includes(a.num)?'<span class="mk f">★</span>':(emp&&REC.includes(a.num)?'<span class="mk r">🕘</span>':'');
+ return `<div class="row${k===cur?' sel':''}" data-k="${k}">${mk}${lab}<span class="tt">${esc(a.title)}</span></div>`;}
 function renderList(){$('list').innerHTML=shown.map((i,k)=>rowHTML(IT[i],k)).join('');const s=$('list').querySelector('.sel');if(s)s.scrollIntoView({block:'nearest'});}
 let CHAT={parts:[],i:0,key:''};
 function chatLimit(){const v=parseInt(($('chatlim')||{}).value);return v>=40&&v<=500?v:120;}
@@ -277,11 +289,11 @@ function renderDet(){const d=$('det');if(!shown.length){d.innerHTML='<div class=
   const sc=autoScript(a);if(sc)h+=sayBlock(sc.say)+stepsBlock(sc.steps);
   if(a.note)h+=warnBlock([a.note]);
   if(a.full){const lab=(a.code==='УК'||a.code==='АК')?'📖 Полный текст (если просит расшифровать)':'📖 Полный текст';h+=`<div class="sec"><div class="lab">${lab}</div><div class="full" style="white-space:pre-line">${esc(a.full)}</div></div>`;}}
- d.innerHTML=h;d.scrollTop=0;}
-$('det').addEventListener('click',e=>{if(e.target.dataset&&e.target.dataset.chat){chatCopy(e.target,SAYLINES);return;}const s=e.target.closest('.say');if(!s)return;const t=s.textContent.replace(/^«|»$/g,'');try{navigator.clipboard.writeText(t)}catch(_){}s.classList.add('copied');setTimeout(()=>s.classList.remove('copied'),900);flash('Фраза скопирована');});
+ const isF=FAV.includes(a.num);d.innerHTML=`<button class="favb${isF?' on':''}" id="favb" title="Избранное">${isF?'★ В избранном':'☆ В избранное'}</button>`+h;d.scrollTop=0;}
+$('det').addEventListener('click',e=>{if(e.target.id==='favb'){const n=IT[shown[cur]].num;FAV=FAV.includes(n)?FAV.filter(x=>x!==n):[n,...FAV];saveFR();renderDet();renderList();flash(FAV.includes(n)?'Добавлено в избранное':'Убрано из избранного');return;}if(e.target.dataset&&e.target.dataset.chat){chatCopy(e.target,SAYLINES);return;}const s=e.target.closest('.say');if(!s)return;const t=s.textContent.replace(/^«|»$/g,'');try{navigator.clipboard.writeText(t)}catch(_){}s.classList.add('copied');setTimeout(()=>s.classList.remove('copied'),900);flash('Фраза скопирована');});
 $('q').addEventListener('input',()=>{if(win.classList.contains('cons'))setTab(false);if(win.classList.contains('mini')&&$('q').value.trim()){win.classList.remove('mini');$('mini').textContent='▁';}search();});
-$('q').addEventListener('keydown',e=>{if(e.key==='ArrowDown'&&cur<shown.length-1){cur++;renderList();renderDet();e.preventDefault()}else if(e.key==='ArrowUp'&&cur>0){cur--;renderList();renderDet();e.preventDefault()}else if(e.key==='Escape'){$('q').value='';search()}});
-$('list').addEventListener('click',e=>{const r=e.target.closest('.row');if(!r)return;cur=+r.dataset.k;renderList();renderDet();});
+$('q').addEventListener('keydown',e=>{if(e.key==='ArrowDown'&&cur<shown.length-1){cur++;renderList();renderDet();recLater();e.preventDefault()}else if(e.key==='ArrowUp'&&cur>0){cur--;renderList();renderDet();recLater();e.preventDefault()}else if(e.key==='Escape'){$('q').value='';search()}});
+$('list').addEventListener('click',e=>{const r=e.target.closest('.row');if(!r)return;cur=+r.dataset.k;renderList();renderDet();markRec();});
 $('minus').onclick=()=>{if(fs>10){fs--;applyFont()}};$('plus').onclick=()=>{if(fs<30){fs++;applyFont()}};
 $('font').onclick=()=>{fi=(fi+1)%FONTS.length;applyFont();flash('Шрифт: '+FNAMES[fi])};
 $('gear').onclick=()=>{$('cfg').classList.toggle('on');$('gear').classList.toggle('on')};
@@ -406,7 +418,7 @@ $('chips').innerHTML=GROUPS.map(g=>`<button class="chip${g[0]==='all'?' on':''}"
 $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));search();});
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
 ['minus','plus','font','gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});
-try{const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;if(b>=0&&b<5)fi=b;}catch(_){}
+try{if(localStorage.getItem('ps_fsv')!=='2'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','2');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;if(b>=0&&b<5)fi=b;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
 </body></html>
