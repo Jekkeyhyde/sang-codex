@@ -197,7 +197,33 @@ body{background:radial-gradient(1200px 600px at 20% -10%,#16244a 0%,transparent 
  .top{grid-area:top!important;padding-right:calc(14px + 330px + 10px)!important}
  .tabs{grid-area:top!important;justify-self:end;align-self:center;width:330px;max-width:330px!important;margin:4px 14px 0 0!important}
 }
+.hlp{position:fixed;inset:0;z-index:50;background:rgba(3,6,14,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px}
+.hlp[hidden]{display:none}
+.hlp-c{position:relative;max-width:640px;width:100%;max-height:88vh;overflow:auto;background:linear-gradient(180deg,#141d35,#0d1324);border:1px solid var(--line);border-radius:16px;padding:22px 22px 18px;color:var(--txt);font:13px/1.5 Inter,"Segoe UI",sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.hlp-c h2{margin:0 0 10px;font-size:18px;color:var(--gold)}.hlp-c h3{margin:14px 0 4px;font-size:13px;color:#cfd8ea}.hlp-c p{margin:4px 0}.hlp-c ul{margin:4px 0;padding-left:18px}.hlp-c li{margin:2px 0}
+.hlp-x{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);border-radius:8px;width:30px;height:30px;cursor:pointer}
+.hlp-n{color:var(--muted);font-size:11px;margin-top:12px!important}
+.hlp-ok{margin-top:12px;background:rgba(242,195,91,.15);border:1px solid rgba(242,195,91,.45);color:var(--gold);border-radius:10px;padding:8px 18px;font:700 13px Inter,sans-serif;cursor:pointer}
 </style></head><body>
+<div class="hlp" id="hlp" hidden><div class="hlp-c" role="dialog" aria-label="Как пользоваться">
+<button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
+<h2>Как пользоваться SANG Codex</h2>
+<h3>🔎 Поиск</h3>
+<p>Пиши, что случилось, своими словами: «стреляли по нам», «выращивает на острове», «боец в гражданке». Можно номер статьи: «17.2», «пго 7.3». Сленг и опечатки понимает.</p>
+<p>Сверху выходят <b>🎯 ситуации</b> — готовый разбор, ниже — отдельные статьи и пункты. Стрелки ↑ ↓ листают список.</p>
+<h3>📋 Карточка ситуации</h3>
+<ul><li><b>Статьи</b> — что применять, с наказанием.</li><li><b>Говорить</b> — нажми на фразу, и она скопируется.</li><li><b>💬 В чат — по частям</b> — вся речь кусками под лимит игрового чата: нажал, вставил (Ctrl+V), нажал снова.</li><li><b>Действия</b> — по шагам, <b>Важно</b> — где можно залететь.</li><li><b>☆ В избранное</b> — частое будет сверху при пустом поиске, рядом — 🕘 недавние.</li></ul>
+<h3>🏷 Фильтры</h3>
+<p>🎯 — только ситуации, УК, АК, ПК, ДК, ДУ, УВС, КУ, Закон о НГ, Правила. С выбранным фильтром и пустым поиском — весь документ по порядку.</p>
+<h3>🧩 Задержание</h3>
+<p>Отметь <b>где</b>, <b>кто</b> и <b>что сделал</b> (оружие, наркотики, обстановка). Приложение скажет, можешь ли ты задерживать (ПГО 7.3), подберёт статьи, соберёт речь целиком и фразу для передачи по рации. «Сбросить» — начать заново.</p>
+<h3>⚙ Настройки</h3>
+<p><b>A− / A+</b> — размер текста, <b>Аа</b> — шрифт, <b>⚙</b> — звание, фамилия (подставятся в речь) и лимит символов чата. Всё запоминается.</p>
+<h3>📲 На телефон</h3>
+<p>Android / Chrome: меню → «Установить приложение». iPhone / Safari: «Поделиться» → «На экран „Домой“». После первого открытия работает без интернета.</p>
+<p class="hlp-n">Неофициальная памятка. При расхождениях действует форум Majestic RP.</p>
+<button class="hlp-ok" id="hlpok">Понятно</button>
+</div></div>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
@@ -459,7 +485,15 @@ $('chips').innerHTML=GROUPS.map(g=>`<button class="chip${g[0]==='all'?' on':''}"
 $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));search();});
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
 ['minus','plus','font','gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});
+const hb=document.createElement('button');hb.className='b';hb.id='helpb';hb.title='Как пользоваться';hb.textContent='?';$('tools').appendChild(hb);
+function showHelp(on){$('hlp').hidden=!on;if(!on){try{localStorage.setItem('ps_help','1')}catch(_){}}}
+hb.onclick=()=>showHelp(true);$('hlpx').onclick=()=>showHelp(false);$('hlpok').onclick=()=>showHelp(false);
+$('hlp').addEventListener('click',e=>{if(e.target.id==='hlp')showHelp(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hlp').hidden)showHelp(false)});
+try{if(!localStorage.getItem('ps_help'))showHelp(true)}catch(_){}
+
 try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','3');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;if(b>=0&&b<5)fi=b;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
+
 </body></html>
