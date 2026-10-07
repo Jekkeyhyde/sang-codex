@@ -535,11 +535,34 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 .st-s,.hp section{box-shadow:var(--sh1)}
 .tip{box-shadow:0 18px 40px -10px rgba(0,0,0,.7),0 0 0 1px rgba(242,195,91,.15)!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.chatkey{font-size:11px;color:#6f7b95;margin-left:8px}.chatkey kbd,.hp kbd{display:inline-block;padding:1px 6px;border-radius:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-bottom-width:2px;font:700 10px Inter,sans-serif;color:#d5dcea}
+.chatnx{display:none;margin:6px 0 4px;padding:8px 11px;border-radius:10px;border:1px dashed rgba(96,165,250,.3);background:rgba(96,165,250,.05);font-size:calc(var(--fs) - 1px);color:#aab5cb;line-height:1.4}.chatnx.on{display:block}
+.chatnx span{display:block;font:800 10px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#7fa9e6;margin-bottom:2px}
+.det .steps li{cursor:pointer;border-radius:8px;transition:background .12s,color .12s}.det .steps li:hover{background:rgba(255,255,255,.03)}
+.det .steps li.done{color:#6f7b95;text-decoration:line-through}.det .steps li.done::before{content:"✓"!important;background:linear-gradient(135deg,#3fbf75,#2a8f55)!important;color:#fff!important;box-shadow:0 0 10px rgba(63,191,117,.45)!important}
+@media (min-width:900px){.top{padding-right:calc(14px + 380px + 10px)!important}.tabs{width:380px!important;max-width:380px!important}}
+
+.chg-b{position:relative;margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgba(242,195,91,.35);background:rgba(242,195,91,.08);color:#ffe3a3;font:700 10.5px Inter,sans-serif;cursor:pointer;vertical-align:1px;transition:all .15s;white-space:nowrap}
+.chg-b:hover{background:rgba(242,195,91,.16);box-shadow:0 0 12px -2px rgba(242,195,91,.5)}
+.chg-b i{display:none;position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#ef5b5b;box-shadow:0 0 0 2px #0b1122,0 0 8px rgba(239,91,91,.8);animation:pl 1.6s infinite}
+.chg-b.new i{display:block}
+.chg-c{max-width:620px}
+.chg-d{display:flex;align-items:baseline;gap:10px;margin:14px 0 4px}.chg-d b{font:800 15px var(--hd,Inter),sans-serif;color:#fff}.chg-d span{font-size:11.5px;color:#6f7b95}
+.chg-h{font:800 11px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#9aa6c0;margin:14px 0 6px;display:flex;align-items:center;gap:8px}.chg-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.chg-r{display:grid;grid-template-columns:auto auto 1fr;gap:4px 10px;align-items:baseline;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--line);color:#d5dcea;cursor:pointer;font:13px/1.45 Inter,sans-serif;transition:all .14s}
+.chg-r:hover{border-color:rgba(242,195,91,.35);transform:translateX(2px)}
+.chg-n1{font:700 12.5px var(--mono,monospace),monospace;color:var(--gold);white-space:nowrap}
+.chg-t{font:800 9.5px Inter,sans-serif;letter-spacing:.8px;text-transform:uppercase;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.chg-t.nw{color:#9ff0bf;background:rgba(63,191,117,.12);border:1px solid rgba(63,191,117,.3)}.chg-t.ch{color:#ffe08a;background:rgba(242,195,91,.1);border:1px solid rgba(242,195,91,.3)}.chg-t.rm{color:#ffb4b4;background:rgba(239,91,91,.1);border:1px solid rgba(239,91,91,.3)}
+.chg-x{grid-column:1/-1;color:#aab5cb;font-size:12.5px}
+.chg-n{font-size:11.5px;color:#6f7b95;margin-top:14px}
+@media (max-width:480px){.chg-b{margin-left:6px;padding:1px 7px;font-size:10px}}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
 <div class="hp-hero"><div class="hp-ic">📖</div><div><h2>Как пользоваться SANG Codex</h2><p>Памятка бойца SANG: законы, уставы и правила проекта, готовые ситуации с речью и действиями. Работает без интернета.</p></div></div>
-<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs2">📋 Карточка</a><a data-s="hs3">⚡ Бой</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav></div><div class="md-body" id="hpbody">
+<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs2">📋 Карточка</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav></div><div class="md-body" id="hpbody">
 <div class="hp-quick"><div><b>1</b>Опиши, что случилось</div><div><b>2</b>Открой ситуацию 🎯</div><div><b>3</b>Жми фразы — вставляй в чат</div></div>
 
 <section id="hs1"><h3>🔎 Поиск</h3><ul>
@@ -553,17 +576,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 <section id="hs2"><h3>📋 Карточка ситуации</h3><ul>
 <li><b>Статьи</b> — номер, суть и наказание; ★ — уровень розыска.</li>
 <li><b>Говорить</b> — нажми на фразу, она скопируется. Твоё звание и фамилия подставятся сами (⚙).</li>
-<li><b>💬 В чат — по частям</b> — вся речь кусками под лимит игрового чата: нажал → Ctrl+V в игре → нажал снова.</li>
+<li><b>💬 В чат — по частям</b> (или <kbd>Пробел</kbd>) — вся речь кусками под лимит игрового чата: нажал → Ctrl+V в игре → нажал снова. Под кнопкой видно, какая часть будет следующей.</li><li><b>Действия</b> можно отмечать галочками по ходу — нажми на шаг.</li>
 <li><b>Действия</b> — по шагам. <b>⚠️ Важно</b> — где можно залететь.</li>
 <li><b>🎮 Правило сервера (OOC)</b> — фиолетовая плашка: TK, DM и т.п. Наказывает администрация по жалобе с видео, не ты в игре.</li>
 <li><b>➡️ Дальше обычно</b> — следующие ситуации по цепочке: обыск, сопротивление, раненый, час задержания.</li>
-<li><b>☆ В избранное</b> — частое всегда будет сверху.</li>
+<li><b>☆ В избранное</b> — твои частые ситуации всегда сверху на главном экране: это твои «быстрые кнопки».</li>
 <li>У статей есть <b>📖 полный текст</b> — если задержанный просит расшифровать.</li></ul></section>
-
-<section id="hs3"><h3>⚡ Бой</h3><p>Пульт для горячих моментов, когда думать некогда.</p><ul>
-<li>Сверху выбери ситуацию. Видно стадию: <b>Остановить → Представиться → Задержать → Обыск → Передать</b>.</li>
-<li>Большая кнопка <b>«Скопировать и дальше»</b> (или <kbd>Пробел</kbd>) — фраза в буфере, вставь в чат. Ниже видно, что говорить следующим.</li>
-<li>Справа (на телефоне — ниже) — <b>чек-лист действий</b> с галочками и «Не залететь».</li></ul></section>
 
 <section id="hs4"><h3>🧩 Задержание (конструктор)</h3><ul>
 <li>Отмечаешь по шагам: <b>где</b> произошло, <b>кого</b> задерживаешь (нарушитель), <b>что он сделал</b>, оружие, наркотики, обстановка.</li>
@@ -597,9 +615,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 <section id="hs9"><h3>⌨ Клавиши</h3><div class="hp-keys">
 <div><kbd>↑</kbd><kbd>↓</kbd><span>листать список (в поиске)</span></div>
 <div><kbd>Esc</kbd><span>очистить поиск / закрыть окно</span></div>
-<div><kbd>Пробел</kbd><kbd>Enter</kbd><span>Бой: следующая фраза · Учёба: дальше</span></div>
-<div><kbd>Backspace</kbd><span>Бой: назад</span></div>
-<div><kbd>R</kbd><span>Бой: сначала</span></div>
+<div><kbd>Пробел</kbd><span>карточка: следующая часть речи в буфер (вставь в чат Ctrl+V)</span></div><div><kbd>Enter</kbd><span>Учёба: дальше</span></div>
+
+
 <div><kbd>1</kbd>–<kbd>4</kbd><span>Учёба: выбрать ответ</span></div>
 <div><kbd>Ctrl</kbd>+<kbd>колесо</kbd><span>размер текста</span></div></div>
 <p class="hp-tip">💡 Наведи мышку на кнопку (на телефоне — удержи палец) — появится подсказка.</p></section>
@@ -637,17 +655,19 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 <div class="st-note">SANG Codex · законы от 05.10.2026, правила от 30.09.2026 · v25. Всё хранится только на этом устройстве.</div></div>
 <button class="hlp-ok" id="setok">Готово</button>
 </div></div></div>
+<div class="hlp" id="chgm" hidden><div class="hlp-c st-c chg-c" role="dialog" aria-label="Что нового">
+<div class="md-head st-head"><h2>🆕 Что нового в законах</h2><button class="hlp-x" id="chgx" aria-label="Закрыть">✕</button></div><div class="md-body" id="chgbody"></div></div></div>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd" title="Законы (УК, АК, ПК) сверены с форумом 05.10.2026. Правила проекта и уставы — по состоянию на 30.09.2026.">законы от 05.10.2026</span></div></div></div><div class="tools" id="tools"></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd" title="Законы (УК, АК, ПК) сверены с форумом 05.10.2026. Правила проекта и уставы — по состоянию на 30.09.2026.">законы от 05.10.2026</span><button class="chg-b" id="chgb" title="Что изменилось в законах">🆕 Что нового<i></i></button></div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="mic" id="mic" title="Сказать голосом">🎤</button><button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
    <button class="b" id="gear" title="Моё звание и фамилия">⚙</button>
    <button class="b on" id="topb">Поверх</button><button class="b" id="mini" title="Свернуть">▁</button>
   </div>
-  <div class="tabs"><button class="tab on" id="tSearch">🔎 Поиск</button><button class="tab" id="tBat">⚡ Бой</button><button class="tab" id="tCons">🧩 Задерж.</button><button class="tab" id="tTrn">🎓 Учёба</button></div>
+  <div class="tabs"><button class="tab on" id="tSearch">🔎 Поиск</button><button class="tab" id="tBat" hidden>⚡ Бой</button><button class="tab" id="tCons">🧩 Задерж.</button><button class="tab" id="tTrn">🎓 Учёба</button></div>
   <div class="cfg" id="cfg"></div>
   <div class="chips" id="chips"></div>
   <div class="hint" id="hint"></div>
@@ -729,9 +749,9 @@ function chunkLines(lines,n){const out=[];lines.forEach(l=>{const t=l.replace(/\
 function chatCopy(btn,lines){if(!lines||!lines.length){flash('Нечего копировать');return;}const ml=lines.map(me);const text=ml.join(' ');const key=text+'|'+chatLimit();if(CHAT.key!==key){CHAT={parts:chunkLines(ml,chatLimit()),i:0,key};}
  const part=CHAT.parts[CHAT.i];try{navigator.clipboard.writeText(part)}catch(_){}
  CHAT.i++;const done=CHAT.i>=CHAT.parts.length;flash(`В буфере часть ${CHAT.i} из ${CHAT.parts.length} — вставь в чат (Ctrl+V)`);
- btn.textContent=done?'💬 В чат ✓ (заново)':`💬 В чат — часть ${CHAT.i+1}/${CHAT.parts.length}`;if(done)CHAT.i=0;}
+ btn.textContent=done?'💬 В чат ✓ (заново)':`💬 В чат — часть ${CHAT.i+1}/${CHAT.parts.length}`;const nx=btn.parentElement.querySelector('.chatnx');if(nx){nx.innerHTML=done?'<span>✓ Вся речь отправлена</span>':`<span>Дальше · ${CHAT.i+1}/${CHAT.parts.length}</span>«${esc(CHAT.parts[CHAT.i])}»`;nx.classList.add('on');}if(done)CHAT.i=0;}
 let SAYLINES=[];
-function sayBlock(lines){SAYLINES=lines;return `<div class="sec"><div class="lab">🗣 Говорить</div><button class="chatbtn" data-chat="1">💬 В чат — по частям</button>${lines.map(l=>`<div class="say">«${esc(me(l))}»</div>`).join('')}</div>`;}
+function sayBlock(lines){SAYLINES=lines;return `<div class="sec"><div class="lab">🗣 Говорить</div><button class="chatbtn" data-chat="1">💬 В чат — по частям</button><span class="chatkey">или <kbd>Пробел</kbd></span><div class="chatnx" id="chatnx"></div>${lines.map(l=>`<div class="say">«${esc(me(l))}»</div>`).join('')}</div>`;}
 function sayBlockOld(lines){return `<div class="sec"><div class="lab">🗣 Говорить</div>${lines.map(l=>`<div class="say">«${esc(me(l))}»</div>`).join('')}</div>`;}
 function stepsBlock(st,lab='✅ Действия'){return st.length?`<div class="sec"><div class="lab">${lab}</div><ol class="steps">${st.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`:'';}
 function warnBlock(w){return w&&w.length?`<div class="sec"><div class="lab">⚠️ Важно</div>${w.map(x=>`<div class="warn">${esc(x)}</div>`).join('')}</div>`:'';}
@@ -1187,7 +1207,7 @@ const TIPS={aib:['🧠 ИИ-поиск по смыслу','Понимает лю
  helpb:['? Как пользоваться','Полный гайд: поиск, карточки, Бой, Задержание, Учёба, ИИ и голос, установка, клавиши, частые вопросы.'],
  mic:['🎤 Голосовой ввод','Нажми и скажи, что случилось. Остановится сам после 4 секунд тишины или по повторному нажатию. Нужен интернет (распознаёт браузер). Язык — в ⚙.'],
  tSearch:['🔎 Поиск','Опиши ситуацию своими словами или введи номер статьи: «ук 17.6», «пго 7.3».'],
- tBat:['⚡ Бой','Пульт для горячих моментов: выбрал ситуацию — жмёшь «Скопировать и дальше» (или пробел) и вставляешь в чат.'],
+ 
  tCons:['🧩 Задержание','Отметь где, кого и что он сделал — скажет, можно ли задерживать, и соберёт речь и доклад по рации.'],
  tTrn:['🎓 Учёба','Тест по темам: 10–50 вопросов, тренировка или экзамен, оценка и разбор ошибок.']};
 const CHIPT={all:'Всё — ситуации и статьи',sit:'Только готовые ситуации',УК:'Уголовный кодекс',АК:'Административный кодекс',ПК:'Процессуальный кодекс',ДК:'Дорожный кодекс',ДУ:'Дисциплинарный устав',УВС:'Устав внутренней службы',КУ:'Устав караульной службы',НГ:'Закон о Национальной гвардии',rules:'Правила проекта: гос. организации, поставки, нападения, зоны…',other:'Конституция, ГК, ТК, Этический кодекс'};
@@ -1225,6 +1245,37 @@ $('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)retu
  window.csSync=sync;sync();})();
 
 function phFit(){$('q').placeholder=innerWidth<520?'Что случилось? или «17.2»':'Что случилось? угон, стрелял, остров, ук 17.6…';}phFit();addEventListener('resize',phFit);
+// ---- карточка: пробел = следующая часть, галочки у действий ----
+document.addEventListener('keydown',e=>{if(e.code!=='Space'||/INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName)||!$('setm').hidden||!$('hlp').hidden)return;if(win.classList.contains('cons')||win.classList.contains('trn')||win.classList.contains('bat'))return;const b=$('det').querySelector('[data-chat]');if(!b)return;e.preventDefault();chatCopy(b,SAYLINES);});
+$('det').addEventListener('click',e=>{const li=e.target.closest('.steps li');if(li)li.classList.toggle('done');});
+
+// ---- что нового ----
+const CHANGES=[{id:'2026-10-05',date:'05.10.2026',src:'Форум Majestic, Законодательная база',items:[
+ {n:'УК 17.2',k:'imp',tag:'изменена',t:'Убрано «не опасного для жизни или здоровья». Теперь любое насилие или угроза насилием в отношении военного или сотрудника ПО при исполнении — 17.2.'},
+ {n:'АК 3.8',k:'imp',tag:'новая',t:'Административный арест: только если он прямо есть в санкции статьи и только за повторное нарушение в течение 30 минут. За первое нарушение при сотруднике ареста нет.'},
+ {n:'АК 5.1',k:'imp',tag:'изменена',t:'Мелкое хулиганство: к штрафу добавлен административный арест на 20 дней (★★) — по правилам АК 3.8.'},
+ {n:'ПК 18',k:'imp',tag:'изменена',t:'«Просто присутствие» не считается помехой задержанию только для тех, кто был на месте до приезда сотрудников. Подошедшим позже можно приказать отойти.'},
+ {n:'УК 17.7',tag:'изменена',t:'У частей своё наказание: ч.1 (адм. штраф) — 2 года или 10–50 тыс.$, ч.2 (уголовный штраф) — 3 года или 20–60 тыс.$. Неуплата уголовного штрафа заменяется сроком.'},
+ {n:'УК 15.6 ч.2',tag:'новая',t:'Халатность, повлёкшая по неосторожности тяжкий вред или смерть — 5 лет.'},
+ {n:'УК 15.6 ч.3',tag:'новая',t:'Повторная халатность (после АК 9.3 в течение 10 дней или при судимости) — 5 лет.'},
+ {n:'УК 15.3 ч.3',tag:'новая',t:'Выдавал себя за должностное лицо, и это повлекло тяжкий вред или смерть — 5 лет.'},
+ {n:'УК 15.1.1 ч.3',tag:'новая',t:'Злоупотребление полномочиями сотрудником отдела по расследованию должностных преступлений — 5 лет.'},
+ {n:'УК 9.2 ч.2',tag:'новая',t:'Срыв идущего заседания Сената — 3 года.'},
+ {n:'УК 13.6 ч.3',tag:'новая',t:'Перевозка запрещённых товаров с поддельными документами — дополнительно по соответствующим статьям УК.'},
+ {n:'УК 19.3',tag:'новая',t:'Новая статья: насилие в отношении животных — 2–3 года.'},
+ {n:'УК 6.4',tag:'утратила силу',t:'Статья утратила силу.'},
+ {n:'АК 3.2',tag:'изменена',t:'В виды административных наказаний добавлен административный арест.'}]}];
+const CHG_LAST=CHANGES[0].id;
+function chgSeen(){try{return localStorage.getItem('ps_chg')===CHG_LAST}catch(_){return true}}
+function chgDot(){$('chgb').classList.toggle('new',!chgSeen());}
+function chgOpen(on){$('chgm').hidden=!on;if(on){try{localStorage.setItem('ps_chg',CHG_LAST)}catch(_){}chgDot();
+ $('chgbody').innerHTML=CHANGES.map(c=>`<div class="chg-d"><b>${c.date}</b><span>${esc(c.src)}</span></div>`+(c.items.some(x=>x.k==='imp')?`<div class="chg-h">⚡ Важно для SANG</div>`:'')+c.items.filter(x=>x.k==='imp').map(chgRow).join('')+`<div class="chg-h">Остальное</div>`+c.items.filter(x=>x.k!=='imp').map(chgRow).join('')).join('')+`<p class="chg-n">Нажми на статью, чтобы открыть её полностью. Правила проекта и уставы — по состоянию на 30.09.2026.</p>`;}}
+function chgRow(x){const i=NUMIDX[x.n];const cls=x.tag==='новая'?'nw':x.tag==='утратила силу'?'rm':'ch';return `<button class="chg-r"${i!==undefined?` data-i="${i}"`:''}><span class="chg-n1">${esc(x.n)}</span><span class="chg-t ${cls}">${esc(x.tag)}</span><span class="chg-x">${esc(x.t)}</span></button>`;}
+$('chgb').onclick=()=>chgOpen(true);$('chgx').onclick=()=>chgOpen(false);
+$('chgm').addEventListener('click',e=>{if(e.target.id==='chgm'){chgOpen(false);return;}const r=e.target.closest('.chg-r[data-i]');if(r){chgOpen(false);$('q').value='';openSit(+r.dataset.i);}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('chgm').hidden)chgOpen(false)});
+chgDot();
+
 try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','3');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;fi=0;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script>
