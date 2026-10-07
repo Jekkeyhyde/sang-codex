@@ -357,34 +357,142 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 .tip b{display:block;color:#ffe3a3;font-weight:700;font-size:13px}.tip span{display:block;margin-top:3px;color:#aab5cb}
 .tip::before{content:"";position:absolute;left:calc(var(--ax) - 6px);top:-6px;width:10px;height:10px;background:#1c2848;border-left:1px solid rgba(242,195,91,.3);border-top:1px solid rgba(242,195,91,.3);transform:rotate(45deg)}
 .tip.up::before{top:auto;bottom:-6px;transform:rotate(225deg);background:#131c34}
+
+/* единые полосы прокрутки: не залезают на скругления */
+@supports not (-moz-appearance:none){
+ .list,.det,.form,.cons-p,.pn,.hlp-c,.rk-pop,.bx-right{scrollbar-width:auto!important;scrollbar-color:auto!important}
+}
+.list::-webkit-scrollbar,.det::-webkit-scrollbar,.form::-webkit-scrollbar,.cons-p::-webkit-scrollbar,.pn::-webkit-scrollbar,.hlp-c::-webkit-scrollbar,.rk-pop::-webkit-scrollbar{width:10px!important;height:10px}
+.list::-webkit-scrollbar-track,.det::-webkit-scrollbar-track,.form::-webkit-scrollbar-track,.cons-p::-webkit-scrollbar-track,.pn::-webkit-scrollbar-track,.hlp-c::-webkit-scrollbar-track,.rk-pop::-webkit-scrollbar-track{background:transparent;margin:16px 0}
+.list::-webkit-scrollbar-thumb,.det::-webkit-scrollbar-thumb,.form::-webkit-scrollbar-thumb,.cons-p::-webkit-scrollbar-thumb,.pn::-webkit-scrollbar-thumb,.hlp-c::-webkit-scrollbar-thumb,.rk-pop::-webkit-scrollbar-thumb{background:rgba(255,255,255,.13)!important;border-radius:10px;border:3px solid transparent;background-clip:padding-box!important}
+.list::-webkit-scrollbar-thumb:hover,.det::-webkit-scrollbar-thumb:hover,.cons-p::-webkit-scrollbar-thumb:hover,.pn::-webkit-scrollbar-thumb:hover,.hlp-c::-webkit-scrollbar-thumb:hover,.rk-pop::-webkit-scrollbar-thumb:hover{background:rgba(242,195,91,.45)!important}
+.list::-webkit-scrollbar-button,.det::-webkit-scrollbar-button,.cons-p::-webkit-scrollbar-button,.pn::-webkit-scrollbar-button,.hlp-c::-webkit-scrollbar-button,.rk-pop::-webkit-scrollbar-button{display:none;height:0;width:0}
+.rk-pop::-webkit-scrollbar-track{margin:10px 0}
+@supports (-moz-appearance:none){.list,.det,.cons-p,.pn,.hlp-c,.rk-pop{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.18) transparent}}
+
+/* ===== help ===== */
+.hlp-c.hp{max-width:760px;padding:0 0 18px;font-size:12.5px}
+.hp-hero{display:flex;gap:14px;align-items:center;padding:20px 22px 14px}
+.hp-ic{width:46px;height:46px;flex:0 0 auto;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,rgba(242,195,91,.3),rgba(242,195,91,.08));border:1px solid rgba(242,195,91,.35)}
+.hp-hero h2{margin:0 0 3px!important;font-size:16px!important}.hp-hero p{margin:0;color:#8d9ab3;font-size:12px;line-height:1.45}
+.hp-nav{position:sticky;top:0;z-index:3;display:flex;gap:6px;overflow-x:auto;padding:10px 22px;background:#141d35;box-shadow:0 8px 14px -6px rgba(8,12,24,.9);scrollbar-width:none}.hp-nav::-webkit-scrollbar{display:none}
+.hp-nav a{flex:0 0 auto;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#aab5cb;font:600 11.5px Inter,sans-serif;cursor:pointer;transition:all .15s;user-select:none}
+.hp-nav a:hover{color:#fff;background:rgba(255,255,255,.08)}.hp-nav a.on{color:var(--gold);border-color:rgba(242,195,91,.45);background:rgba(242,195,91,.1)}
+.hp-quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 22px 6px}.hp-quick div{padding:10px;border-radius:12px;background:rgba(242,195,91,.06);border:1px solid rgba(242,195,91,.2);font-size:12px;color:#d5dcea;line-height:1.35}.hp-quick b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#f2c35b,#c98f22);color:#1a1204;font-size:11px;margin-right:7px}
+@media (max-width:560px){.hp-quick{grid-template-columns:1fr}}
+.hp section{margin:12px 22px 0;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid var(--line)}
+.hp section h3{margin:0 0 8px!important;font-size:13px!important;color:#ffe3a3!important}
+.hp ul{margin:0;padding-left:16px}.hp li{margin:5px 0;line-height:1.5;color:#c9d2e3}.hp li b,.hp p b{color:#fff;font-weight:600}.hp p{color:#c9d2e3;line-height:1.5}
+.hp kbd{display:inline-block;min-width:22px;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-bottom-width:2px;font:700 10.5px Inter,sans-serif;color:#e9eef7;text-align:center}
+.hp-keys{display:grid;gap:6px}.hp-keys div{display:flex;align-items:center;gap:5px;font-size:12px;color:#aab5cb}.hp-keys span{margin-left:8px}
+.hp-tip{margin-top:10px!important;font-size:12px;color:#8d9ab3!important}
+.hp-faq details{border-top:1px solid rgba(255,255,255,.05);padding:8px 0}.hp-faq details:first-child{border-top:0}
+.hp-faq summary{cursor:pointer;font-weight:600;color:#e2e8f3;list-style:none;display:flex;justify-content:space-between;gap:10px}.hp-faq summary::-webkit-details-marker{display:none}
+.hp-faq summary::after{content:"+";color:var(--gold);font-weight:800}.hp-faq details[open] summary::after{content:"−"}
+.hp-faq p{margin:6px 0 2px!important;color:#aab5cb!important;font-size:12px}
+.hp .hlp-n{margin:14px 22px 0!important}.hp .hlp-ok{margin:12px 22px 0}
+.hp .hlp-x{background:#1c2848!important;box-shadow:-10px 0 12px 2px #141d35;position:sticky;float:right;top:10px;margin:12px 12px -42px 0;z-index:5}.hp-nav{padding-right:56px}
+/* ===== custom select ===== */
+.cs{position:relative}.cs-b{display:flex;align-items:center;gap:10px;min-width:150px;height:34px;padding:0 10px 0 12px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--txt);font:500 12.5px Inter,sans-serif;cursor:pointer}
+.cs-b span{flex:1;text-align:left}.cs-b i{font-style:normal;color:#8d9ab3;font-size:11px;transition:transform .2s}
+.cs.open .cs-b{border-color:rgba(242,195,91,.5);box-shadow:0 0 0 3px rgba(242,195,91,.12)}.cs.open .cs-b i{transform:rotate(180deg);color:var(--gold)}
+.cs-pop{position:absolute;right:0;top:calc(100% + 6px);z-index:60;min-width:100%;padding:5px;border-radius:12px;background:linear-gradient(180deg,#1a2544,#111a31);border:1px solid rgba(242,195,91,.25);box-shadow:0 16px 36px rgba(0,0,0,.55);animation:rkIn .14s ease-out}
+.cs-o{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;cursor:pointer;font:500 12.5px Inter,sans-serif;color:#d5dcea;white-space:nowrap}.cs-o i{font-style:normal}.cs-o b{margin-left:auto;color:var(--gold);padding-left:10px}
+.cs-o:hover{background:rgba(255,255,255,.06)}.cs-o.on{background:linear-gradient(90deg,rgba(242,195,91,.16),rgba(242,195,91,.04));color:#ffe3a3}
+/* ===== гармоничное уменьшение шрифтов ===== */
+.tip{max-width:260px;padding:8px 11px;font-size:11.5px}.tip b{font-size:12px}
+.hlp-c{font-size:12.5px}.hlp-c h2{font-size:16px}
+.st-h{font-size:11px}.st-row{font-size:12.5px}.st-g label{font-size:10.5px}.st-c input:not([type]),.st-c input[list],.st-num{height:34px;font-size:12.5px}.st-pv{font-size:12px}.st-note{font-size:11.5px}.st-btn{font-size:12px;padding:7px 11px}
+.rk-o{font-size:12.5px;padding:7px 9px}.rk-o i{width:24px;height:24px}
+.bx-sit{font-size:12px;padding:7px 12px 7px 7px}.bx-sit i{width:24px;height:24px;font-size:13px}
+.bx-st{font-size:11px}.bx-st span{width:26px;height:26px;font-size:12px}
+.bx-ph{font:600 clamp(15px,1.7vw,19px)/1.45 Inter,sans-serif}.bx-go{min-height:50px;font-size:14.5px;border-radius:14px}.bx-nx{font-size:12px}.bx-ctl button{font-size:11.5px}
+.bx-ck{font-size:12.5px}.bx-w{font-size:12px}.bx-tag{font-size:10.5px}
+.tr-t{font-size:16px}.tr-s{font-size:12px}.tr-tp b{font-size:12.5px}.tr-tp small{font-size:11px}.tr-seg button{font-size:13.5px;padding:8px 0}.tr-md b{font-size:13px}.tr-md small{font-size:11.5px}
+.tr-go{min-height:48px;font-size:14.5px;border-radius:14px}.tr-go.alt{min-height:42px;font-size:13px}
+.tr-qq{font:700 clamp(15px,1.6vw,18px)/1.4 Inter,sans-serif}.tr-sub{font-size:12px}.tr-o{font-size:13px;padding:10px 12px}.tr-exp{font-size:12.5px}
+.tr-ring{width:132px;height:132px}.tr-ring>div{width:108px;height:108px}.tr-ring b{font-size:28px}.tr-gr{font-size:19px}
+.intro{font-size:12.5px}.opt{font-size:12.5px!important;padding:6px 11px!important}.verdict{font-size:13px!important}
+.parse{font-size:12.5px}.ooc{font-size:12px}.nx{font-size:11.5px}
+@media (min-width:700px){.tab{font-size:11.5px!important}.chip{font-size:10.5px!important}.bt{font-size:15px!important}.bs{font-size:10.5px}}
 </style></head><body>
-<div class="hlp" id="hlp" hidden><div class="hlp-c" role="dialog" aria-label="Как пользоваться">
+<div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
-<h2>Как пользоваться SANG Codex</h2>
-<h3>🔎 Поиск</h3>
-<p>Пиши, что случилось, своими словами: «стреляли по нам», «выращивает на острове», «боец в гражданке». Можно номер статьи: «17.2», «пго 7.3». Сленг и опечатки понимает.</p>
-<p>Сверху выходят <b>🎯 ситуации</b> — готовый разбор, ниже — отдельные статьи и пункты. Стрелки ↑ ↓ листают список.</p>
-<h3>📋 Карточка ситуации</h3>
-<ul><li><b>Статьи</b> — что применять, с наказанием.</li><li><b>Говорить</b> — нажми на фразу, и она скопируется.</li><li><b>💬 В чат — по частям</b> — вся речь кусками под лимит игрового чата: нажал, вставил (Ctrl+V), нажал снова.</li><li><b>Действия</b> — по шагам, <b>Важно</b> — где можно залететь.</li><li><b>☆ В избранное</b> — частое будет сверху при пустом поиске, рядом — 🕘 недавние.</li></ul>
-<h3>🏷 Фильтры</h3>
-<p>🎯 — только ситуации, УК, АК, ПК, ДК, ДУ, УВС, КУ, Закон о НГ, Правила. С выбранным фильтром и пустым поиском — весь документ по порядку.</p>
-<h3>🧠 ИИ-поиск</h3>
-<p>Кнопка <b>🧠</b> сверху — умный поиск по смыслу: понимает «шмальнул в своего», «чел с базы залутал склад», любые формулировки. Найденное ИИ помечено 🧠.</p><ul><li><b>Это по желанию</b> — без ИИ всё остальное работает так же.</li><li><b>Ничего отдельно качать не надо</b>: нажал 🧠 → «ОК» — модель (~120 МБ) скачается сама внутри приложения, внизу видно проценты. Лучше по Wi-Fi.</li><li>Качается <b>один раз</b> на каждом устройстве, дальше включается сам и работает <b>без интернета</b>. Ничего никуда не отправляется.</li><li>Освободить место — ⚙ → «Удалить ИИ-модель».</li></ul><p>💡 Наведи мышку на любую кнопку (на телефоне — удержи палец), чтобы увидеть подсказку.</p>
-<h3>🎤 Голос</h3>
-<p>Нажми 🎤 и скажи, что случилось. Работает в Chrome / Edge.</p>
-<h3>🧩 Разбор ситуации</h3>
-<p>Опиши случай целиком («гражданский без лицензии достал ствол у КПП») — сверху карточки появится разбор: где, кто, что сделал. Кнопка переносит всё в «Задержание», а что непонятно — спросит кнопками.</p>
-<h3>⚡ Бой</h3>
-<p>Пульт для горячих моментов: выбери ситуацию сверху и жми <b>«Скопировать и дальше»</b> (или пробел) — фраза в буфере, вставь в чат Ctrl+V. Видно, на какой ты стадии (остановить → представиться → задержать → обыск → передать) и что говорить дальше. Справа — чек-лист действий, отмечай галочками. ← Backspace — назад, R — сначала.</p>
-<h3>🎓 Учёба</h3>
-<p>Полноценный тест: выбери темы (ситуации, УК, АК, Дисциплинарный устав, Правила гос. организаций, закон о НГ, устав), 10–50 вопросов и режим — <b>тренировка</b> (ответ сразу) или <b>экзамен</b> (результат в конце). В конце — процент, оценка, время, разбор ошибок и «Повторить ошибки». Результат можно скопировать для отчёта. Клавиши 1–4 — ответ, Enter — дальше.</p>
-<h3>🎮 Правила сервера</h3>
-<p>Фиолетовая плашка — это OOC-правило проекта (TK, DM…): наказывает администрация по жалобе, а не ты в игре.</p>
-<h3>🧩 Задержание</h3>
-<p>Отметь по шагам: <b>где</b> произошло, <b>кого</b> задерживаешь (нарушитель) и <b>что он сделал</b> (оружие, наркотики, обстановка). Приложение скажет, можешь ли ты задерживать (ПГО 7.3), подберёт статьи, соберёт речь целиком и фразу для передачи по рации. «Сбросить» — начать заново.</p>
-<h3>⚙ Настройки</h3>
-<p><b>⚙</b> — звание и фамилия (подставятся в речь), размер текста, лимит чата, ИИ и голос, очистка данных. Всё запоминается на этом устройстве.</p>
-<p class="hlp-n">Неофициальная памятка. При расхождениях действует форум Majestic RP.</p>
+<div class="hp-hero"><div class="hp-ic">📖</div><div><h2>Как пользоваться SANG Codex</h2><p>Памятка бойца SANG: законы, уставы и правила проекта, готовые ситуации с речью и действиями. Работает без интернета.</p></div></div>
+<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs2">📋 Карточка</a><a data-s="hs3">⚡ Бой</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav>
+<div class="hp-quick"><div><b>1</b>Опиши, что случилось</div><div><b>2</b>Открой ситуацию 🎯</div><div><b>3</b>Жми фразы — вставляй в чат</div></div>
+
+<section id="hs1"><h3>🔎 Поиск</h3><ul>
+<li><b>Своими словами:</b> «стреляли по нам», «выращивает на острове», «боец в гражданке». Сленг и опечатки понимает.</li>
+<li><b>По номеру:</b> «17.2», «ук 17.6», «пго 7.3», «ук 12.7 ч.2», «общие 5.7», «ранг 14».</li>
+<li><b>🎯 Ситуации</b> выходят сверху — это готовый разбор. Ниже — отдельные статьи и пункты.</li>
+<li><b>Фильтры</b> (Всё, 🎯, УК, АК, ДУ…): с выбранным фильтром и пустым поиском — весь документ по порядку.</li>
+<li><b>Пустой поиск</b> — главный экран: ★ избранное, 🕘 недавние и ситуации по разделам.</li>
+<li><b>Разбор ситуации:</b> напиши случай целиком («гражданский без лицензии достал ствол у КПП») — над карточкой появится 🧩 разбор (где, кто, что сделал) и кнопка «Разобрать в задержание».</li></ul></section>
+
+<section id="hs2"><h3>📋 Карточка ситуации</h3><ul>
+<li><b>Статьи</b> — номер, суть и наказание; ★ — уровень розыска.</li>
+<li><b>Говорить</b> — нажми на фразу, она скопируется. Твоё звание и фамилия подставятся сами (⚙).</li>
+<li><b>💬 В чат — по частям</b> — вся речь кусками под лимит игрового чата: нажал → Ctrl+V в игре → нажал снова.</li>
+<li><b>Действия</b> — по шагам. <b>⚠️ Важно</b> — где можно залететь.</li>
+<li><b>🎮 Правило сервера (OOC)</b> — фиолетовая плашка: TK, DM и т.п. Наказывает администрация по жалобе с видео, не ты в игре.</li>
+<li><b>➡️ Дальше обычно</b> — следующие ситуации по цепочке: обыск, сопротивление, раненый, час задержания.</li>
+<li><b>☆ В избранное</b> — частое всегда будет сверху.</li>
+<li>У статей есть <b>📖 полный текст</b> — если задержанный просит расшифровать.</li></ul></section>
+
+<section id="hs3"><h3>⚡ Бой</h3><p>Пульт для горячих моментов, когда думать некогда.</p><ul>
+<li>Сверху выбери ситуацию. Видно стадию: <b>Остановить → Представиться → Задержать → Обыск → Передать</b>.</li>
+<li>Большая кнопка <b>«Скопировать и дальше»</b> (или <kbd>Пробел</kbd>) — фраза в буфере, вставь в чат. Ниже видно, что говорить следующим.</li>
+<li>Справа (на телефоне — ниже) — <b>чек-лист действий</b> с галочками и «Не залететь».</li></ul></section>
+
+<section id="hs4"><h3>🧩 Задержание (конструктор)</h3><ul>
+<li>Отмечаешь по шагам: <b>где</b> произошло, <b>кого</b> задерживаешь (нарушитель), <b>что он сделал</b>, оружие, наркотики, обстановка.</li>
+<li>Приложение скажет, <b>можно ли тебе задерживать</b> (ПГО 7.3 и исключения), подберёт статьи, соберёт речь целиком и доклад по рации.</li>
+<li>Если пришёл из «Разбора» — сверху спросит недостающее кнопками («❓ Уточни»).</li>
+<li>«Сбросить» — начать заново.</li></ul></section>
+
+<section id="hs5"><h3>🎓 Учёба</h3><ul>
+<li>Выбери <b>темы</b> (ситуации, УК, АК, Дисциплинарный устав, Правила гос. организаций, закон о НГ, уставы службы), <b>10–50 вопросов</b> и режим.</li>
+<li><b>📖 Тренировка</b> — ответ и пояснение сразу. <b>📝 Экзамен</b> — всё в конце.</li>
+<li>Результат: процент, оценка (Отлично ≥ 90%, Хорошо ≥ 75%, Зачёт ≥ 60%), время, <b>разбор ошибок</b>, «Повторить ошибки» и «Скопировать результат» для отчёта.</li>
+<li>Лучший результат по одной теме запоминается.</li></ul></section>
+
+<section id="hs6"><h3>🧠 ИИ-поиск и 🎤 голос</h3><ul>
+<li><b>🧠 ИИ-поиск</b> понимает смысл любых формулировок. <b>По желанию</b> — без него всё работает.</li>
+<li>Отдельно ничего качать не надо: нажал 🧠 → «ОК» — модель (~120 МБ) скачается сама внутри приложения, внизу видно проценты. Лучше по Wi-Fi.</li>
+<li>Качается <b>один раз на каждом устройстве</b>, дальше включается сам и работает <b>без интернета</b>. Ничего никуда не отправляется. Найденное ИИ помечено 🧠.</li>
+<li><b>🎤 Голос:</b> нажми и говори, можно с паузами. Остановится после 4 сек тишины или по нажатию. <b>Нужен интернет</b> — речь распознаёт сам браузер (Chrome, Edge, Safari).</li></ul></section>
+
+<section id="hs7"><h3>⚙ Настройки</h3><ul>
+<li><b>Профиль:</b> звание (табель рангов УВС 2.10) и фамилия — подставляются во фразы и рацию.</li>
+<li><b>Текст:</b> размер, компактный список. <b>Чат:</b> лимит символов одного сообщения (по умолчанию 120).</li>
+<li><b>ИИ и голос:</b> вкл/выкл ИИ, язык голоса, удалить модель. <b>Данные:</b> очистить избранное, сбросить всё.</li>
+<li>Всё хранится <b>только на этом устройстве</b>.</li></ul></section>
+
+<section id="hs8"><h3>📲 Установка и офлайн</h3><ul>
+<li><b>ПК (Chrome/Edge):</b> значок установки в адресной строке → «Установить». Откроется отдельным окном.</li>
+<li><b>Android:</b> меню ⋮ → «Добавить на главный экран». <b>iPhone:</b> Поделиться → «На экран Домой».</li>
+<li>После первого открытия работает <b>без интернета</b>. Обновления подтягиваются сами при следующем запуске с сетью; если видишь старое — Ctrl+F5 или перезапусти.</li></ul></section>
+
+<section id="hs9"><h3>⌨ Клавиши</h3><div class="hp-keys">
+<div><kbd>↑</kbd><kbd>↓</kbd><span>листать список (в поиске)</span></div>
+<div><kbd>Esc</kbd><span>очистить поиск / закрыть окно</span></div>
+<div><kbd>Пробел</kbd><kbd>Enter</kbd><span>Бой: следующая фраза · Учёба: дальше</span></div>
+<div><kbd>Backspace</kbd><span>Бой: назад</span></div>
+<div><kbd>R</kbd><span>Бой: сначала</span></div>
+<div><kbd>1</kbd>–<kbd>4</kbd><span>Учёба: выбрать ответ</span></div>
+<div><kbd>Ctrl</kbd>+<kbd>колесо</kbd><span>размер текста</span></div></div>
+<p class="hp-tip">💡 Наведи мышку на кнопку (на телефоне — удержи палец) — появится подсказка.</p></section>
+
+<section id="hs10"><h3>❓ Частые вопросы</h3><div class="hp-faq">
+<details><summary>Не нашёл свою ситуацию</summary><p>Опиши иначе, короче («стрелял», «маска», «КПП»), введи номер статьи или включи 🧠 ИИ-поиск. Есть идея новой ситуации — напиши руководству.</p></details>
+<details><summary>Можно ли полагаться на 100%?</summary><p>Это неофициальная памятка. При расхождениях действует форум Majestic RP. Дата базы — в шапке.</p></details>
+<details><summary>Почему в речи «[звание] [фамилия]»?</summary><p>Не заполнен профиль. ⚙ → Профиль — впиши звание и фамилию.</p></details>
+<details><summary>Фраза не вставляется целиком в чат</summary><p>Используй «💬 В чат — по частям». Если всё равно обрезает — уменьши лимит в ⚙ → Игровой чат.</p></details>
+<details><summary>ИИ не включается</summary><p>Нужен интернет для первой загрузки и современный браузер. На старых телефонах может не хватить памяти — обычный поиск работает всегда.</p></details>
+<details><summary>Микрофон не работает</summary><p>Разреши доступ к микрофону в браузере и проверь интернет. В Firefox голосовой ввод не поддерживается.</p></details></div></section>
+
+<p class="hlp-n">Неофициальная памятка SANG · Majestic RP Orlando. При расхождениях действует форум.</p>
 <button class="hlp-ok" id="hlpok">Понятно</button>
 </div></div>
 <div class="hlp" id="setm" hidden><div class="hlp-c st-c" role="dialog" aria-label="Настройки">
@@ -688,7 +796,7 @@ $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
 ['gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});['minus','plus'].forEach(id=>{const b=$(id);if(b)b.style.display='none'});
 const hb=document.createElement('button');hb.className='b';hb.id='helpb';hb.title='Как пользоваться';hb.textContent='?';$('tools').appendChild(hb);
-function showHelp(on){$('hlp').hidden=!on;if(!on){try{localStorage.setItem('ps_help','1')}catch(_){}}}
+function showHelp(on){$('hlp').hidden=!on;if(on)document.querySelector('#hlp .hlp-c').scrollTop=0;if(!on){try{localStorage.setItem('ps_help','1')}catch(_){}}}
 hb.onclick=()=>showHelp(true);$('hlpx').onclick=()=>showHelp(false);$('hlpok').onclick=()=>showHelp(false);
 $('hlp').addEventListener('click',e=>{if(e.target.id==='hlp')showHelp(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hlp').hidden)showHelp(false)});
@@ -742,10 +850,16 @@ function askBlock(){if(!C.ask||!C.ask.length)return '';const q=C.ask[0];let lab=
  return `<div class="ask"><div class="lab">❓ Уточни (${C.ask.length}) · ${lab}</div><div class="opts">${o}</div></div>`;}
 
 // ---- voice ----
-(function(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition,b=$('mic');if(!SR){b.style.display='none';return;}let r=null;
- b.onclick=()=>{if(r){r.stop();return;}r=new SR();r.lang=(localStorage.getItem('ps_vlang')||'ru-RU');r.interimResults=true;r.continuous=false;b.classList.add('rec');flash('Говори… (нажми ещё раз — стоп)');
-  r.onresult=e=>{let t='';for(const x of e.results)t+=x[0].transcript;$('q').value=t;if(win.classList.contains('cons')||win.classList.contains('bat')||win.classList.contains('trn'))setTab('search');search();};
-  r.onerror=e=>flash(e.error==='not-allowed'?'Нет доступа к микрофону':'Голос: ошибка '+e.error);r.onend=()=>{b.classList.remove('rec');r=null;};r.start();};})();
+(function(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition,b=$('mic');if(!SR){b.style.display='none';return;}let r=null,sil=null,max=null,stopping=false;
+ const SILENCE=4000,MAXT=60000;
+ function stop(){stopping=true;clearTimeout(sil);clearTimeout(max);try{r&&r.stop()}catch(_){}}
+ function arm(){clearTimeout(sil);sil=setTimeout(stop,SILENCE);}
+ b.onclick=()=>{if(r){stop();return;}r=new SR();stopping=false;try{r.lang=localStorage.getItem('ps_vlang')||'ru-RU'}catch(_){r.lang='ru-RU'}r.interimResults=true;r.continuous=true;b.classList.add('rec');flash('🎤 Говори… остановится после 4 сек тишины или по нажатию');
+  const base=$('q').value.trim();
+  r.onresult=e=>{let t='';for(const x of e.results)t+=x[0].transcript+' ';t=t.replace(/\s+/g,' ').trim();$('q').value=t;if(win.classList.contains('cons')||win.classList.contains('bat')||win.classList.contains('trn'))setTab('search');search();arm();};
+  r.onerror=e=>{if(e.error==='no-speech')flash('Ничего не услышал — нажми 🎤 и говори');else if(e.error==='not-allowed')flash('Нет доступа к микрофону — разреши в браузере');else if(e.error==='network')flash('Голосу нужен интернет');else if(e.error!=='aborted')flash('Голос: ошибка '+e.error);};
+  r.onend=()=>{b.classList.remove('rec');clearTimeout(sil);clearTimeout(max);r=null;};
+  arm();max=setTimeout(stop,MAXT);r.start();};})();
 
 // ---- battle (пульт) ----
 const BAT=[['🏰','Посторонний на Форте','Посторонний на Форте'],['🏝','Посторонний на Кайо-Перико','Посторонний на Кайо'],['🎯','Стрельба по военным','Стрельба по нам'],['👊','Нападение на военного (удар, угроза)','Напал / ударил'],['✋','Не выполняет требование','Не подчиняется'],['🚧','Гражданин у КПП (белая зона)','Гражданин у КПП'],['💥','Таран КПП / прорыв на машине','Таран КПП'],['🚙','Угон гос. машины','Угон гос. машины'],['🔫','Гражданский с оружием у КПП / у Форта','Вооружён у КПП'],['🎖','Военный стрелял в военного (свой в своего)','Свой стрелял']].filter(x=>SIDX[x[1]]!==undefined);
@@ -862,7 +976,7 @@ try{if(localStorage.getItem('ps_ai')==='1')setTimeout(aiLoad,600)}catch(_){}
 
 // ---- settings modal ----
 function stPrev(){$('stpv').innerHTML='Так будет во фразах: <b>«'+esc(me('Национальная гвардия штата San-Andreas, [звание] [фамилия]. Моё удостоверение.'))+'»</b>';}
-function stSync(){$('fsr').value=fs;$('fsv').textContent=fs+' px';$('aisw').checked=AI.state==='on'||AI.state==='loading';try{$('vlang').value=localStorage.getItem('ps_vlang')||'ru-RU';$('compact').checked=localStorage.getItem('ps_compact')==='1'}catch(_){}stPrev();}
+function stSync(){$('fsr').value=fs;$('fsv').textContent=fs+' px';$('aisw').checked=AI.state==='on'||AI.state==='loading';try{$('vlang').value=localStorage.getItem('ps_vlang')||'ru-RU';window.csSync&&csSync();$('compact').checked=localStorage.getItem('ps_compact')==='1'}catch(_){}stPrev();}
 function showSet(on){$('setm').hidden=!on;$('gear').classList.toggle('on',on);if(on)stSync();}
 $('gear').onclick=()=>showSet(true);$('setx').onclick=()=>showSet(false);$('setok').onclick=()=>showSet(false);
 $('setm').addEventListener('click',e=>{if(e.target.id==='setm')showSet(false)});
@@ -897,8 +1011,8 @@ $('myrank').addEventListener('blur',()=>setTimeout(()=>rkOpen(false),120));
 // ---- tooltips ----
 const TIPS={aib:['🧠 ИИ-поиск по смыслу','Понимает любые формулировки и сленг. По желанию: модель ~120 МБ скачивается один раз прямо в браузер (лучше по Wi-Fi), дальше работает без интернета. Ничего никуда не отправляет.'],
  gear:['⚙ Настройки','Звание и фамилия для фраз, размер текста, лимит чата, ИИ и голос, очистка данных.'],
- helpb:['? Как пользоваться','Короткая инструкция по всем разделам.'],
- mic:['🎤 Голосовой ввод','Нажми и скажи, что случилось. Нажми ещё раз — стоп. Работает в Chrome и Edge, язык — в ⚙.'],
+ helpb:['? Как пользоваться','Полный гайд: поиск, карточки, Бой, Задержание, Учёба, ИИ и голос, установка, клавиши, частые вопросы.'],
+ mic:['🎤 Голосовой ввод','Нажми и скажи, что случилось. Остановится сам после 4 секунд тишины или по повторному нажатию. Нужен интернет (распознаёт браузер). Язык — в ⚙.'],
  tSearch:['🔎 Поиск','Опиши ситуацию своими словами или введи номер статьи: «ук 17.6», «пго 7.3».'],
  tBat:['⚡ Бой','Пульт для горячих моментов: выбрал ситуацию — жмёшь «Скопировать и дальше» (или пробел) и вставляешь в чат.'],
  tCons:['🧩 Задержание','Отметь где, кого и что он сделал — скажет, можно ли задерживать, и соберёт речь и доклад по рации.'],
@@ -921,6 +1035,21 @@ document.addEventListener('focusout',tipHide);document.addEventListener('click',
 let lp=null;document.addEventListener('touchstart',e=>{const el=e.target.closest('[data-tipk],[data-tipc]');if(!el)return;lp=setTimeout(()=>{tipShow(el);lp='shown';},500);},{passive:true});
 document.addEventListener('touchend',e=>{if(lp==='shown'){e.preventDefault();setTimeout(tipHide,2200);}else clearTimeout(lp);lp=null;});
 document.addEventListener('touchmove',()=>{if(lp!=='shown')clearTimeout(lp);},{passive:true});
+
+// ---- help nav ----
+$('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const s=$(a.dataset.s);const c=document.querySelector('#hlp .hlp-c');c.scrollTo({top:s.offsetTop-c.querySelector('.hp-nav').offsetHeight-14,behavior:'smooth'});});
+(function(){const c=document.querySelector('#hlp .hlp-c');c.addEventListener('scroll',()=>{let cur=null;document.querySelectorAll('#hlp section').forEach(s=>{if(s.offsetTop-c.scrollTop<120)cur=s.id});document.querySelectorAll('#hpnav a').forEach(a=>a.classList.toggle('on',a.dataset.s===cur));},{passive:true});})();
+// ---- custom select (язык голоса) ----
+(function(){const sel=$('vlang');const w=document.createElement('div');w.className='cs';w.innerHTML='<button type="button" class="cs-b"><span></span><i>▾</i></button><div class="cs-pop" hidden></div>';sel.after(w);sel.style.display='none';
+ const btn=w.querySelector('.cs-b'),pop=w.querySelector('.cs-pop');const FL={'ru-RU':'🇷🇺','uk-UA':'🇺🇦'};
+ const sync=()=>{btn.querySelector('span').textContent=(FL[sel.value]||'')+' '+sel.selectedOptions[0].text;};
+ const draw=()=>{pop.innerHTML=[...sel.options].map(o=>`<div class="cs-o${o.value===sel.value?' on':''}" data-v="${o.value}"><i>${FL[o.value]||''}</i><span>${esc(o.text)}</span>${o.value===sel.value?'<b>✓</b>':''}</div>`).join('');};
+ const open=o=>{pop.hidden=!o;w.classList.toggle('open',o);if(o)draw();};
+ btn.onclick=e=>{e.stopPropagation();open(pop.hidden);};
+ pop.addEventListener('click',e=>{const o=e.target.closest('.cs-o');if(!o)return;sel.value=o.dataset.v;sel.dispatchEvent(new Event('change'));sync();open(false);});
+ document.addEventListener('click',e=>{if(!w.contains(e.target))open(false)});
+ btn.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pop.hidden){open(false);e.stopPropagation();}});
+ window.csSync=sync;sync();})();
 
 try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','3');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;fi=0;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
