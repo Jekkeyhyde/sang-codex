@@ -446,6 +446,19 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 @media (min-width:900px){.bx-stages{overflow:visible!important}}
 .hp-nav{flex-wrap:wrap!important;-webkit-mask-image:none!important;mask-image:none!important;overflow:visible!important}
 @media (max-width:420px){.rk-o small{display:none}}.rk-o span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+.tr-pg{grid-column:1/-1;margin-top:8px}.tr-pb{position:relative;height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.tr-pb span{position:absolute;left:0;top:0;bottom:0;border-radius:3px}.tr-pb .s{background:rgba(96,165,250,.35)}.tr-pb .l{background:linear-gradient(90deg,#2a8f55,#3fbf75)}
+.tr-pt{font-size:10.5px;color:#7d89a3;margin-top:4px}.tr-pt b{color:#a8f0c6}.tr-pt u{text-decoration:none;color:#ffb4b4}
+.tr-leg{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:10px;font-size:11px;color:#7d89a3}.tr-leg i{display:inline-block;width:10px;height:5px;border-radius:3px;margin-right:5px;vertical-align:middle}.tr-leg i.l{background:#3fbf75}.tr-leg i.s{background:rgba(96,165,250,.5)}
+.tr-rst{margin-left:auto;background:none;border:1px solid var(--line);color:#8d9ab3;border-radius:8px;padding:4px 9px;font:600 11px Inter,sans-serif;cursor:pointer}.tr-rst:hover{color:#ffb4b4;border-color:rgba(239,91,91,.4)}
+.tr-tmr{margin-top:10px;padding:8px 2px 0!important;border-top:1px solid rgba(255,255,255,.05)}
+.tr-tm{position:relative;height:6px;border-radius:4px;background:rgba(255,255,255,.07);margin:-4px 0 14px;overflow:visible}.tr-tm b{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#c98f22,#f2c35b);transition:width .2s linear}
+.tr-tm span{position:absolute;right:0;top:-20px;font:800 11px Inter,sans-serif;color:#f2c35b}.tr-tm.low b{background:linear-gradient(90deg,#b8323a,#ef5b5b)}.tr-tm.low span{color:#ff9d9d}
+.tr-new,.tr-wk{display:inline-block;margin-left:6px;font:800 9.5px Inter,sans-serif;letter-spacing:.8px;text-transform:uppercase;padding:3px 7px;border-radius:999px;vertical-align:top}
+.tr-new{color:#9ff0bf;background:rgba(63,191,117,.12);border:1px solid rgba(63,191,117,.3)}.tr-wk{color:#ffb4b4;background:rgba(239,91,91,.1);border:1px solid rgba(239,91,91,.3)}
+.tr-sc.ex{color:#9cc7ff!important}
+.tr-gain{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:-4px 0 16px}.tr-gain span{font-size:12px;color:#aab5cb;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.tr-gain b{color:#fff}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
@@ -486,7 +499,7 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 <li>Выбери <b>темы</b> (ситуации, УК, АК, Дисциплинарный устав, Правила гос. организаций, закон о НГ, уставы службы), <b>10–50 вопросов</b> и режим.</li>
 <li><b>📖 Тренировка</b> — ответ и пояснение сразу. <b>📝 Экзамен</b> — всё в конце.</li>
 <li>Результат: процент, оценка (Отлично ≥ 90%, Хорошо ≥ 75%, Зачёт ≥ 60%), время, <b>разбор ошибок</b>, «Повторить ошибки» и «Скопировать результат» для отчёта.</li>
-<li>Лучший результат по одной теме запоминается.</li></ul></section>
+<li><b>Без повторов:</b> вопросы идут по колоде — сначала то, что ещё не попадалось. Пока не пройдёшь всю тему, одно и то же не повторится.</li><li><b>Ошибки возвращаются чаще</b>, а выученное (3+ верных ответа подряд) — реже. На карточке темы видно «выучено X из Y» и слабые места.</li><li><b>Экзамен строже:</b> похожие варианты из той же главы, ⏱ 30 сек на вопрос (можно выключить), без возврата, сдал — от 80%.</li><li>«Сбросить прогресс» — начать колоду заново. Лучший результат по одной теме запоминается.</li></ul></section>
 
 <section id="hs6"><h3>🧠 ИИ-поиск и 🎤 голос</h3><ul>
 <li><b>🧠 ИИ-поиск</b> понимает смысл любых формулировок. <b>По желанию</b> — без него всё работает.</li>
@@ -819,7 +832,7 @@ $('cons').addEventListener('click',e=>{
  const sc=$('cons').scrollTop;renderCons();$('cons').scrollTop=sc;});
 function setTab(m){if(m===true)m='cons';if(m===false)m='search';win.classList.toggle('cons',m==='cons');win.classList.toggle('bat',m==='bat');win.classList.toggle('trn',m==='trn');
  [['tSearch','search'],['tBat','bat'],['tCons','cons'],['tTrn','trn']].forEach(([id,k])=>$(id).classList.toggle('on',m===k));
- if(m==='cons')renderCons();else if(m==='bat')renderBattle();else if(m==='trn')renderTrainer();else $('q').focus();}
+ if(m==='cons')renderCons();else if(m==='bat')renderBattle();else if(m==='trn'){renderTrainer();if(TS.stage==='run')qTimer();}if(m!=='trn'&&typeof TQ!=='undefined')clearInterval(TQ);else $('q').focus();}
 $('tSearch').onclick=()=>setTab('search');$('tCons').onclick=()=>{if(!C.ask)C.ask=[];setTab('cons')};$('tBat').onclick=()=>setTab('bat');$('tTrn').onclick=()=>setTab('trn');
 $('chips').innerHTML=GROUPS.map(g=>`<button class="chip${g[0]==='all'?' on':''}" data-g="${g[0]}">${g[1]}</button>`).join('');
 $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));search();});
@@ -924,59 +937,113 @@ document.addEventListener('keydown',e=>{if(!win.classList.contains('bat')||/INPU
 const TTOP=[['sit','🎯','Ситуации','какую статью применить'],['УК','📕','Уголовный кодекс','статьи и наказания'],['АК','📙','Административный кодекс','статьи и штрафы'],['ДУ','🎖','Дисциплинарный устав','нарушения бойцов'],['ПГО','🏛','Правила гос. организаций','задержания, полномочия'],['НГ','🛡','Закон о Нацгвардии','права и запреты SANG'],['КУ','📘','Уставы службы','внутренняя и караульная: патруль, КПП']];
 const TPOOL=IT.map((a,i)=>i).filter(i=>{const a=IT[i];return a.t==='sit'&&a.arts&&a.arts.length&&byNum[a.arts[0]]&&/^(УК|АК|ДУ)/.test(a.arts[0])});
 function lawPool(c){return IT.map((a,i)=>i).filter(i=>{const a=IT[i];if(a.t==='sit'||!a.title||a.title.length<12||/^Ранг \d/.test(a.title)||/:$/.test(a.title))return false;if(c==='НГ')return a.code==='НГ'||a.code==='Прил1';if(c==='КУ')return a.code==='КУ'||a.code==='УВС';return a.code===c;});}
+const POOLS={};TTOP.forEach(t=>{POOLS[t[0]]=t[0]==='sit'?TPOOL:lawPool(t[0]);});
 const shuf=x=>{x=x.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x;};
 const cut=(s,n=170)=>s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s;
-function mkQ(topic){
- if(topic==='sit'){const i=TPOOL[Math.floor(Math.random()*TPOOL.length)],a=IT[i],r=a.arts[0],pf=r.split(' ')[0];let pool=[...new Set(TPOOL.map(j=>IT[j].arts[0]))].filter(n=>!a.arts.includes(n));const s=pool.filter(n=>n.startsWith(pf));pool=shuf(s.length>=3?s:pool).slice(0,3);
-  const fmt=n=>`<b>${esc(n)}</b> — ${esc(cut(byNum[n].title,110))}`;return {kind:'Ситуация',q:a.title,sub:'Какая основная статья?',ok:fmt(r),opts:shuf([r,...pool]).map(fmt),exp:a.arts.map(n=>byNum[n]?`${n} — ${cut(byNum[n].title,120)}`:n).join('\n'),go:i,key:'s'+i};}
- const P=lawPool(topic);const i=P[Math.floor(Math.random()*P.length)],a=IT[i];const others=shuf(P.filter(j=>j!==i&&IT[j].title!==a.title));
+// ---- колода и прогресс (система Лейтнера) ----
+// карточка: {l:уровень 0..4, s:сколько раз видел, w:ошибок, r:раунд, t:номер теста когда видел}
+const cid=i=>{const a=IT[i];return a.t==='sit'?'s:'+a.title:'n:'+a.num;};
+let DECK={},DROUND={},DTEST=0;
+try{DECK=JSON.parse(localStorage.getItem('ps_deck')||'{}')||{};DROUND=JSON.parse(localStorage.getItem('ps_dround')||'{}')||{};DTEST=+localStorage.getItem('ps_dtest')||0;}catch(_){}
+function deckSave(){try{localStorage.setItem('ps_deck',JSON.stringify(DECK));localStorage.setItem('ps_dround',JSON.stringify(DROUND));localStorage.setItem('ps_dtest',String(DTEST));}catch(_){}}
+const GAP=[0,1,3,7,15]; // через сколько тестов карточка снова «созрела» по уровню
+function topicStats(t){const P=POOLS[t];let learned=0,weak=0,seen=0;P.forEach(i=>{const c=DECK[cid(i)];if(!c)return;seen++;if(c.l>=3)learned++;else if(c.l===0&&c.w>0)weak++;});return {n:P.length,learned,weak,seen};}
+function pickItems(t,count,used){const P=POOLS[t].filter(i=>!used.has(cid(i)));if(!P.length)return [];const R=DROUND[t]||1;
+ const card=i=>DECK[cid(i)];
+ // 1) слабые — до 30% теста
+ const weak=shuf(P.filter(i=>{const c=card(i);return c&&c.l===0&&c.w>0&&DTEST-c.t>=1;}));
+ const out=weak.slice(0,Math.ceil(count*0.3));
+ // 2) ещё не было в этом раунде: сначала совсем новые, потом созревшие по уровню
+ const take=()=>{const rest=P.filter(i=>!out.includes(i)&&(card(i)||{}).r!==DROUND[t]);
+  const fresh=shuf(rest.filter(i=>!card(i))),due=shuf(rest.filter(i=>{const c=card(i);return c&&DTEST-c.t>=GAP[c.l];})),other=shuf(rest.filter(i=>{const c=card(i);return c&&DTEST-c.t<GAP[c.l];}));
+  for(const i of [...fresh,...due,...other]){if(out.length>=count)break;out.push(i);}};
+ DROUND[t]=R;take();
+ // 3) раунд пройден — начинаем новый (перемешанная колода)
+ if(out.length<count&&P.length>out.length){DROUND[t]=R+1;take();}
+ return out;}
+function deckMark(q,ok){const id=q.cid;const c=DECK[id]||{l:0,s:0,w:0,r:0,t:0};c.s++;c.t=DTEST;c.r=DROUND[q.topic]||1;if(ok)c.l=Math.min(4,c.l+1);else{c.l=0;c.w++;}DECK[id]=c;}
+// ---- варианты ответов: похожие, из той же главы ----
+const chap=a=>a.code+' '+(a.num.split(' ')[1]||'').split('.')[0];
+function near(P,i,f,k,hard){const a=IT[i],ch=chap(a),val=f(i);const seen=new Set([val]);const pick=[];
+ const add=list=>{for(const j of list){if(pick.length>=k)break;const v=f(j);if(!v||seen.has(v))continue;seen.add(v);pick.push(v);}};
+ if(hard)add(shuf(P.filter(j=>j!==i&&chap(IT[j])===ch)));add(shuf(P.filter(j=>j!==i)));return pick;}
+function mkQFor(topic,i,hard){
+ if(topic==='sit'){const a=IT[i],r=a.arts[0],pf=r.split(' ')[0],rch=chap(byNum[r]);let pool=[...new Set(TPOOL.map(j=>IT[j].arts[0]))].filter(n=>!a.arts.includes(n)&&byNum[n]);
+  const same=pool.filter(n=>n.startsWith(pf));const sameCh=same.filter(n=>chap(byNum[n])===rch);let ds=shuf(hard?sameCh:[]);ds=[...ds,...shuf(same).filter(n=>!ds.includes(n))];ds=[...ds,...shuf(pool).filter(n=>!ds.includes(n))].slice(0,3);
+  const fmt=n=>`<b>${esc(n)}</b> — ${esc(cut(byNum[n].title,110))}`;return {topic,cid:cid(i),kind:'Ситуация',q:a.title,sub:'Какая основная статья?',ok:fmt(r),opts:shuf([r,...ds]).map(fmt),exp:a.arts.map(n=>byNum[n]?`${n} — ${cut(byNum[n].title,120)}`:n).join('\n'),go:i};}
+ const P=POOLS[topic],a=IT[i];
  const types=['d2n','n2d'];if((topic==='УК'||topic==='АК')&&a.pun&&new Set(P.map(j=>IT[j].pun)).size>4)types.push('pun','pun');const t=types[Math.floor(Math.random()*types.length)];
- if(t==='pun'){const ds=shuf([...new Set(P.map(j=>IT[j].pun).filter(p=>p&&p!==a.pun))]).slice(0,3);return {kind:'Наказание',q:`${a.num} — ${cut(a.title,150)}`,sub:'Какое наказание?',ok:esc(a.pun),opts:shuf([a.pun,...ds]).map(esc),exp:a.num+': '+a.pun,go:i,key:'p'+i};}
- if(t==='d2n'){const ds=others.slice(0,3).map(j=>IT[j].num);return {kind:'Найди статью',q:cut(a.title,220),sub:'Какой это пункт?',ok:esc(a.num),opts:shuf([a.num,...ds]).map(esc),exp:a.num+' — '+cut(a.title,200)+(a.pun?'\nНаказание: '+a.pun:''),go:i,key:'d'+i};}
- const ds=others.slice(0,3).map(j=>IT[j].title);return {kind:'Что гласит',q:a.num,sub:'О чём этот пункт?',ok:esc(cut(a.title,140)),opts:shuf([a.title,...ds]).map(x=>esc(cut(x,140))),exp:a.num+' — '+cut(a.title,220)+(a.pun?'\nНаказание: '+a.pun:''),go:i,key:'n'+i};}
-let TS={stage:'setup',topics:new Set(['sit','УК']),n:10,mode:'train',qs:[],i:0,ans:[],t0:0,t1:0};
-try{const s=JSON.parse(localStorage.getItem('ps_tcfg')||'null');if(s){TS.topics=new Set((s.topics||[]).filter(t=>TTOP.some(x=>x[0]===t)));if(![10,20,30,50].includes(s.n))s.n=10;if(!['train','exam'].includes(s.mode))s.mode='train';TS.n=s.n;TS.mode=s.mode;}}catch(_){}
-function tStart(retry){let qs=[];if(retry)qs=retry;else{const tp=[...TS.topics];const seen=new Set();let guard=0;while(qs.length<TS.n&&guard++<TS.n*20){const q=mkQ(tp[qs.length%tp.length]);if(seen.has(q.key))continue;seen.add(q.key);qs.push(q);}qs=shuf(qs);}
- TS.retry=!!retry;TS.qs=qs;TS.i=0;TS.ans=[];TS.stage='run';TS.t0=Date.now();try{localStorage.setItem('ps_tcfg',JSON.stringify({topics:[...TS.topics],n:TS.n,mode:TS.mode}))}catch(_){}renderTrainer();}
-function grade(p){return p>=90?['Отлично','#3fbf75']:p>=75?['Хорошо','#8fd36b']:p>=60?['Зачёт','#f2c35b']:['Не сдал','#ef5b5b'];}
+ const base={topic,cid:cid(i),go:i};
+ if(t==='pun'){const ds=near(P,i,j=>IT[j].pun,3,hard);return {...base,kind:'Наказание',q:`${a.num} — ${cut(a.title,150)}`,sub:'Какое наказание?',ok:esc(a.pun),opts:shuf([a.pun,...ds]).map(esc),exp:a.num+': '+a.pun};}
+ if(t==='d2n'){const ds=near(P,i,j=>IT[j].title!==a.title?IT[j].num:null,3,hard);return {...base,kind:'Найди статью',q:cut(a.title,220),sub:'Какой это пункт?',ok:esc(a.num),opts:shuf([a.num,...ds]).map(esc),exp:a.num+' — '+cut(a.title,200)+(a.pun?'\nНаказание: '+a.pun:'')};}
+ const ds=near(P,i,j=>cut(IT[j].title,140)!==cut(a.title,140)?IT[j].title:null,3,hard);return {...base,kind:'Что гласит',q:a.num,sub:'О чём этот пункт?',ok:esc(cut(a.title,140)),opts:shuf([a.title,...ds]).map(x=>esc(cut(x,140))),exp:a.num+' — '+cut(a.title,220)+(a.pun?'\nНаказание: '+a.pun:'')};}
+function mkQ(topic){const P=POOLS[topic];return mkQFor(topic,P[Math.floor(Math.random()*P.length)],false);}
+// ---- состояние теста ----
+let TS={stage:'setup',topics:new Set(['sit','УК']),n:10,mode:'train',timer:true,qs:[],i:0,ans:[],t0:0,t1:0};
+try{const s=JSON.parse(localStorage.getItem('ps_tcfg')||'null');if(s){TS.topics=new Set((s.topics||[]).filter(t=>TTOP.some(x=>x[0]===t)));if(![10,20,30,50].includes(s.n))s.n=10;if(!['train','exam'].includes(s.mode))s.mode='train';TS.n=s.n;TS.mode=s.mode;TS.timer=s.timer!==false;}}catch(_){}
+const QSEC=30;let TQ=null,TQend=0;
+function tStart(retry){let qs=[];
+ if(retry)qs=retry;
+ else{const tp=shuf([...TS.topics]);const used=new Set();const per={};tp.forEach((t,k)=>per[t]=Math.floor(TS.n/tp.length)+(k<TS.n%tp.length?1:0));
+  const hard=TS.mode==='exam';DTEST++;
+  tp.forEach(t=>{pickItems(t,per[t],used).forEach(i=>{used.add(cid(i));qs.push(mkQFor(t,i,hard));});});
+  // если в какой-то теме карточек меньше, чем нужно, — добираем из остальных
+  for(const t of tp){if(qs.length>=TS.n)break;pickItems(t,TS.n-qs.length,used).forEach(i=>{used.add(cid(i));qs.push(mkQFor(t,i,hard));});}
+  qs=shuf(qs).slice(0,TS.n);}
+ TS.retry=!!retry;TS.qs=qs;TS.i=0;TS.ans=[];TS.stage='run';TS.t0=Date.now();deckSave();
+ try{localStorage.setItem('ps_tcfg',JSON.stringify({topics:[...TS.topics],n:TS.n,mode:TS.mode,timer:TS.timer}))}catch(_){}renderTrainer();qTimer();}
+const TIMEOUT='⏱ Время вышло';
+function qTimer(){clearInterval(TQ);if(TS.stage!=='run'||TS.mode!=='exam'||!TS.timer)return;TQend=Date.now()+QSEC*1000;const tick=()=>{const left=Math.max(0,TQend-Date.now());const bar=document.querySelector('.tr-tm b'),lab=document.querySelector('.tr-tm span');if(bar)bar.style.width=(left/(QSEC*10))+'%';if(lab)lab.textContent=Math.ceil(left/1000)+' с';if(bar)bar.parentElement.classList.toggle('low',left<8000);
+ if(left<=0){clearInterval(TQ);if(TS.ans[TS.i]===undefined){TS.ans[TS.i]=TIMEOUT;tNext();}}};tick();TQ=setInterval(tick,200);}
+const isExam=()=>TS.mode==='exam';
+function grade(p){if(isExam())return p>=95?['Отлично · сдал','#3fbf75']:p>=80?['Сдал','#8fd36b']:['Не сдал','#ef5b5b'];return p>=90?['Отлично','#3fbf75']:p>=75?['Хорошо','#8fd36b']:p>=60?['Зачёт','#f2c35b']:['Нужно подтянуть','#ef5b5b'];}
 function fmtT(ms){const s=Math.round(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
 function renderTrainer(){const el=$('trainer');let x='';
  if(TS.stage==='setup'){let best={};try{best=JSON.parse(localStorage.getItem('ps_tbest')||'{}')}catch(_){}
-  x+=`<div class="tr-hero"><div class="tr-ic">🎓</div><div><div class="tr-t">Учёба SANG</div><div class="tr-s">Собери тест под себя: темы, количество вопросов и режим. В конце — оценка и разбор ошибок.</div></div></div>`;
-  x+=`<div class="tr-sec"><div class="tr-h">1 · Темы <span>можно несколько</span></div><div class="tr-topics">${TTOP.map(t=>`<button class="tr-tp${TS.topics.has(t[0])?' on':''}" data-tp="${t[0]}"><i>${t[1]}</i><b>${t[2]}</b><small>${t[3]}</small>${best[t[0]]!=null?`<em>лучший ${best[t[0]]}%</em>`:''}</button>`).join('')}</div></div>`;
+  x+=`<div class="tr-hero"><div class="tr-ic">🎓</div><div><div class="tr-t">Учёба SANG</div><div class="tr-s">Вопросы идут по колоде: сначала то, что ещё не попадалось, ошибки возвращаются чаще, выученное — реже. Прогресс сохраняется на этом устройстве.</div></div></div>`;
+  x+=`<div class="tr-sec"><div class="tr-h">1 · Темы <span>можно несколько</span></div><div class="tr-topics">${TTOP.map(t=>{const st=topicStats(t[0]);const pl=Math.round(st.learned/st.n*100),ps=Math.round(st.seen/st.n*100);
+   return `<button class="tr-tp${TS.topics.has(t[0])?' on':''}" data-tp="${t[0]}"><i>${t[1]}</i><b>${t[2]}</b><small>${t[3]}</small><div class="tr-pg"><div class="tr-pb"><span class="s" style="width:${ps}%"></span><span class="l" style="width:${pl}%"></span></div><div class="tr-pt">выучено <b>${st.learned}</b>/${st.n}${st.weak?` · <u>${st.weak} слаб.</u>`:''}${best[t[0]]!=null?` · лучший <b>${best[t[0]]}%</b>`:''}</div></div></button>`}).join('')}</div>
+   <div class="tr-leg"><span><i class="l"></i>выучено (3+ верных подряд)</span><span><i class="s"></i>уже встречалось</span><button class="tr-rst" id="trst">Сбросить прогресс</button></div></div>`;
   x+=`<div class="tr-sec"><div class="tr-h">2 · Количество вопросов</div><div class="tr-seg">${[10,20,30,50].map(n=>`<button class="${TS.n===n?'on':''}" data-n="${n}">${n}</button>`).join('')}</div></div>`;
-  x+=`<div class="tr-sec"><div class="tr-h">3 · Режим</div><div class="tr-modes"><button class="tr-md${TS.mode==='train'?' on':''}" data-m="train"><b>📖 Тренировка</b><small>правильный ответ и пояснение сразу после выбора</small></button><button class="tr-md${TS.mode==='exam'?' on':''}" data-m="exam"><b>📝 Экзамен</b><small>без подсказок, результат и разбор — в конце</small></button></div></div>`;
-  x+=`<button class="tr-go" id="tgo" ${TS.topics.size?'':'disabled'}>Начать тест · ${TS.n} вопросов</button>`;}
+  x+=`<div class="tr-sec"><div class="tr-h">3 · Режим</div><div class="tr-modes"><button class="tr-md${TS.mode==='train'?' on':''}" data-m="train"><b>📖 Тренировка</b><small>ответ и пояснение сразу после выбора</small></button><button class="tr-md${TS.mode==='exam'?' on':''}" data-m="exam"><b>📝 Экзамен</b><small>без подсказок, похожие варианты, зачёт от 80%, разбор в конце</small></button></div>
+   ${TS.mode==='exam'?`<div class="st-row tr-tmr"><span>⏱ Таймер — ${QSEC} секунд на вопрос</span><label class="sw"><input type="checkbox" id="ttimer" ${TS.timer?'checked':''}><i></i></label></div>`:''}</div>`;
+  x+=`<button class="tr-go" id="tgo" ${TS.topics.size?'':'disabled'}>Начать ${TS.mode==='exam'?'экзамен':'тренировку'} · ${TS.n} вопросов</button>`;}
  else if(TS.stage==='run'){const q=TS.qs[TS.i],A=TS.ans[TS.i],sh=A!==undefined&&TS.mode==='train';const okc=TS.ans.filter((a,k)=>a===TS.qs[k].ok).length;
-  x+=`<div class="tr-top"><button class="tr-q" id="tquit">✕ Выйти</button><span>Вопрос <b>${TS.i+1}</b> из ${TS.qs.length}</span>${TS.mode==='train'?`<span class="tr-sc">✓ ${okc}</span>`:'<span class="tr-sc">📝 экзамен</span>'}</div>`;
+  x+=`<div class="tr-top"><button class="tr-q" id="tquit">✕ Выйти</button><span>Вопрос <b>${TS.i+1}</b> из ${TS.qs.length}</span>${TS.mode==='train'?`<span class="tr-sc">✓ ${okc}</span>`:'<span class="tr-sc ex">📝 экзамен</span>'}</div>`;
   x+=`<div class="tr-dots">${TS.qs.map((qq,k)=>{let c=k===TS.i?'cur':'';if(TS.ans[k]!==undefined&&k!==TS.i)c=TS.mode==='train'?(TS.ans[k]===qq.ok?'ok':'bad'):'done';return `<i class="${c}"></i>`}).join('')}</div>`;
-  x+=`<div class="tr-card"><div class="tr-kind">${esc(q.kind)}</div><div class="tr-qq">${esc(q.q)}</div><div class="tr-sub">${esc(q.sub)}</div><div class="tr-opts">${q.opts.map((o,k)=>{let c='';if(sh){if(o===q.ok)c=' ok';else if(o===A)c=' bad';}else if(A===o)c=' pick';return `<button class="tr-o${c}" data-o="${k}"><kbd>${k+1}</kbd><span>${o}</span></button>`}).join('')}</div>`;
+  const cd=DECK[q.cid];const tag=!cd?'<span class="tr-new">новый</span>':(cd.l===0&&cd.w>0?'<span class="tr-wk">повтор ошибки</span>':'');
+  x+=`<div class="tr-card">${isExam()&&TS.timer?`<div class="tr-tm"><b></b><span></span></div>`:''}<div class="tr-kind">${esc(q.kind)}</div>${tag}<div class="tr-qq">${esc(q.q)}</div><div class="tr-sub">${esc(q.sub)}</div><div class="tr-opts">${q.opts.map((o,k)=>{let c='';if(sh){if(o===q.ok)c=' ok';else if(o===A)c=' bad';}else if(A===o)c=' pick';return `<button class="tr-o${c}" data-o="${k}"><kbd>${k+1}</kbd><span>${o}</span></button>`}).join('')}</div>`;
   if(sh)x+=`<div class="tr-exp ${A===q.ok?'ok':'bad'}"><b>${A===q.ok?'✓ Верно':'✗ Неверно'}</b><div>${esc(q.exp).replace(/\n/g,'<br>')}</div></div>`;
   x+=`</div>`;
-  if(A!==undefined)x+=`<button class="tr-go" id="tnx">${TS.i+1<TS.qs.length?'Дальше →':'Завершить тест'}</button>`;}
+  if(A!==undefined&&!isExam())x+=`<button class="tr-go" id="tnx">${TS.i+1<TS.qs.length?'Дальше →':'Завершить тест'}</button>`;}
  else{const n=TS.qs.length,ok=TS.ans.filter((a,k)=>a===TS.qs[k].ok).length,p=Math.round(ok/n*100),[g,col]=grade(p),wr=TS.qs.map((q,k)=>[q,TS.ans[k]]).filter(([q,a])=>a!==q.ok);
+  const nw=TS.newCnt||0,up=TS.upCnt||0;
   x+=`<div class="tr-res"><div class="tr-ring" style="--p:${p};--c:${col}"><div><b>${p}%</b><small>${ok} из ${n}</small></div></div><div class="tr-gr" style="color:${col}">${g}</div><div class="tr-meta">${[...TS.topics].map(t=>TTOP.find(x=>x[0]===t)[2]).join(' · ')} · ${TS.mode==='exam'?'экзамен':'тренировка'} · время ${fmtT(TS.t1-TS.t0)}</div>`;
+  x+=`<div class="tr-gain">${nw?`<span>🆕 новых: <b>${nw}</b></span>`:''}${up?`<span>📈 выучено: <b>+${up}</b></span>`:''}${wr.length?`<span>🔁 в повтор: <b>${wr.length}</b></span>`:''}</div>`;
   x+=`<div class="tr-acts">${wr.length?'<button class="tr-go" id="tretry">🔁 Повторить ошибки ('+wr.length+')</button>':''}<button class="tr-go alt" id="tnew">Новый тест</button><button class="tr-go alt" id="tcopy">📋 Скопировать результат</button></div></div>`;
-  if(wr.length)x+=`<div class="tr-sec"><div class="tr-h">Разбор ошибок</div>${wr.map(([q,a])=>`<div class="tr-err"><div class="tr-kind">${esc(q.kind)}</div><div class="tr-eq">${esc(q.q)}</div><div class="tr-ea bad">Твой ответ: ${a}</div><div class="tr-ea ok">Правильно: ${q.ok}</div><div class="tr-ex">${esc(q.exp).replace(/\n/g,'<br>')}</div><button class="nx" data-go="${q.go}">Открыть в базе</button></div>`).join('')}</div>`;
+  if(wr.length)x+=`<div class="tr-sec"><div class="tr-h">Разбор ошибок</div>${wr.map(([q,a])=>`<div class="tr-err"><div class="tr-kind">${esc(q.kind)}</div><div class="tr-eq">${esc(q.q)}</div><div class="tr-ea bad">Твой ответ: ${a===TIMEOUT?esc(a):a}</div><div class="tr-ea ok">Правильно: ${q.ok}</div><div class="tr-ex">${esc(q.exp).replace(/\n/g,'<br>')}</div><button class="nx" data-go="${q.go}">Открыть в базе</button></div>`).join('')}</div>`;
   else x+=`<div class="tr-sec" style="text-align:center;color:#8fe3b2">Без единой ошибки. Красава! 🔥</div>`;}
  el.innerHTML=x;el.scrollTop=0;}
-function tAnswer(k){const q=TS.qs[TS.i];if(TS.ans[TS.i]!==undefined&&TS.mode==='train')return;TS.ans[TS.i]=q.opts[k];if(TS.mode==='exam'){setTimeout(tNext,180);}renderTrainer();}
-function tNext(){if(TS.ans[TS.i]===undefined)return;if(TS.i+1<TS.qs.length){TS.i++;renderTrainer();}else tFinish();}
-function tFinish(){TS.t1=Date.now();TS.stage='res';const n=TS.qs.length,ok=TS.ans.filter((a,k)=>a===TS.qs[k].ok).length,p=Math.round(ok/n*100);
+function tAnswer(k){const q=TS.qs[TS.i];if(TS.ans[TS.i]!==undefined)return;TS.ans[TS.i]=q.opts[k];if(isExam()){clearInterval(TQ);renderTrainer();setTimeout(tNext,220);return;}renderTrainer();}
+function tNext(){if(TS.ans[TS.i]===undefined)return;if(TS.i+1<TS.qs.length){TS.i++;renderTrainer();qTimer();}else tFinish();}
+function tFinish(){clearInterval(TQ);TS.t1=Date.now();TS.stage='res';const n=TS.qs.length,ok=TS.ans.filter((a,k)=>a===TS.qs[k].ok).length,p=Math.round(ok/n*100);
+ let nw=0,up=0;TS.qs.forEach((q,k)=>{const before=DECK[q.cid];if(!before)nw++;const wasL=before?before.l:0;deckMark(q,TS.ans[k]===q.ok);if(wasL<3&&DECK[q.cid].l>=3)up++;});TS.newCnt=nw;TS.upCnt=up;deckSave();
  if(n>=10&&TS.topics.size===1&&!TS.retry){try{const b=JSON.parse(localStorage.getItem('ps_tbest')||'{}');TS.topics.forEach(t=>{if(b[t]==null||p>b[t])b[t]=p});localStorage.setItem('ps_tbest',JSON.stringify(b))}catch(_){}}renderTrainer();}
 $('trainer').addEventListener('click',e=>{const t=e.target;
+ if(t.closest('#trst')){if(confirm('Сбросить прогресс учёбы по всем темам? Колода начнётся заново.')){DECK={};DROUND={};DTEST=0;deckSave();try{localStorage.removeItem('ps_tbest')}catch(_){}renderTrainer();flash('Прогресс учёбы сброшен');}return;}
  const tp=t.closest('.tr-tp');if(tp){const v=tp.dataset.tp;TS.topics.has(v)?TS.topics.delete(v):TS.topics.add(v);renderTrainer();return;}
  const nb=t.closest('[data-n]');if(nb&&TS.stage==='setup'){TS.n=+nb.dataset.n;renderTrainer();return;}
  const md=t.closest('.tr-md');if(md){TS.mode=md.dataset.m;renderTrainer();return;}
+ if(t.closest('.tr-tmr')){e.preventDefault();TS.timer=!TS.timer;renderTrainer();return;}
  if(t.closest('#tgo')){if(TS.topics.size)tStart();return;}
  const o=t.closest('.tr-o');if(o){tAnswer(+o.dataset.o);return;}
  if(t.closest('#tnx')){tNext();return;}
- if(t.closest('#tquit')){if(confirm('Выйти из теста? Прогресс не сохранится.')){TS.stage='setup';renderTrainer();}return;}
+ if(t.closest('#tquit')){if(confirm('Выйти из теста? Результат не засчитается.')){clearInterval(TQ);TS.stage='setup';renderTrainer();}return;}
  if(t.closest('#tretry')){const wr=TS.qs.filter((q,k)=>TS.ans[k]!==q.ok).map(q=>({...q,opts:shuf(q.opts)}));tStart(wr);return;}
  if(t.closest('#tnew')){TS.stage='setup';renderTrainer();return;}
- if(t.closest('#tcopy')){const n=TS.qs.length,ok=TS.ans.filter((a,k)=>a===TS.qs[k].ok).length,p=Math.round(ok/n*100);const s=`🎓 SANG Codex · тест: ${[...TS.topics].map(x=>TTOP.find(y=>y[0]===x)[2]).join(', ')} (${TS.mode==='exam'?'экзамен':'тренировка'})\nРезультат: ${ok}/${n} — ${p}% · ${grade(p)[0]} · время ${fmtT(TS.t1-TS.t0)}`;try{navigator.clipboard.writeText(me(s))}catch(_){}flash('Результат скопирован');return;}
- const g=t.closest('[data-go]');if(g)openSit(+g.dataset.go);});
-document.addEventListener('keydown',e=>{if(!win.classList.contains('trn')||TS.stage!=='run'||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||!$('setm').hidden||!$('hlp').hidden)return;if(/^[1-4]$/.test(e.key)){tAnswer(+e.key-1);}else if(e.key==='Enter'||e.code==='Space'){e.preventDefault();tNext();}});
+ if(t.closest('#tcopy')){const n=TS.qs.length,ok=TS.ans.filter((a,k)=>a===TS.qs[k].ok).length,p=Math.round(ok/n*100);const s=`🎓 SANG Codex · ${TS.mode==='exam'?'экзамен':'тренировка'}: ${[...TS.topics].map(x=>TTOP.find(y=>y[0]===x)[2]).join(', ')}\nРезультат: ${ok}/${n} — ${p}% · ${grade(p)[0]} · время ${fmtT(TS.t1-TS.t0)}`;try{navigator.clipboard.writeText(me(s))}catch(_){}flash('Результат скопирован');return;}
+ const g=t.closest('[data-go]');if(g){clearInterval(TQ);openSit(+g.dataset.go);}});
+document.addEventListener('keydown',e=>{if(!win.classList.contains('trn')||TS.stage!=='run'||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||!$('setm').hidden||!$('hlp').hidden)return;if(/^[1-4]$/.test(e.key)){tAnswer(+e.key-1);}else if((e.key==='Enter'||e.code==='Space')&&!isExam()){e.preventDefault();tNext();}});
 
 // ---- AI (semantic search, on-device) ----
 window.AI={state:'off',sims:null,q:''};
