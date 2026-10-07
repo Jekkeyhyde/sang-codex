@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SANG Codex">
 
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet"><style>
 :root{--bg:#0f1729;--panel:#182338;--txt:#ecf0f6;--gold:#ffd26e;--muted:#96a5be;--sel:#344e7a;--on:#286e46;--line:#253350;--desk:#e9edf3;--deskT:#14213a;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#0a0f1a;--deskT:#cfd6e2}}
@@ -459,6 +459,82 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 .tr-new{color:#9ff0bf;background:rgba(63,191,117,.12);border:1px solid rgba(63,191,117,.3)}.tr-wk{color:#ffb4b4;background:rgba(239,91,91,.1);border:1px solid rgba(239,91,91,.3)}
 .tr-sc.ex{color:#9cc7ff!important}
 .tr-gain{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:-4px 0 16px}.tr-gain span{font-size:12px;color:#aab5cb;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.tr-gain b{color:#fff}
+
+/* ================= PREMIUM POLISH ================= */
+:root{--glass:linear-gradient(180deg,rgba(24,34,62,.78),rgba(12,18,34,.82));--edge:rgba(255,255,255,.075);--edgeHi:rgba(255,255,255,.12);--goldGlow:0 0 0 1px rgba(242,195,91,.35),0 8px 28px -6px rgba(242,195,91,.28);
+ --sh1:0 1px 0 rgba(255,255,255,.04) inset,0 1px 2px rgba(0,0,0,.35),0 8px 24px -8px rgba(0,0,0,.55);--sh2:0 1px 0 rgba(255,255,255,.05) inset,0 2px 4px rgba(0,0,0,.3),0 24px 60px -18px rgba(0,0,0,.7);--hd:Manrope,Inter,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace}
+body{background:
+ radial-gradient(1100px 620px at 12% -12%,rgba(46,78,150,.38),transparent 62%),
+ radial-gradient(900px 520px at 108% 2%,rgba(150,104,24,.22),transparent 58%),
+ radial-gradient(700px 500px at 50% 120%,rgba(30,60,120,.22),transparent 60%),
+ #060a14!important;background-attachment:fixed!important}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+ background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:44px 44px;
+ -webkit-mask-image:radial-gradient(ellipse 85% 70% at 50% 30%,#000 30%,transparent 85%);mask-image:radial-gradient(ellipse 85% 70% at 50% 30%,#000 30%,transparent 85%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.45));}
+.wrap,.win{position:relative;z-index:1}
+/* brand */
+.bt{font-family:var(--hd)!important;font-weight:800!important;letter-spacing:.2px!important;background:linear-gradient(92deg,#fff 0%,#ffe9b5 45%,#f2c35b 100%)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.logo svg{filter:drop-shadow(0 0 10px rgba(242,195,91,.35)) drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.bd{color:#d8b663!important;font-weight:600}
+.tools .b{box-shadow:var(--sh1);backdrop-filter:blur(8px)}
+/* search */
+.q{background-color:rgba(255,255,255,.045)!important;box-shadow:var(--sh1);backdrop-filter:blur(10px)}
+.q:focus{box-shadow:0 0 0 4px rgba(242,195,91,.12),0 10px 30px -10px rgba(242,195,91,.25)!important}
+.mic{box-shadow:var(--sh1)}
+/* tabs */
+.tabs{background:rgba(10,15,30,.55)!important;box-shadow:var(--sh1);backdrop-filter:blur(10px)}
+.tab{position:relative}
+.tab.on{background:linear-gradient(180deg,#26407a,#1a2c58)!important;box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 6px 18px -6px rgba(40,80,170,.7)!important}
+.tab.on::after{content:"";position:absolute;left:30%;right:30%;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#f2c35b,transparent);box-shadow:0 0 8px rgba(242,195,91,.8)}
+/* chips */
+.chip{transition:all .15s!important}.chip:hover{color:#dfe6f3!important;border-color:var(--edgeHi)!important}
+.chip.on{box-shadow:0 0 0 1px rgba(242,195,91,.25),0 4px 14px -4px rgba(242,195,91,.35)}
+/* list rows */
+.row{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02))!important;box-shadow:var(--sh1);transition:transform .14s,background .14s,border-color .14s,box-shadow .14s!important}
+.row:hover{transform:translateX(2px);border-color:var(--edgeHi)!important}
+.row.sel{box-shadow:var(--goldGlow)!important}
+.row .n{font-family:var(--mono)!important;font-variant-numeric:tabular-nums;letter-spacing:-.2px}
+.sh{font-family:var(--hd)!important;color:#c4cde0!important}
+.sh::before{content:"";width:3px;height:12px;border-radius:2px;background:linear-gradient(180deg,#f2c35b,#c98f22);box-shadow:0 0 8px rgba(242,195,91,.6)}
+/* cards */
+.det,.cons-p,.bx-card,.bx-right,.tr-card,.tr-sec,.tr-hero,.tr-res,.hlp-c{box-shadow:var(--sh2)!important;border-color:var(--edge)!important}
+.det,.cons-p{background:var(--glass)!important;backdrop-filter:blur(14px)}
+.det .h,.tr-qq,.tr-t,.bx-ph,.hlp-c h2,.hp-hero h2{font-family:var(--hd)!important;letter-spacing:-.2px}
+.det .h{color:#f6cf6f!important;text-shadow:0 0 22px rgba(242,195,91,.3),0 1px 0 rgba(0,0,0,.4)!important}
+.det>*:not(.favb){animation:fadeUp .28s ease both}.favb{position:relative;z-index:3}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sec .lab{font-family:var(--hd)!important;letter-spacing:1.2px!important}
+.sec .lab::before{content:"";width:3px;height:11px;border-radius:2px;background:linear-gradient(180deg,#f2c35b,#c98f22);flex:0 0 auto}
+.arts .a{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02))!important;box-shadow:var(--sh1)}
+.arts .a b{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.say{background:linear-gradient(90deg,rgba(242,195,91,.06),rgba(255,255,255,.025) 40%)!important;box-shadow:var(--sh1);transition:transform .1s,background .15s,box-shadow .15s!important}
+.say:hover{background:linear-gradient(90deg,rgba(242,195,91,.11),rgba(255,255,255,.04) 50%)!important;box-shadow:0 0 0 1px rgba(242,195,91,.2),0 8px 20px -10px rgba(242,195,91,.35)}
+.steps li::before{box-shadow:0 0 0 1px rgba(242,195,91,.3),0 0 10px rgba(242,195,91,.25)}
+.chatbtn,.copyall,.favb,.nx{transition:all .15s!important}.chatbtn:hover,.nx:hover{box-shadow:0 0 0 1px rgba(96,165,250,.4),0 6px 16px -6px rgba(96,165,250,.5)}
+.verdict{box-shadow:var(--sh1)}
+.opt{transition:all .12s!important}.opt:hover{border-color:var(--edgeHi)!important;color:#fff}
+.opt.on{box-shadow:0 0 0 1px rgba(242,195,91,.25),0 4px 14px -6px rgba(242,195,91,.45)}
+/* battle */
+.bx-card{background:radial-gradient(700px 260px at 0% 0%,rgba(242,195,91,.14),transparent 60%),radial-gradient(500px 200px at 100% 100%,rgba(60,100,200,.12),transparent 60%),linear-gradient(180deg,#17223f,#0c1326)!important}
+.bx-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 30%)}
+.bx-go{position:relative;overflow:hidden}
+.bx-go::after,.tr-go:not(.alt)::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+.tr-go:not(.alt){position:relative;overflow:hidden}
+@keyframes shine{0%,70%{left:-60%}100%{left:130%}}
+.bx-sit{box-shadow:var(--sh1)}
+/* trainer */
+.tr-tp{box-shadow:var(--sh1);transition:transform .14s,border-color .14s,background .14s!important}.tr-tp:hover{transform:translateY(-2px);border-color:var(--edgeHi)}
+.tr-o{box-shadow:var(--sh1)}.tr-o:hover{transform:translateX(2px)}
+.tr-ring{box-shadow:0 0 0 6px rgba(255,255,255,.02),0 0 50px -6px var(--c)!important}
+.tr-ring b{font-family:var(--hd)!important}
+/* modals */
+.hlp{backdrop-filter:blur(8px) saturate(120%)!important}
+.hlp-c{background:linear-gradient(180deg,#17213d,#0d1427)!important}
+.md-head{background:linear-gradient(180deg,rgba(255,255,255,.04),transparent)!important}
+.st-s,.hp section{box-shadow:var(--sh1)}
+.tip{box-shadow:0 18px 40px -10px rgba(0,0,0,.7),0 0 0 1px rgba(242,195,91,.15)!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
@@ -558,13 +634,13 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 <div class="st-s"><div class="st-h">💾 Данные</div>
 <div class="st-row"><span>Избранное и недавние</span><button class="st-btn" id="clrfr">Очистить</button></div>
 <div class="st-row"><span>Все настройки</span><button class="st-btn red" id="rstall">Сбросить всё</button></div>
-<div class="st-note">SANG Codex · база от 30.09.2026 · v25. Всё хранится только на этом устройстве.</div></div>
+<div class="st-note">SANG Codex · законы от 05.10.2026, правила от 30.09.2026 · v25. Всё хранится только на этом устройстве.</div></div>
 <button class="hlp-ok" id="setok">Готово</button>
 </div></div></div>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd">база от 30.09.2026</span></div></div></div><div class="tools" id="tools"></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd" title="Законы (УК, АК, ПК) сверены с форумом 05.10.2026. Правила проекта и уставы — по состоянию на 30.09.2026.">законы от 05.10.2026</span></div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="mic" id="mic" title="Сказать голосом">🎤</button><button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
