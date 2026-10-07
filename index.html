@@ -415,11 +415,42 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 .intro{font-size:12.5px}.opt{font-size:12.5px!important;padding:6px 11px!important}.verdict{font-size:13px!important}
 .parse{font-size:12.5px}.ooc{font-size:12px}.nx{font-size:11.5px}
 @media (min-width:700px){.tab{font-size:11.5px!important}.chip{font-size:10.5px!important}.bt{font-size:15px!important}.bs{font-size:10.5px}}
+
+/* ===== модальные окна: неподвижная шапка + прокручиваемое тело ===== */
+.hlp-c.hp,.hlp-c.st-c{display:flex;flex-direction:column;overflow:hidden!important;padding:0!important;max-height:min(88vh,860px)}
+.md-head{position:relative;flex:0 0 auto;border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,#16203b,#141d35)}
+.md-body{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 0 18px;overscroll-behavior:contain}
+.md-head .hlp-x{position:absolute!important;float:none!important;margin:0!important;top:14px!important;right:14px!important;box-shadow:none!important;background:rgba(255,255,255,.06)!important;z-index:2}
+.hp-hero{padding:18px 64px 10px 20px!important}
+.hp-nav{position:static!important;box-shadow:none!important;background:transparent!important;padding:2px 20px 12px!important;flex-wrap:wrap}
+.hp section{margin:12px 20px 0!important}.hp-quick{margin:12px 20px 4px!important}.hp .hlp-n{margin:14px 20px 0!important}.hp .hlp-ok{margin:12px 20px 0!important}
+@media (max-width:560px){.hp-nav{flex-wrap:nowrap;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}.hp-hero p{display:none}}
+.st-head{display:flex;align-items:center;padding:16px 20px 14px}.st-head h2{margin:0!important}
+.st-c .md-body{padding:0 20px 18px}.st-c .st-s:first-child{margin-top:14px}
+.md-body::-webkit-scrollbar{width:10px}.md-body::-webkit-scrollbar-track{background:transparent;margin:6px 0 14px}.md-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.13);border-radius:10px;border:3px solid transparent;background-clip:padding-box}.md-body::-webkit-scrollbar-thumb:hover{background:rgba(242,195,91,.45);background-clip:padding-box}.md-body::-webkit-scrollbar-button{display:none}
+@supports not (-moz-appearance:none){.md-body{scrollbar-width:auto!important;scrollbar-color:auto!important}}
+@supports (-moz-appearance:none){.md-body{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.18) transparent}}
+.rk-pop{min-width:300px;right:auto}.rk-o span{white-space:nowrap}
+@media (max-width:480px){.bs .bl{display:none}.bs{white-space:nowrap}.rk-pop{min-width:0;right:0}}
+
+/* ===== без обрезаний ===== */
+.bx-sits{flex-wrap:wrap;overflow:visible!important;padding:2px 0 12px!important}
+@media (max-width:599px){
+ .bx-sits{flex-wrap:nowrap;overflow-x:auto!important;scroll-padding:0 16px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent);padding:2px 14px 12px 4px!important;margin:0}
+ .bx-st:not(.cur){font-size:0!important;gap:0}.bx-st:not(.cur) span{font-size:12px}
+ .bx-stages{overflow:visible!important}.bx-ln{min-width:8px;margin:0 4px}
+}
+@media (max-width:899px){
+ .chips{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);padding-right:30px!important;scroll-padding-right:30px}
+}
+@media (min-width:900px){.bx-stages{overflow:visible!important}}
+.hp-nav{flex-wrap:wrap!important;-webkit-mask-image:none!important;mask-image:none!important;overflow:visible!important}
+@media (max-width:420px){.rk-o small{display:none}}.rk-o span{min-width:0;overflow:hidden;text-overflow:ellipsis}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
-<button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
+<div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
 <div class="hp-hero"><div class="hp-ic">📖</div><div><h2>Как пользоваться SANG Codex</h2><p>Памятка бойца SANG: законы, уставы и правила проекта, готовые ситуации с речью и действиями. Работает без интернета.</p></div></div>
-<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs2">📋 Карточка</a><a data-s="hs3">⚡ Бой</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav>
+<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs2">📋 Карточка</a><a data-s="hs3">⚡ Бой</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav></div><div class="md-body" id="hpbody">
 <div class="hp-quick"><div><b>1</b>Опиши, что случилось</div><div><b>2</b>Открой ситуацию 🎯</div><div><b>3</b>Жми фразы — вставляй в чат</div></div>
 
 <section id="hs1"><h3>🔎 Поиск</h3><ul>
@@ -494,10 +525,9 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 
 <p class="hlp-n">Неофициальная памятка SANG · Majestic RP Orlando. При расхождениях действует форум.</p>
 <button class="hlp-ok" id="hlpok">Понятно</button>
-</div></div>
+</div></div></div>
 <div class="hlp" id="setm" hidden><div class="hlp-c st-c" role="dialog" aria-label="Настройки">
-<button class="hlp-x" id="setx" aria-label="Закрыть">✕</button>
-<h2>⚙ Настройки</h2>
+<div class="md-head st-head"><h2>⚙ Настройки</h2><button class="hlp-x" id="setx" aria-label="Закрыть">✕</button></div><div class="md-body" id="stbody">
 <div class="st-s"><div class="st-h">👤 Профиль <span>подставляется во фразы и рацию</span></div>
 <div class="st-g"><label>Звание<div class="rk"><input id="myrank" placeholder="Выбери или впиши" autocomplete="off"><span class="rk-ar">▾</span><div class="rk-pop" id="rkpop" hidden></div></div></label><label>Фамилия<input id="myname" placeholder="Santana"></label></div>
 
@@ -517,11 +547,11 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 <div class="st-row"><span>Все настройки</span><button class="st-btn red" id="rstall">Сбросить всё</button></div>
 <div class="st-note">SANG Codex · база от 30.09.2026 · v25. Всё хранится только на этом устройстве.</div></div>
 <button class="hlp-ok" id="setok">Готово</button>
-</div></div>
+</div></div></div>
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs">Памятка · Орландо · <span class="bd">база от 30.09.2026</span></div></div></div><div class="tools" id="tools"></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd">база от 30.09.2026</span></div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="mic" id="mic" title="Сказать голосом">🎤</button><button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
@@ -587,7 +617,7 @@ function search(){let rawIn=$('q').value.trim().replace(/([а-яёa-z])(\d)/gi,'
  const top=Math.max(0,...sc),min=raw?Math.max(1,Math.floor(top/3)):1;
  shown=sc.map((s,i)=>[s,i]).filter(x=>x[0]>=min).sort((a,b)=>b[0]-a[0]||a[1]-b[1]).slice(0,grp==='all'?60:2000).map(x=>x[1]);
  HOMEH={};AISET=new Set();if(!raw&&grp==='all')shown=buildHome();
- PARSE=null;if(raw.split(/\s+/).length>=3){const p=parseText(rawIn);if(p.f.length&&p.score>=2)PARSE=p;}
+ PARSE=null;if(raw.split(/\s+/).length>=3){const p=parseText(rawIn);if((p.f.length||p.gun||p.drawn||p.drug)&&p.score>=2)PARSE=p;}
  cur=0;renderList();renderDet();if(raw)recLater();if(raw&&AI.state==='on'){clearTimeout(aiT);aiT=setTimeout(()=>aiRerank(raw,sc),220);}}
 let FAV=[],REC=[];try{FAV=JSON.parse(localStorage.getItem('ps_fav')||'[]');REC=JSON.parse(localStorage.getItem('ps_rec')||'[]')}catch(_){}
 function saveFR(){try{localStorage.setItem('ps_fav',JSON.stringify(FAV));localStorage.setItem('ps_rec',JSON.stringify(REC))}catch(_){}}
@@ -796,7 +826,7 @@ $('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
 ['gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});['minus','plus'].forEach(id=>{const b=$(id);if(b)b.style.display='none'});
 const hb=document.createElement('button');hb.className='b';hb.id='helpb';hb.title='Как пользоваться';hb.textContent='?';$('tools').appendChild(hb);
-function showHelp(on){$('hlp').hidden=!on;if(on)document.querySelector('#hlp .hlp-c').scrollTop=0;if(!on){try{localStorage.setItem('ps_help','1')}catch(_){}}}
+function showHelp(on){$('hlp').hidden=!on;if(on)$('hpbody').scrollTop=0;if(!on){try{localStorage.setItem('ps_help','1')}catch(_){}}}
 hb.onclick=()=>showHelp(true);$('hlpx').onclick=()=>showHelp(false);$('hlpok').onclick=()=>showHelp(false);
 $('hlp').addEventListener('click',e=>{if(e.target.id==='hlp')showHelp(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hlp').hidden)showHelp(false)});
@@ -879,7 +909,7 @@ function renderBattle(){const el=$('battle'),a=IT[BSEL],P=batParts(a);if(BI>=P.l
  else x+=`<div class="bx-ph fin">✅ Речь отправлена полностью</div><button class="bx-go" id="brst"><span>Начать заново</span><kbd>R</kbd></button>`;
  x+=`<div class="bx-ctl"><button id="bprev">← Назад</button><button id="brst2">↺ Сначала</button><button data-go="${BSEL}">📋 Карточка и статьи</button></div></div>`;
  x+=`</div><div class="bx-right"><div class="bx-h">✅ Действия</div>${a.steps.map((s,k)=>`<label class="bx-ck${BDONE.has(k)?' on':''}" data-k="${k}"><span></span>${esc(s)}</label>`).join('')}${a.warn&&a.warn.length?`<div class="bx-h" style="margin-top:14px">⚠️ Не залететь</div>${a.warn.slice(0,3).map(w=>`<div class="bx-w">${esc(w)}</div>`).join('')}`:''}${oocBlock(a)}</div></div>`;
- const sl=el.querySelector('.bx-sits')?.scrollLeft||0;el.innerHTML=x;const ss=el.querySelector('.bx-sits');if(ss){ss.scrollLeft=sl;const on=ss.querySelector('.on');if(on&&(on.offsetLeft<ss.scrollLeft||on.offsetLeft+on.offsetWidth>ss.scrollLeft+ss.clientWidth))ss.scrollLeft=on.offsetLeft-12;}}
+ const sl=el.querySelector('.bx-sits')?.scrollLeft||0;el.innerHTML=x;const ss=el.querySelector('.bx-sits');if(ss){ss.scrollLeft=sl;const on=ss.querySelector('.on');if(on&&ss.scrollWidth>ss.clientWidth){const a=ss.getBoundingClientRect(),r=on.getBoundingClientRect();if(r.left<a.left+14)ss.scrollLeft+=r.left-a.left-18;else if(r.right>a.right-28)ss.scrollLeft+=r.right-a.right+34;}}}
 function batNext(){const P=batParts(IT[BSEL]);if(BI>=P.length)return;try{navigator.clipboard.writeText(P[BI].t)}catch(_){}flash(`Часть ${BI+1} из ${P.length} в буфере — вставь в чат (Ctrl+V)`);BI++;renderBattle();const c=$('battle').querySelector('.bx-card');if(c){c.classList.add('pop');setTimeout(()=>c.classList.remove('pop'),250);}}
 $('battle').addEventListener('click',e=>{const b=e.target.closest('.bx-sit');if(b){BSEL=+b.dataset.b;BI=0;BDONE=new Set();renderBattle();return;}
  if(e.target.closest('#bgo')){batNext();return;}
@@ -1037,8 +1067,8 @@ document.addEventListener('touchend',e=>{if(lp==='shown'){e.preventDefault();set
 document.addEventListener('touchmove',()=>{if(lp!=='shown')clearTimeout(lp);},{passive:true});
 
 // ---- help nav ----
-$('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const s=$(a.dataset.s);const c=document.querySelector('#hlp .hlp-c');c.scrollTo({top:s.offsetTop-c.querySelector('.hp-nav').offsetHeight-14,behavior:'smooth'});});
-(function(){const c=document.querySelector('#hlp .hlp-c');c.addEventListener('scroll',()=>{let cur=null;document.querySelectorAll('#hlp section').forEach(s=>{if(s.offsetTop-c.scrollTop<120)cur=s.id});document.querySelectorAll('#hpnav a').forEach(a=>a.classList.toggle('on',a.dataset.s===cur));},{passive:true});})();
+$('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const s=$(a.dataset.s);const c=$('hpbody');c.scrollTo({top:s.offsetTop-8,behavior:'smooth'});a.scrollIntoView({inline:'nearest',block:'nearest'});});
+(function(){const c=$('hpbody');c.addEventListener('scroll',()=>{let cur=null;document.querySelectorAll('#hlp section').forEach(s=>{if(s.offsetTop-c.scrollTop<60)cur=s.id});document.querySelectorAll('#hpnav a').forEach(a=>a.classList.toggle('on',a.dataset.s===cur));},{passive:true});})();
 // ---- custom select (язык голоса) ----
 (function(){const sel=$('vlang');const w=document.createElement('div');w.className='cs';w.innerHTML='<button type="button" class="cs-b"><span></span><i>▾</i></button><div class="cs-pop" hidden></div>';sel.after(w);sel.style.display='none';
  const btn=w.querySelector('.cs-b'),pop=w.querySelector('.cs-pop');const FL={'ru-RU':'🇷🇺','uk-UA':'🇺🇦'};
@@ -1051,6 +1081,7 @@ $('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)retu
  btn.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pop.hidden){open(false);e.stopPropagation();}});
  window.csSync=sync;sync();})();
 
+function phFit(){$('q').placeholder=innerWidth<520?'Что случилось? или «17.2»':'Что случилось? угон, стрелял, остров, ук 17.6…';}phFit();addEventListener('resize',phFit);
 try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','3');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;fi=0;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script>
