@@ -562,11 +562,24 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 .tab.on{background:linear-gradient(180deg,rgba(242,195,91,.16),rgba(242,195,91,.06))!important;color:#ffe3a3!important;box-shadow:inset 0 0 0 1px rgba(242,195,91,.45),inset 0 1px 0 rgba(255,255,255,.08),0 6px 18px -8px rgba(242,195,91,.45)!important;text-shadow:0 0 12px rgba(242,195,91,.35)}
 .tab:not(.on):hover{color:#dfe6f3!important;background:rgba(255,255,255,.04)!important}
 .chg-t.ok{color:#9cc7ff;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3)}
+
+.now{flex-shrink:0;margin:2px 0 6px;padding:10px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid var(--line);box-shadow:var(--sh1)}
+.now-h{display:flex;align-items:center;justify-content:space-between;font:800 10.5px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#9aa6c0;margin:0 2px 6px}
+.now-i{background:none;border:0;color:#6f7b95;cursor:pointer;font-size:13px;padding:0 2px}.now-i:hover{color:var(--gold)}
+.now-r{display:grid;grid-template-columns:24px auto 1fr;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 8px;margin:3px 0;border-radius:10px;background:rgba(255,255,255,.025);border:1px solid transparent;color:#d5dcea;cursor:pointer;font:12.5px/1.35 Inter,sans-serif;transition:all .14s}
+.now-r:hover{border-color:var(--edgeHi,rgba(255,255,255,.12));background:rgba(255,255,255,.05)}
+.now-r i{font-style:normal;text-align:center}.now-r b{font-weight:700;white-space:nowrap}.now-r span{color:#8d9ab3;min-width:0}
+.now-r.live{background:rgba(239,91,91,.08);border-color:rgba(239,91,91,.3)}.now-r.live span{color:#ffb4b4}
+.now-r.warn span{color:#ffe08a}.now-r.off span{color:#6f7b95}
+.now-n{font-size:10.5px;color:#5f6b85;margin:6px 2px 0;line-height:1.4}
+.now-r em{display:none;font-style:normal}
+@media (max-width:700px){.now{display:flex;flex-wrap:wrap;gap:5px;padding:8px}.now-h{width:100%;margin:0 2px 2px}.now-n{display:none}.now-r{display:inline-flex;width:auto;gap:5px;padding:5px 9px;margin:0;border-radius:999px;font-size:11.5px;border-color:var(--line)}.now-r b,.now-r span{display:none}.now-r em{display:inline;color:#c9d2e3}.now-r.live em{color:#ffb4b4}.now-r.warn em{color:#ffe08a}.now-r.off em{color:#7d89a3}}
+@media (max-width:560px){.hp-nav{flex-wrap:nowrap!important;overflow-x:auto!important;padding:2px 14px 10px!important;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent)!important;mask-image:linear-gradient(90deg,#000 85%,transparent)!important;scrollbar-width:none}.hp-nav::-webkit-scrollbar{display:none}.hp-hero{padding:14px 56px 8px 14px!important}.hp-ic{width:38px;height:38px;font-size:18px}}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
 <div class="hp-hero"><div class="hp-ic">📖</div><div><h2>Как пользоваться SANG Codex</h2><p>Памятка бойца SANG: законы, уставы и правила проекта, готовые ситуации с речью и действиями. Работает без интернета.</p></div></div>
-<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs2">📋 Карточка</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav></div><div class="md-body" id="hpbody">
+<nav class="hp-nav" id="hpnav"><a data-s="hs1">🔎 Поиск</a><a data-s="hs11">🕒 Сейчас по МСК</a><a data-s="hs2">📋 Карточка</a><a data-s="hs4">🧩 Задержание</a><a data-s="hs5">🎓 Учёба</a><a data-s="hs12">⧉ Поверх игры</a><a data-s="hs13">🆕 Что нового</a><a data-s="hs6">🧠 ИИ и 🎤</a><a data-s="hs7">⚙ Настройки</a><a data-s="hs8">📲 Установка</a><a data-s="hs9">⌨ Клавиши</a><a data-s="hs10">❓ Вопросы</a></nav></div><div class="md-body" id="hpbody">
 <div class="hp-quick"><div><b>1</b>Опиши, что случилось</div><div><b>2</b>Открой ситуацию 🎯</div><div><b>3</b>Жми фразы — вставляй в чат</div></div>
 
 <section id="hs1"><h3>🔎 Поиск</h3><ul>
@@ -574,8 +587,27 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 <li><b>По номеру:</b> «17.2», «ук 17.6», «пго 7.3», «ук 12.7 ч.2», «общие 5.7», «ранг 14».</li>
 <li><b>🎯 Ситуации</b> выходят сверху — это готовый разбор. Ниже — отдельные статьи и пункты.</li>
 <li><b>Фильтры</b> (Всё, 🎯, УК, АК, ДУ…): с выбранным фильтром и пустым поиском — весь документ по порядку.</li>
-<li><b>Пустой поиск</b> — главный экран: ★ избранное, 🕘 недавние и ситуации по разделам.</li>
+<li><b>Пустой поиск</b> — главный экран: блок «🕒 Сейчас по МСК», ★ избранное, 🕘 недавние и ситуации по разделам.</li>
 <li><b>Разбор ситуации:</b> напиши случай целиком («гражданский без лицензии достал ствол у КПП») — над карточкой появится 🧩 разбор (где, кто, что сделал) и кнопка «Разобрать в задержание».</li></ul></section>
+
+<section id="hs11"><h3>🕒 Сейчас по МСК</h3><p>Блок на главном экране (при пустом поиске). Время всегда по Москве; если у тебя другое — рядом в скобках твоё местное.</p><ul>
+<li><b>🏰 Форт / 🏝 Кайо-Перико</b> — чьё сегодня окно нападения (Форт: пн, ср, пт, сб; Кайо: вт, чт, вс; 16:00–23:00), сколько до начала или до конца. Красная строка — окно открыто: нападение <b>может</b> начаться, наручники во время самого нападения нельзя.</li>
+<li><b>💼 Бизнесы и банки</b> — ограбления разрешены 12:00–01:00.</li>
+<li><b>🔫 Red zone</b> — с 17:00 до 10:00 по вооружённым можно стрелять без предупреждения (включая Кайо-Перико).</li>
+<li>Нажми на строку — откроется пункт правил. На телефоне блок сжат до трёх значков.</li>
+<li>Это график с форума: переносы и заморозки объявляют в Discord. Заранее готовиться к нападению нельзя (Форт 2.2).</li></ul></section>
+
+<section id="hs12"><h3>⧉ Поверх игры (ПК)</h3><p>Кнопка <b>⧉</b> в шапке (Chrome / Edge на ПК) открывает маленькое окно Кодекса, которое всегда поверх — даже поверх игры.</p><ul>
+<li>Игра должна быть в режиме <b>«Оконный без рамки»</b> — в полноэкранном окно не будет видно.</li>
+<li>В игре освободи курсор клавишей <kbd>'</kbd>, найди ситуацию в окне, нажми <b>«💬 Речь в чат»</b> — фраза в буфере. Кликни в игру, открой чат, <kbd>Ctrl</kbd>+<kbd>V</kbd>.</li>
+<li>Внутри окна: поиск, «Сейчас по МСК», статьи, кнопка следующей части (или <kbd>Пробел</kbd>), «Дальше», все фразы (клик — копировать) и действия с галочками.</li>
+<li>Окно связано с главным: выбрал ситуацию в одном — она в другом. Закроется вместе со вкладкой Кодекса.</li></ul></section>
+
+<section id="hs13"><h3>🆕 Что нового</h3><ul>
+<li>Кнопка рядом с датой базы в шапке. <b>Красная точка</b> — есть изменения, которые ты ещё не смотрел.</li>
+<li>Внутри — что поменялось на форуме по датам: сверху «⚡ Важно для SANG», ниже остальное; метки <b>новая</b>, <b>изменена</b>, <b>утратила силу</b>.</li>
+<li>Нажми на пункт — откроется сама статья.</li>
+<li>Дата в шапке («база от …») — когда база последний раз сверялась с форумом.</li></ul></section>
 
 <section id="hs2"><h3>📋 Карточка ситуации</h3><ul>
 <li><b>Статьи</b> — номер, суть и наказание; ★ — уровень розыска.</li>
@@ -671,7 +703,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
    <button class="b" id="gear" title="Моё звание и фамилия">⚙</button>
    <button class="b on" id="topb">Поверх</button><button class="b" id="mini" title="Свернуть">▁</button>
   </div>
-  <div class="tabs"><button class="tab on" id="tSearch">🔎 Поиск</button><button class="tab" id="tBat" hidden>⚡ Бой</button><button class="tab" id="tCons">🧩 Задерж.</button><button class="tab" id="tTrn">🎓 Учёба</button></div>
+  <div class="tabs"><button class="tab on" id="tSearch">🔎 Поиск</button><button class="tab" id="tBat" hidden>⚡ Бой</button><button class="tab" id="tCons">🧩 Задержание</button><button class="tab" id="tTrn">🎓 Учёба</button></div>
   <div class="cfg" id="cfg"></div>
   <div class="chips" id="chips"></div>
   <div class="hint" id="hint"></div>
@@ -741,7 +773,7 @@ function cg(c){if(c==='УК')return 'uk';if(c==='АК')return 'ak';if(c==='ПК'
 function rowHTML(a,k){const lab=a.t==='sit'?`<span class="n sit">🎯</span>`:`<span class="n" data-g="${cg(a.code)}">${esc(a.num)}${a.stars?' '+esc(a.stars):''}</span>`;
  const mk=(typeof AISET!=='undefined'&&AISET.has(IT.indexOf(a)))?'<span class="aib">🧠</span>':'';
  return `<div class="row${k===cur?' sel':''}" data-k="${k}">${mk}${lab}<span class="tt">${esc(a.title)}</span></div>`;}
-function renderList(){$('list').innerHTML=shown.map((i,k)=>(HOMEH[k]?`<div class="sh">${HOMEH[k]}</div>`:'')+rowHTML(IT[i],k)).join('');const s=$('list').querySelector('.sel');if(s)s.scrollIntoView({block:'nearest'});}
+function renderList(){const home=!$('q').value.trim()&&grp==='all'&&typeof nowHTML==='function';$('list').innerHTML=(home?nowHTML():'')+shown.map((i,k)=>(HOMEH[k]?`<div class="sh">${HOMEH[k]}</div>`:'')+rowHTML(IT[i],k)).join('');const s=$('list').querySelector('.sel');if(s)s.scrollIntoView({block:'nearest'});}
 let CHAT={parts:[],i:0,key:''};
 function chatLimit(){const v=parseInt(($('chatlim')||{}).value);return v>=40&&v<=500?v:120;}
 function packPieces(pieces,n,sep){const out=[];let cur='';pieces.forEach(p=>{const t=(cur?cur+sep:'')+p;if(t.length<=n)cur=t;else{if(cur)out.push(cur);cur=p;}});if(cur)out.push(cur);return out;}
@@ -1234,8 +1266,8 @@ document.addEventListener('touchend',e=>{if(lp==='shown'){e.preventDefault();set
 document.addEventListener('touchmove',()=>{if(lp!=='shown')clearTimeout(lp);},{passive:true});
 
 // ---- help nav ----
-$('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const s=$(a.dataset.s);const c=$('hpbody');c.scrollTo({top:s.offsetTop-8,behavior:'smooth'});a.scrollIntoView({inline:'nearest',block:'nearest'});});
-(function(){const c=$('hpbody');c.addEventListener('scroll',()=>{let cur=null;document.querySelectorAll('#hlp section').forEach(s=>{if(s.offsetTop-c.scrollTop<60)cur=s.id});document.querySelectorAll('#hpnav a').forEach(a=>a.classList.toggle('on',a.dataset.s===cur));},{passive:true});})();
+$('hpnav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const s=$(a.dataset.s);const c=$('hpbody');c.scrollTo({top:c.scrollTop+s.getBoundingClientRect().top-c.getBoundingClientRect().top-10,behavior:'smooth'});a.scrollIntoView({inline:'nearest',block:'nearest'});});
+(function(){const c=$('hpbody');c.addEventListener('scroll',()=>{let cur=null;const ct=c.getBoundingClientRect().top;document.querySelectorAll('#hlp section').forEach(s=>{if(s.getBoundingClientRect().top-ct<60)cur=s.id});document.querySelectorAll('#hpnav a').forEach(a=>a.classList.toggle('on',a.dataset.s===cur));},{passive:true});})();
 // ---- custom select (язык голоса) ----
 (function(){const sel=$('vlang');const w=document.createElement('div');w.className='cs';w.innerHTML='<button type="button" class="cs-b"><span></span><i>▾</i></button><div class="cs-pop" hidden></div>';sel.after(w);sel.style.display='none';
  const btn=w.querySelector('.cs-b'),pop=w.querySelector('.cs-pop');const FL={'ru-RU':'🇷🇺','uk-UA':'🇺🇦'};
@@ -1284,6 +1316,92 @@ $('chgb').onclick=()=>chgOpen(true);$('chgx').onclick=()=>chgOpen(false);
 $('chgm').addEventListener('click',e=>{if(e.target.id==='chgm'){chgOpen(false);return;}const r=e.target.closest('.chg-r[data-i]');if(r){chgOpen(false);$('q').value='';openSit(+r.dataset.i);}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('chgm').hidden)chgOpen(false)});
 chgDot();
+
+// ---- «Сейчас по МСК» ----
+function msk(){const p=new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());const g=t=>(p.find(x=>x.type===t)||{}).value;
+ const wd=['вс','пн','вт','ср','чт','пт','сб'].indexOf(String(g('weekday')).toLowerCase().replace('.',''));return {wd,h:+g('hour'),m:+g('minute')};}
+const pad=n=>String(n).padStart(2,'0');
+function dur(min){const h=Math.floor(min/60),m=min%60;return h?`${h} ч ${m} мин`:`${m} мин`;}
+function locOff(){const now=new Date();const mskMin=(()=>{const t=msk();return t.h*60+t.m})();const loc=now.getHours()*60+now.getMinutes();let d=loc-mskMin;if(d>720)d-=1440;if(d<-720)d+=1440;return d;}
+function lt(hh){const d=locOff();if(!d)return '';let x=(hh*60+d+1440)%1440;return ` (у тебя ${pad(Math.floor(x/60))}:${pad(x%60)})`;}
+const ATK=wd=>[1,3,5,6].includes(wd)?['🏰','Форт','График Форт-Занкудо']:['🏝','Кайо','График Кайо-Перико'];
+function nowHTML(){const t=msk(),mn=t.h*60+t.m;const out=[];
+ {const [ic,nm,key]=ATK(t.wd);let st,cls;
+  if(mn<16*60){st=`сегодня 16:00–23:00${lt(16)} · через ${dur(16*60-mn)}`;cls='';}
+  else if(mn<23*60){st=`🔴 окно открыто до 23:00 · ещё ${dur(23*60-mn)}`;cls='live';}
+  else{const [ic2,nm2]=ATK((t.wd+1)%7);st=`окно закрыто · завтра ${ic2} ${nm2} с 16:00`;cls='off';}
+  const sh=cls==='live'?`${nm} 🔴 до 23:00`:cls==='off'?`${nm} закрыт`:`${nm} в 16:00`;out.push({ic,nm:'Нападение: '+nm,st,cls,k:key,sh});}
+ {const open=t.h>=12||t.h<1;out.push({ic:'💼',sh:open?'грабят до 01:00':'закрыты до 12:00',nm:'Бизнесы и банки',st:open?`ограбления разрешены до 01:00${lt(1)}`:`ограбления закрыты до 12:00${lt(12)}`,cls:open?'warn':'off',k:'Бизнесы 1.1'});}
+ {const on=t.h>=17||t.h<10;out.push({ic:'🔫',sh:on?'RZ без предупр. до 10:00':'RZ с 17:00',nm:'Red zone',st:on?`огонь по вооружённым без предупреждения до 10:00${lt(10)}`:`без предупреждения — с 17:00${lt(17)}`,cls:on?'warn':'off',k:'Зоны 2.1'});}
+ return `<div class="now"><div class="now-h"><span>🕒 Сейчас по МСК · ${pad(t.h)}:${pad(t.m)}</span><button class="now-i" data-k="Форт 2.2" title="Почему без сирен">ⓘ</button></div>${out.map(o=>`<button class="now-r ${o.cls}" data-k="${esc(o.k)}"><i>${o.ic}</i><b>${esc(o.nm)}</b><span>${esc(o.st)}</span><em>${esc(o.sh)}</em></button>`).join('')}<div class="now-n">По графику с форума. Изменения и заморозки — в Discord. Заранее готовиться к нападению нельзя (Форт 2.2).</div></div>`;}
+function nowRender(){const el=$('list').querySelector('.now');if(el)el.outerHTML=nowHTML();}
+$('list').addEventListener('click',e=>{const b=e.target.closest('.now-r,.now-i');if(!b)return;e.stopPropagation();const i=NUMIDX[b.dataset.k];if(i!==undefined)openSit(i);},true);
+setInterval(()=>{if(!document.hidden)nowRender();},30000);
+
+// ---- мини-окно поверх игры (Document Picture-in-Picture) ----
+let PIP=null;
+if('documentPictureInPicture' in window){const pb=document.createElement('button');pb.className='b';pb.id='pipb';pb.textContent='⧉';$('tools').insertBefore(pb,$('gear'));
+ TIPS.pipb=['⧉ Поверх игры','Маленькое окно Кодекса, которое всегда сверху — даже поверх игры (режим «Оконный без рамки»). Освободи курсор, нажми «Следующая часть», вставь в чат Ctrl+V.'];pb.dataset.tipk='pipb';
+ pb.onclick=pipOpen;}
+async function pipOpen(){if(PIP){PIP.focus();return;}
+ try{PIP=await documentPictureInPicture.requestWindow({width:380,height:600});}catch(e){flash('Не удалось открыть окно поверх: '+e.message);return;}
+ const d=PIP.document;
+ document.querySelectorAll('style,link[rel="stylesheet"]').forEach(n=>d.head.appendChild(n.cloneNode(true)));
+ const st=d.createElement('style');st.textContent=MINICSS;d.head.appendChild(st);
+ d.documentElement.style.setProperty('--fs',getComputedStyle(win).getPropertyValue('--fs')||'12px');
+ d.body.innerHTML=`<div class="mn"><div class="mn-top"><input class="mn-q" id="mq" placeholder="Что случилось? или «17.2»" autocomplete="off"><button class="mn-x" id="mclr" title="Очистить">✕</button></div><div class="mn-now" id="mnow"></div><div class="mn-list" id="ml"></div><div class="mn-card" id="mc"></div></div>`;
+ const q=d.getElementById('mq');q.value=$('q').value;
+ q.addEventListener('input',()=>{$('q').value=q.value;if(win.classList.contains('cons')||win.classList.contains('trn'))setTab('search');search();pipRender();});
+ q.addEventListener('keydown',e=>{if(e.key==='ArrowDown'&&cur<shown.length-1){cur++;renderList();renderDet();pipRender();e.preventDefault();}else if(e.key==='ArrowUp'&&cur>0){cur--;renderList();renderDet();pipRender();e.preventDefault();}else if(e.key==='Enter'){q.blur();}});
+ d.getElementById('mclr').onclick=()=>{q.value='';$('q').value='';search();pipRender();q.focus();};
+ d.addEventListener('click',e=>{const r=e.target.closest('.mn-r');if(r){cur=+r.dataset.k;renderList();renderDet();CHAT={parts:[],i:0,key:''};pipRender();return;}
+  if(e.target.closest('#mnext')){pipNext();return;}
+  const s=e.target.closest('.mn-say');if(s){pipCopy(s.dataset.t);s.classList.add('copied');setTimeout(()=>s.classList.remove('copied'),700);return;}
+  const li=e.target.closest('.mn-steps li');if(li)li.classList.toggle('done');});
+ d.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();pipNext();}});
+ PIP.addEventListener('pagehide',()=>{PIP=null;$('pipb')&&$('pipb').classList.remove('on');});
+ $('pipb').classList.add('on');pipRender();q.focus();}
+function pipCopy(t){try{PIP.navigator.clipboard.writeText(t).catch(()=>{});}catch(_){}}
+function pipNext(){if(!SAYLINES||!SAYLINES.length)return;const ml=SAYLINES.map(me),key=ml.join(' ')+'|'+chatLimit();if(CHAT.key!==key)CHAT={parts:chunkLines(ml,chatLimit()),i:0,key};
+ const part=CHAT.parts[CHAT.i];pipCopy(part);CHAT.i++;if(CHAT.i>=CHAT.parts.length)CHAT.i=CHAT.parts.length;pipRender(part);if(CHAT.i>=CHAT.parts.length)setTimeout(()=>{CHAT.i=0;},0);}
+function pipRender(justCopied){if(!PIP)return;const d=PIP.document;
+ d.getElementById('mnow').innerHTML=typeof nowHTML==='function'?nowHTML():'';
+ const top=shown.slice(0,6);d.getElementById('ml').innerHTML=top.map((i,k)=>{const a=IT[i];return `<div class="mn-r${k===cur?' on':''}" data-k="${k}">${a.t==='sit'?'🎯':`<b>${esc(a.num)}</b>`} <span>${esc(a.title)}</span></div>`}).join('')||'<div class="mn-e">Ничего не нашёл</div>';
+ const a=IT[shown[cur]];const c=d.getElementById('mc');if(!a){c.innerHTML='';return;}
+ const lines=SAYLINES||[];const ml=lines.map(me);const parts=ml.length?chunkLines(ml,chatLimit()):[];const key=ml.join(' ')+'|'+chatLimit();const i=CHAT.key===key?CHAT.i:0;
+ const done=CHAT.key===key&&justCopied&&i===0&&parts.length;
+ let x=`<div class="mn-h">${a.t==='sit'?'🎯 ':''}${esc(a.t==='sit'?a.title:a.num)}</div>`;
+ if(a.t==='sit')x+=`<div class="mn-arts">${a.arts.map(n=>byNum[n]?`<span><b>${esc(n)}</b> ${esc(byNum[n].pun||'')}</span>`:'').join('')}</div>`;else x+=`<div class="mn-ti">${esc(a.title)}</div>${a.pun?`<div class="mn-pun">${esc(a.pun)}</div>`:''}`;
+ if(parts.length){x+=`<button class="mn-go" id="mnext">💬 ${done?'Готово ✓ · заново':(i?`Следующая часть ${i+1}/${parts.length}`:`Речь в чат · 1/${parts.length}`)} <kbd>Space</kbd></button>`;
+  if(justCopied)x+=`<div class="mn-cp">✓ В буфере — вставь в чат Ctrl+V</div>`;
+  if(!done&&parts[i])x+=`<div class="mn-nx"><span>${i?'Дальше':'Первая часть'}</span>«${esc(parts[i])}»</div>`;
+  x+=`<div class="mn-lab">Фразы (клик — копировать)</div>`+ml.map(l=>`<div class="mn-say" data-t="${esc(l).replace(/"/g,'&quot;')}">«${esc(l)}»</div>`).join('');}
+ if(a.t==='sit'&&a.steps&&a.steps.length)x+=`<div class="mn-lab">Действия</div><ol class="mn-steps">${a.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`;
+ c.innerHTML=x;}
+const MINICSS=`
+body{margin:0;background:#070b14!important;overflow:hidden}body::before,body::after{display:none!important}
+.mn{display:flex;flex-direction:column;height:100vh;padding:8px;gap:6px;box-sizing:border-box;font:13px/1.4 Inter,system-ui,sans-serif;color:#e9eef7}
+.mn-top{display:flex;gap:6px}.mn-q{flex:1;min-width:0;height:34px;border-radius:10px;border:1px solid rgba(242,195,91,.35);background:rgba(255,255,255,.06);color:#fff;padding:0 10px;font:13px Inter,sans-serif;outline:none}.mn-q:focus{box-shadow:0 0 0 3px rgba(242,195,91,.15)}
+.mn-x{width:34px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.05);color:#8d9ab3;cursor:pointer}
+.mn-now .now{margin:0;padding:6px}.mn-now .now-h{display:none}
+.mn-list{flex:0 0 auto;max-height:28vh;overflow:auto;display:flex;flex-direction:column;gap:3px}
+.mn-r{padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
+.mn-r b{color:#f2c35b;font:700 11px "JetBrains Mono",monospace}.mn-r.on{border-color:rgba(242,195,91,.5);background:rgba(242,195,91,.1)}
+.mn-e{color:#6f7b95;font-size:12px;padding:4px}
+.mn-card{flex:1;min-height:0;overflow:auto;padding:10px;border-radius:12px;background:linear-gradient(180deg,#141d35,#0d1427);border:1px solid rgba(255,255,255,.07)}
+.mn-h{font:800 14px Manrope,Inter,sans-serif;color:#f6cf6f;margin-bottom:6px}
+.mn-arts{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}.mn-arts span{font-size:11px;color:#c9d2e3;background:rgba(255,255,255,.05);border-radius:6px;padding:2px 6px}.mn-arts b{color:#f2c35b;font-family:"JetBrains Mono",monospace}
+.mn-ti{font-size:12.5px;margin-bottom:4px}.mn-pun{color:#f2c35b;font-weight:700;font-size:12px;margin-bottom:6px}
+.mn-go{width:100%;min-height:44px;border:0;border-radius:12px;background:linear-gradient(135deg,#f6cf6f,#d99a25);color:#1a1204;font:800 14px Inter,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.mn-go kbd{font:700 10px Inter,sans-serif;padding:2px 5px;border-radius:5px;background:rgba(26,18,4,.15)}
+.mn-cp{color:#8fe3b2;font-size:11.5px;margin:5px 2px 0}
+.mn-nx{margin:6px 0;padding:7px 9px;border-radius:9px;border:1px dashed rgba(96,165,250,.3);background:rgba(96,165,250,.05);font-size:12px;color:#aab5cb}.mn-nx span{display:block;font:800 9.5px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#7fa9e6}
+.mn-lab{font:800 9.5px Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#7d89a3;margin:10px 0 4px}
+.mn-say{font-size:12px;padding:6px 8px;margin:3px 0;border-radius:8px;border-left:3px solid #f2c35b;background:rgba(255,255,255,.035);cursor:pointer}.mn-say.copied{border-left-color:#3fbf75;background:rgba(63,191,117,.1)}
+.mn-steps{margin:0;padding-left:18px;font-size:12px;color:#c9d2e3}.mn-steps li{margin:3px 0;cursor:pointer}.mn-steps li.done{text-decoration:line-through;color:#6f7b95}
+`;
+// синхронизация: изменения в главном окне → мини-окно
+(function(){const _rd=renderDet;renderDet=function(){_rd.apply(this,arguments);if(PIP)pipRender();};})();
 
 try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');localStorage.setItem('ps_fsv','3');}const a=parseInt(localStorage.getItem('ps_fs')),b=parseInt(localStorage.getItem('ps_fi'));if(a>=10&&a<=30)fs=a;fi=0;}catch(_){}
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
