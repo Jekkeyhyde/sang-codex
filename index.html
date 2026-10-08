@@ -486,7 +486,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 .tabs{background:rgba(10,15,30,.55)!important;box-shadow:var(--sh1);backdrop-filter:blur(10px)}
 .tab{position:relative}
 .tab.on{background:linear-gradient(180deg,#26407a,#1a2c58)!important;box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 6px 18px -6px rgba(40,80,170,.7)!important}
-.tab.on::after{content:"";position:absolute;left:30%;right:30%;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#f2c35b,transparent);box-shadow:0 0 8px rgba(242,195,91,.8)}
+.tab.on::after{content:none}
 /* chips */
 .chip{transition:all .15s!important}.chip:hover{color:#dfe6f3!important;border-color:var(--edgeHi)!important}
 .chip.on{box-shadow:0 0 0 1px rgba(242,195,91,.25),0 4px 14px -4px rgba(242,195,91,.35)}
@@ -558,6 +558,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 .chg-x{grid-column:1/-1;color:#aab5cb;font-size:12.5px}
 .chg-n{font-size:11.5px;color:#6f7b95;margin-top:14px}
 @media (max-width:480px){.chg-b{margin-left:6px;padding:1px 7px;font-size:10px}}
+.logo{min-width:0}.brand{gap:8px}@media (max-width:420px){.chg-b span{display:none}.chg-b{padding:1px 6px}}
+.tab.on{background:linear-gradient(180deg,rgba(242,195,91,.16),rgba(242,195,91,.06))!important;color:#ffe3a3!important;box-shadow:inset 0 0 0 1px rgba(242,195,91,.45),inset 0 1px 0 rgba(255,255,255,.08),0 6px 18px -8px rgba(242,195,91,.45)!important;text-shadow:0 0 12px rgba(242,195,91,.35)}
+.tab:not(.on):hover{color:#dfe6f3!important;background:rgba(255,255,255,.04)!important}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
@@ -660,7 +663,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 <div class="wrap">
  <div class="win" id="win">
   <div class="tb"><span>▦</span><span class="t">Памятка SANG · Орландо</span><span class="c">—</span><span class="c">☐</span><span class="c">✕</span></div>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd" title="Законы (УК, АК, ПК) сверены с форумом 05.10.2026. Правила проекта и уставы — по состоянию на 30.09.2026.">законы от 05.10.2026</span><button class="chg-b" id="chgb" title="Что изменилось в законах">🆕 Что нового<i></i></button></div></div></div><div class="tools" id="tools"></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z" fill="#1c2c4f" stroke="#e8b54a" stroke-width="1.6"/><path d="m12 7.2 1.4 2.9 3.2.4-2.3 2.2.6 3.1L12 14.3l-2.9 1.5.6-3.1-2.3-2.2 3.2-.4z" fill="#e8b54a"/></svg><div><div class="bt">SANG Codex</div><div class="bs"><span class="bl">Памятка · Орландо · </span><span class="bd" title="Законы (УК, АК, ПК) сверены с форумом 05.10.2026. Правила проекта и уставы — по состоянию на 30.09.2026.">законы от 05.10.2026</span><button class="chg-b" id="chgb" title="Что изменилось в законах">🆕<span> Что нового</span><i></i></button></div></div></div><div class="tools" id="tools"></div></div>
   <div class="top">
    <input class="q" id="q" placeholder="Что случилось? угон, стрелял, остров, 17.1…" autocomplete="off">
    <button class="mic" id="mic" title="Сказать голосом">🎤</button><button class="b" id="minus" title="Меньше">A−</button><button class="b" id="plus" title="Больше">A+</button><button class="b" id="font" title="Шрифт">Аа</button>
