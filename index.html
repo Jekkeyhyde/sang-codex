@@ -1384,6 +1384,13 @@ function pipRender(justCopied){if(!PIP)return;const d=PIP.document;
  if(ml.length)x+=`<details class="mn-say-d"${PIP._sayOpen?' open':''}><summary>🗣 Фразы <span>(клик — копировать)</span></summary>${justCopied?'<div class="mn-cp">✓ Скопировано — вставь в чат Ctrl+V</div>':''}${ml.map(l=>`<div class="mn-say" data-t="${esc(l).replace(/"/g,'&quot;')}">«${esc(l)}»</div>`).join('')}</details>`;
  c.innerHTML=x;}
 const MINICSS=`
+.mn-list,.mn-card,body{scrollbar-width:auto!important;scrollbar-color:auto!important}
+.mn-list::-webkit-scrollbar,.mn-card::-webkit-scrollbar,body::-webkit-scrollbar{width:9px;height:9px}
+.mn-list::-webkit-scrollbar-track,.mn-card::-webkit-scrollbar-track{background:transparent;margin:10px 0}
+.mn-list::-webkit-scrollbar-thumb,.mn-card::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:3px solid transparent;background-clip:padding-box}
+.mn-list::-webkit-scrollbar-thumb:hover,.mn-card::-webkit-scrollbar-thumb:hover{background:rgba(242,195,91,.45);background-clip:padding-box}
+.mn-list::-webkit-scrollbar-button,.mn-card::-webkit-scrollbar-button{display:none;width:0;height:0}
+
 .mn-a{font-size:12px;padding:6px 8px;margin:4px 0;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);line-height:1.4}.mn-a b{color:#f2c35b;font-family:"JetBrains Mono",monospace}.mn-a i{font-style:normal;color:#f2c35b;font-size:10px}
 .mn-pun{color:#f6cf6f;font-weight:700;margin-top:2px}
 .mn-ooc{margin:8px 0;padding:6px 8px;border-radius:8px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#d9ccff;font-size:11.5px}
