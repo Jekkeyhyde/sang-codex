@@ -599,8 +599,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 
 <section id="hs12"><h3>⧉ Поверх игры (ПК)</h3><p>Кнопка <b>⧉</b> в шапке (Chrome / Edge на ПК) открывает маленькое окно Кодекса, которое всегда поверх — даже поверх игры.</p><ul>
 <li>Игра должна быть в режиме <b>«Оконный без рамки»</b> — в полноэкранном окно не будет видно.</li>
-<li>В игре освободи курсор клавишей <kbd>'</kbd>, найди ситуацию в окне, нажми <b>«💬 Речь в чат»</b> — фраза в буфере. Кликни в игру, открой чат, <kbd>Ctrl</kbd>+<kbd>V</kbd>.</li>
-<li>Внутри окна: поиск, «Сейчас по МСК», статьи, кнопка следующей части (или <kbd>Пробел</kbd>), «Дальше», все фразы (клик — копировать) и действия с галочками.</li>
+<li>Это быстрая шпаргалка: освободи курсор клавишей <kbd>'</kbd>, введи что случилось — сразу видно статьи и наказание, действия с галочками и «Важно».</li>
+<li>Фразы свёрнуты в «🗣 Фразы ▾» — раскрой и кликни нужную, она скопируется; в игре <kbd>Ctrl</kbd>+<kbd>V</kbd>. Полная речь по частям — в основном окне.</li>
+<li><b>▁</b> сворачивает окно в маленькую полоску «⧉ Кодекс» — чтобы курсор при поворотах камеры не цеплялся за окно. Поставь окно в угол экрана.</li>
 <li>Окно связано с главным: выбрал ситуацию в одном — она в другом. Закроется вместе со вкладкой Кодекса.</li></ul></section>
 
 <section id="hs13"><h3>🆕 Что нового</h3><ul>
@@ -1341,7 +1342,7 @@ setInterval(()=>{if(!document.hidden)nowRender();},30000);
 // ---- мини-окно поверх игры (Document Picture-in-Picture) ----
 let PIP=null;
 if('documentPictureInPicture' in window){const pb=document.createElement('button');pb.className='b';pb.id='pipb';pb.textContent='⧉';$('tools').insertBefore(pb,$('gear'));
- TIPS.pipb=['⧉ Поверх игры','Маленькое окно Кодекса, которое всегда сверху — даже поверх игры (режим «Оконный без рамки»). Освободи курсор, нажми «Следующая часть», вставь в чат Ctrl+V.'];pb.dataset.tipk='pipb';
+ TIPS.pipb=['⧉ Поверх игры','Маленькое окно-шпаргалка поверх игры (режим «Оконный без рамки»): статьи, наказание, действия. ▁ — свернуть в полоску.'];pb.dataset.tipk='pipb';
  pb.onclick=pipOpen;}
 async function pipOpen(){if(PIP){PIP.focus();return;}
  try{PIP=await documentPictureInPicture.requestWindow({width:380,height:600});}catch(e){flash('Не удалось открыть окно поверх: '+e.message);return;}
@@ -1349,36 +1350,50 @@ async function pipOpen(){if(PIP){PIP.focus();return;}
  document.querySelectorAll('style,link[rel="stylesheet"]').forEach(n=>d.head.appendChild(n.cloneNode(true)));
  const st=d.createElement('style');st.textContent=MINICSS;d.head.appendChild(st);
  d.documentElement.style.setProperty('--fs',getComputedStyle(win).getPropertyValue('--fs')||'12px');
- d.body.innerHTML=`<div class="mn"><div class="mn-top"><input class="mn-q" id="mq" placeholder="Что случилось? или «17.2»" autocomplete="off"><button class="mn-x" id="mclr" title="Очистить">✕</button></div><div class="mn-now" id="mnow"></div><div class="mn-list" id="ml"></div><div class="mn-card" id="mc"></div></div>`;
+ d.body.innerHTML=`<div class="mn"><div class="mn-top"><input class="mn-q" id="mq" placeholder="Что случилось? или «17.2»" autocomplete="off"><button class="mn-x" id="mclr" title="Очистить">✕</button><button class="mn-x" id="mmin" title="Свернуть в полоску">▁</button></div><button class="mn-strip" id="mstrip">⧉ Кодекс <span>развернуть ▴</span></button><div class="mn-now" id="mnow"></div><div class="mn-list" id="ml"></div><div class="mn-card" id="mc"></div></div>`;
  const q=d.getElementById('mq');q.value=$('q').value;
  q.addEventListener('input',()=>{$('q').value=q.value;if(win.classList.contains('cons')||win.classList.contains('trn'))setTab('search');search();pipRender();});
  q.addEventListener('keydown',e=>{if(e.key==='ArrowDown'&&cur<shown.length-1){cur++;renderList();renderDet();pipRender();e.preventDefault();}else if(e.key==='ArrowUp'&&cur>0){cur--;renderList();renderDet();pipRender();e.preventDefault();}else if(e.key==='Enter'){q.blur();}});
  d.getElementById('mclr').onclick=()=>{q.value='';$('q').value='';search();pipRender();q.focus();};
+ d.getElementById('mmin').onclick=()=>pipMin(true);d.getElementById('mstrip').onclick=()=>pipMin(false);
  d.addEventListener('click',e=>{const r=e.target.closest('.mn-r');if(r){cur=+r.dataset.k;renderList();renderDet();CHAT={parts:[],i:0,key:''};pipRender();return;}
   if(e.target.closest('#mnext')){pipNext();return;}
-  const s=e.target.closest('.mn-say');if(s){pipCopy(s.dataset.t);s.classList.add('copied');setTimeout(()=>s.classList.remove('copied'),700);return;}
+  const s=e.target.closest('.mn-say');if(s){pipCopy(s.dataset.t);s.classList.add('copied');setTimeout(()=>s.classList.remove('copied'),900);return;}
+  if(e.target.closest('.mn-say-d summary'))setTimeout(()=>{PIP._sayOpen=d.querySelector('.mn-say-d').open;},0);
   const li=e.target.closest('.mn-steps li');if(li)li.classList.toggle('done');});
- d.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();pipNext();}});
+
  PIP.addEventListener('pagehide',()=>{PIP=null;$('pipb')&&$('pipb').classList.remove('on');});
  $('pipb').classList.add('on');pipRender();q.focus();}
+function pipMin(on){if(!PIP)return;PIP.document.body.classList.toggle('mini',on);try{if(on){PIP._sz=[PIP.outerWidth,PIP.outerHeight];PIP.resizeTo(190,64);}else{const s=PIP._sz||[380,600];PIP.resizeTo(s[0],s[1]);}}catch(_){}}
 function pipCopy(t){try{PIP.navigator.clipboard.writeText(t).catch(()=>{});}catch(_){}}
 function pipNext(){if(!SAYLINES||!SAYLINES.length)return;const ml=SAYLINES.map(me),key=ml.join(' ')+'|'+chatLimit();if(CHAT.key!==key)CHAT={parts:chunkLines(ml,chatLimit()),i:0,key};
  const part=CHAT.parts[CHAT.i];pipCopy(part);CHAT.i++;if(CHAT.i>=CHAT.parts.length)CHAT.i=CHAT.parts.length;pipRender(part);if(CHAT.i>=CHAT.parts.length)setTimeout(()=>{CHAT.i=0;},0);}
 function pipRender(justCopied){if(!PIP)return;const d=PIP.document;
  d.getElementById('mnow').innerHTML=typeof nowHTML==='function'?nowHTML():'';
- const top=shown.slice(0,6);d.getElementById('ml').innerHTML=top.map((i,k)=>{const a=IT[i];return `<div class="mn-r${k===cur?' on':''}" data-k="${k}">${a.t==='sit'?'🎯':`<b>${esc(a.num)}</b>`} <span>${esc(a.title)}</span></div>`}).join('')||'<div class="mn-e">Ничего не нашёл</div>';
+ const top=shown.slice(0,4);d.getElementById('ml').innerHTML=top.map((i,k)=>{const a=IT[i];return `<div class="mn-r${k===cur?' on':''}" data-k="${k}">${a.t==='sit'?'🎯':`<b>${esc(a.num)}</b>`} <span>${esc(a.title)}</span></div>`}).join('')||'<div class="mn-e">Ничего не нашёл</div>';
  const a=IT[shown[cur]];const c=d.getElementById('mc');if(!a){c.innerHTML='';return;}
  const lines=SAYLINES||[];const ml=lines.map(me);const parts=ml.length?chunkLines(ml,chatLimit()):[];const key=ml.join(' ')+'|'+chatLimit();const i=CHAT.key===key?CHAT.i:0;
  const done=CHAT.key===key&&justCopied&&i===0&&parts.length;
  let x=`<div class="mn-h">${a.t==='sit'?'🎯 ':''}${esc(a.t==='sit'?a.title:a.num)}</div>`;
  if(a.t==='sit')x+=`<div class="mn-arts">${a.arts.map(n=>byNum[n]?`<span><b>${esc(n)}</b> ${esc(byNum[n].pun||'')}</span>`:'').join('')}</div>`;else x+=`<div class="mn-ti">${esc(a.title)}</div>${a.pun?`<div class="mn-pun">${esc(a.pun)}</div>`:''}`;
- if(parts.length){x+=`<button class="mn-go" id="mnext">💬 ${done?'Готово ✓ · заново':(i?`Следующая часть ${i+1}/${parts.length}`:`Речь в чат · 1/${parts.length}`)} <kbd>Space</kbd></button>`;
-  if(justCopied)x+=`<div class="mn-cp">✓ В буфере — вставь в чат Ctrl+V</div>`;
-  if(!done&&parts[i])x+=`<div class="mn-nx"><span>${i?'Дальше':'Первая часть'}</span>«${esc(parts[i])}»</div>`;
-  x+=`<div class="mn-lab">Фразы (клик — копировать)</div>`+ml.map(l=>`<div class="mn-say" data-t="${esc(l).replace(/"/g,'&quot;')}">«${esc(l)}»</div>`).join('');}
+ if(a.t==='sit'&&a.arts&&a.arts.length){x=`<div class="mn-h">🎯 ${esc(a.title)}</div><div class="mn-lab">Статьи</div>`+a.arts.map(n=>{const z=byNum[n];return z?`<div class="mn-a"><b>${esc(n)}</b>${z.stars?' <i>'+esc(z.stars)+'</i>':''} — ${esc(z.title)}${z.pun?`<div class="mn-pun">${esc(z.pun)}</div>`:''}</div>`:''}).join('');}
+ if(a.ooc)x+=`<div class="mn-ooc">🎮 ${esc(a.ooc)}</div>`;
  if(a.t==='sit'&&a.steps&&a.steps.length)x+=`<div class="mn-lab">Действия</div><ol class="mn-steps">${a.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`;
+ if(a.t==='sit'&&a.warn&&a.warn.length)x+=`<div class="mn-lab">⚠️ Важно</div>`+a.warn.map(w=>`<div class="mn-w">${esc(w)}</div>`).join('');
+ if(a.t!=='sit'&&a.full)x+=`<div class="mn-lab">Полный текст</div><div class="mn-full">${esc(a.full)}</div>`;
+ if(ml.length)x+=`<details class="mn-say-d"${PIP._sayOpen?' open':''}><summary>🗣 Фразы <span>(клик — копировать)</span></summary>${justCopied?'<div class="mn-cp">✓ Скопировано — вставь в чат Ctrl+V</div>':''}${ml.map(l=>`<div class="mn-say" data-t="${esc(l).replace(/"/g,'&quot;')}">«${esc(l)}»</div>`).join('')}</details>`;
  c.innerHTML=x;}
 const MINICSS=`
+.mn-a{font-size:12px;padding:6px 8px;margin:4px 0;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);line-height:1.4}.mn-a b{color:#f2c35b;font-family:"JetBrains Mono",monospace}.mn-a i{font-style:normal;color:#f2c35b;font-size:10px}
+.mn-pun{color:#f6cf6f;font-weight:700;margin-top:2px}
+.mn-ooc{margin:8px 0;padding:6px 8px;border-radius:8px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#d9ccff;font-size:11.5px}
+.mn-w{font-size:11.5px;padding:5px 8px;margin:3px 0;border-radius:8px;background:rgba(255,160,122,.07);border:1px solid rgba(255,160,122,.22);color:#ffc4ae}
+.mn-full{font-size:12px;white-space:pre-line;color:#c9d2e3;font-style:italic}
+.mn-say-d{margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:6px}.mn-say-d summary{cursor:pointer;font:700 12px Inter,sans-serif;color:#bcd8ff;list-style:none;padding:4px 0}.mn-say-d summary::-webkit-details-marker{display:none}.mn-say-d summary span{font-weight:500;color:#6f7b95;font-size:11px}
+.mn-say-d[open] summary::after{content:" ▴"}.mn-say-d:not([open]) summary::after{content:" ▾"}
+.mn-strip{display:none;width:100%;height:100%;border:0;border-radius:12px;background:linear-gradient(135deg,#1c2848,#131c34);color:#ffe3a3;font:800 13px Inter,sans-serif;cursor:pointer;border:1px solid rgba(242,195,91,.4)}.mn-strip span{font-weight:500;color:#8d9ab3;font-size:11px;margin-left:4px}
+body.mini .mn>*:not(.mn-strip){display:none!important}body.mini .mn-strip{display:block}body.mini .mn{padding:4px}
+
 body{margin:0;background:#070b14!important;overflow:hidden}body::before,body::after{display:none!important}
 .mn{display:flex;flex-direction:column;height:100vh;padding:8px;gap:6px;box-sizing:border-box;font:13px/1.4 Inter,system-ui,sans-serif;color:#e9eef7}
 .mn-top{display:flex;gap:6px}.mn-q{flex:1;min-width:0;height:34px;border-radius:10px;border:1px solid rgba(242,195,91,.35);background:rgba(255,255,255,.06);color:#fff;padding:0 10px;font:13px Inter,sans-serif;outline:none}.mn-q:focus{box-shadow:0 0 0 3px rgba(242,195,91,.15)}
