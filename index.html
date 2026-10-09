@@ -1231,6 +1231,7 @@ async function aiRerank(raw,sc){if(AI.state!=='on'||raw.length<4)return;const my
  const hi=sims[0][0],lo=sims[sims.length-1][0],top=Math.max(12,...sc);AISET=new Set();
  const tot=sc.slice();sims.forEach(([s,i],k)=>{const w=(s-lo)/(hi-lo+1e-6);if(w<.35)return;if(!sc[i]||sc[i]<top/3)AISET.add(i);tot[i]=(sc[i]||0)+w*top*(IT[i].t==='sit'?1.1:.9);});
  const mn=Math.max(1,Math.floor(Math.max(...tot)/3));const prev=shown[cur];shown=tot.map((s,i)=>[s,i]).filter(x=>x[0]>=mn&&inGrp(IT[x[1]])).sort((a,b)=>b[0]-a[0]||a[1]-b[1]).slice(0,60).map(x=>x[1]);cur=cur>0&&shown.includes(prev)?shown.indexOf(prev):0;renderList();if(shown[cur]!==prev)renderDet();}
+try{if(localStorage.getItem('ps_mig_ai')!=='1'){localStorage.setItem('ps_ai','0');localStorage.setItem('ps_mig_ai','1');}}catch(_){}
 try{if(localStorage.getItem('ps_ai')==='1')setTimeout(aiLoad,600)}catch(_){}
 
 // ---- settings modal ----
