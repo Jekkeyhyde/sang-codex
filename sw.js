@@ -1,4 +1,4 @@
-const C='sang-codex-v30';
+const C='sang-codex-v31';
 const CDN='sang-codex-cdn';
 const F=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)));self.skipWaiting();});
