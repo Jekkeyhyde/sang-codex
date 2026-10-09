@@ -592,6 +592,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 .qwrap{position:relative;flex:1;min-width:0;display:flex}.qwrap .q{flex:1;padding-right:40px!important}.qclr{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:var(--txt);font-size:13px;line-height:26px;cursor:pointer;padding:0;opacity:.75;transition:opacity .12s,background .12s}.qclr:hover{opacity:1;background:rgba(242,195,91,.25)}.qclr[hidden]{display:none}
 .opt{font-size:11.5px!important;padding:4px 10px!important;font-weight:500!important}.opts{gap:5px!important}
 .chg-b{display:inline-flex!important;align-items:center;gap:4px;line-height:1!important;padding:4px 9px!important;vertical-align:middle!important}
+.chipsw{grid-area:chips;min-width:0}.chipsw .chips{grid-area:auto}.chips2{padding-top:4px!important}.chips2 .chip{padding:3px 10px!important;font-size:11px!important}.chips2[hidden]{display:none!important}
 </style></head><body>
 <div class="hlp" id="hlp" hidden><div class="hlp-c hp" role="dialog" aria-label="Как пользоваться">
 <div class="md-head"><button class="hlp-x" id="hlpx" aria-label="Закрыть">✕</button>
@@ -723,7 +724,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
   </div>
   <div class="tabs"><button class="tab on" id="tSearch">🔎 Поиск</button><button class="tab" id="tBat" hidden>⚡ Бой</button><button class="tab" id="tCons">🧩 Задержание</button><button class="tab" id="tTrn">🎓 Учёба</button></div>
   <div class="cfg" id="cfg"></div>
-  <div class="chips" id="chips"></div>
+  <div class="chipsw"><div class="chips" id="chips"></div><div class="chips chips2" id="chips2" hidden></div></div>
   <div class="hint" id="hint"></div>
   <div class="list" id="list"></div>
   <div class="det" id="det"></div>
@@ -750,7 +751,9 @@ const CODEN={'УК':'Уголовного кодекса','АК':'Админис
 const GROUPS=[['all','Всё'],['sit','🎯'],['УК','УК'],['АК','АК'],['ПК','ПК'],['ДК','ДК'],['ДУ','ДУ'],['УВС','УВС'],['КУ','КУ'],['НГ','Закон о НГ'],['rules','Правила'],['other','Прочее']];
 const UST=['ДУ','УВС','КУ','НГ','Прил1'],RUL=['ПГО','Поставки','Кайо','Форт','Зоны','Банки','Бизнесы','ОиП','ВП','Общие','AirDrop','График'];
 let grp='all';
-function inGrp(a){if(grp==='all')return true;if(grp==='sit')return a.t==='sit';if(grp==='ust')return UST.includes(a.code);if(grp==='rules')return RUL.includes(a.code);if(grp==='НГ')return a.code==='НГ'||a.code==='Прил1';if(grp==='other')return ['Конст','ГК','ТК','ЭК'].includes(a.code);return a.code===grp;}
+const SUBG={rules:[['all','Все'],['Форт','Форт'],['Кайо','Кайо'],['Поставки','Поставки'],['ПГО','ПГО'],['Зоны','Зоны'],['ВП','ВП'],['rob','Ограбления'],['Общие','Общие правила'],['sch','Графики']],other:[['all','Все'],['Конст','Конституция'],['ГК','ГК'],['ТК','ТК'],['ЭК','ЭК']]};
+const SUBC={rob:['Банки','Бизнесы','ОиП'],sch:['График','AirDrop']};let sub='all';
+function inGrp(a){if(sub!=='all'&&SUBG[grp]){const L=SUBC[sub]||[sub];if(!L.includes(a.code))return false;}if(grp==='all')return true;if(grp==='sit')return a.t==='sit';if(grp==='ust')return UST.includes(a.code);if(grp==='rules')return RUL.includes(a.code);if(grp==='НГ')return a.code==='НГ'||a.code==='Прил1';if(grp==='other')return ['Конст','ГК','ТК','ЭК'].includes(a.code);return a.code===grp;}
 const SYN={'стрел':'огонь выстрел стрельб','шмаля':'стрел огонь','пальн':'стрел огонь','удар':'насили напал бьет','бьет':'удар насили','избил':'удар насили побои','тачк':'авто транспорт машин','машин':'авто транспорт','угна':'угон завладен','ствол':'оружие','пушк':'оружие','нарк':'наркот','трав':'наркот куст','бронь':'бронежилет','броник':'бронежилет','маск':'маска лицо','мент':'полиц','коп':'полиц','гос':'государствен','фз':'форт','форт':'занкудо','остров':'кайо перико','кайо':'остров','матер':'мат оскорб','послал':'оскорб','обзыва':'оскорб','убег':'скрыл уклон','сбеж':'скрыл уклон','документ':'удостовер паспорт','мусор':'полиц','фэбээр':'fib','фбр':'fib','фибов':'fib','лспд':'lspd полиц','шериф':'lscsd','вертушк':'вертолет','тазер':'шокер спецсредств','гоп':'грабеж','барыг':'сбыт наркот','закладк':'сбыт наркот','мочкан':'убил','завалил':'убил','грохнул':'убил','заковал':'наручник','браслет':'наручник','ксива':'удостовер','корочк':'удостовер','личк':'личный транспорт','хаммер':'военн машин','броневик':'военн машин','база':'форт','взлетк':'впп','рация':'рации доклад','афк':'бездейств','самовол':'самовольн','кпз':'арест','ордер':'обыск','наркота':'наркот','лиценз':'лицензия оружие','серийн':'серийник гос ствол','ствол':'оружие','пушк':'оружие','увал':'увольнит','отпуск':'отпуск'};
 function expand(q){let add='';Object.keys(SYN).forEach(k=>{if(q.includes(k))add+=' '+SYN[k]});return q+add+' ';}
 const HINT='Что случилось? · ↑↓ листать · клик по фразе — копировать';
@@ -986,7 +989,8 @@ function setTab(m){if(m===true)m='cons';if(m===false)m='search';win.classList.to
  if(m==='cons')renderCons();else if(m==='bat')renderBattle();else if(m==='trn'){renderTrainer();if(TS.stage==='run')qTimer();}if(m!=='trn'&&typeof TQ!=='undefined')clearInterval(TQ);else $('q').focus();}
 $('tSearch').onclick=()=>setTab('search');$('tCons').onclick=()=>{if(!C.ask)C.ask=[];setTab('cons')};$('tBat').onclick=()=>setTab('bat');$('tTrn').onclick=()=>setTab('trn');
 $('chips').innerHTML=GROUPS.map(g=>`<button class="chip${g[0]==='all'?' on':''}" data-g="${g[0]}">${g[1]}</button>`).join('');
-$('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));search();});
+$('chips2').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;sub=c.dataset.s;[...$('chips2').children].forEach(x=>x.classList.toggle('on',x===c));search();});
+$('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;grp=c.dataset.g;sub='all';[...$('chips').children].forEach(x=>x.classList.toggle('on',x===c));const c2=$('chips2'),L=SUBG[grp];c2.hidden=!L;c2.innerHTML=L?L.map(g=>`<button class="chip${g[0]==='all'?' on':''}" data-s="${g[0]}">${g[1]}</button>`).join(''):'';search();});
 ['myrank','myname'].forEach(id=>$(id).addEventListener('input',()=>{if(win.classList.contains('cons'))renderCons();}));
 ['gear'].forEach(id=>{const b=$(id);if(b)$('tools').appendChild(b)});['minus','plus'].forEach(id=>{const b=$(id);if(b)b.style.display='none'});
 const hb=document.createElement('button');hb.className='b';hb.id='helpb';hb.title='Как пользоваться';hb.textContent='?';$('tools').appendChild(hb);
