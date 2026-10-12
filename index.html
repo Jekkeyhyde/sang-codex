@@ -1134,7 +1134,7 @@ function near(P,i,f,k,hard){const a=IT[i],ch=chap(a),val=f(i);const seen=new Set
 function mkQFor(topic,i,hard){
  if(topic==='sit'){const a=IT[i],r=a.arts[0],pf=r.split(' ')[0],rch=chap(byNum[r]);let pool=[...new Set(TPOOL.map(j=>IT[j].arts[0]))].filter(n=>!a.arts.includes(n)&&byNum[n]);
   const same=pool.filter(n=>n.startsWith(pf));const sameCh=same.filter(n=>chap(byNum[n])===rch);let ds=shuf(hard?sameCh:[]);ds=[...ds,...shuf(same).filter(n=>!ds.includes(n))];ds=[...ds,...shuf(pool).filter(n=>!ds.includes(n))].slice(0,3);
-  const fmt=n=>`<b>${esc(n)}</b> — ${esc(cut(byNum[n].title,110))}`;return {topic,cid:cid(i),kind:'Ситуация',q:a.title,sub:'Какая основная статья?',ok:fmt(r),opts:shuf([r,...ds]).map(fmt),exp:a.arts.map(n=>byNum[n]?`${n} — ${cut(byNum[n].title,120)}`:n).join('\n'),go:i};}
+  const ex=isExam();const fmt=n=>ex?`<b>${esc(n)}</b>`:`<b>${esc(n)}</b> — ${esc(cut(byNum[n].title,110))}`;return {topic,cid:cid(i),kind:'Ситуация',q:a.title,sub:ex?'Какая основная статья? (только номер)':'Какая основная статья?',ok:fmt(r),opts:shuf([r,...ds]).map(fmt),exp:a.arts.map(n=>byNum[n]?`${n} — ${cut(byNum[n].title,120)}`:n).join('\n'),go:i};}
  const P=POOLS[topic],a=IT[i];
  const types=['d2n','n2d'];if((topic==='УК'||topic==='АК')&&a.pun&&new Set(P.map(j=>IT[j].pun)).size>4)types.push('pun','pun');const t=types[Math.floor(Math.random()*types.length)];
  const base={topic,cid:cid(i),go:i};
