@@ -1485,6 +1485,8 @@ $('det').addEventListener('click',e=>{if(e.target.closest('.say,[data-chat],#fav
 $('q').addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp')setTimeout(teleExplicit,0);});
 document.addEventListener('keydown',e=>{if(e.code==='Space'&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName)&&$('det').querySelector('[data-chat]'))teleExplicit();});
 setTimeout(learnFetch,1500);
+setTimeout(()=>{try{if(teleOn()){const dk=new Date().toISOString().slice(0,10);if(localStorage.getItem('ps_vday')!==dk){let id=localStorage.getItem('ps_vid');if(!id){id=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('ps_vid',id);}fetch(API+'/v',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({u:id,d:matchMedia('(max-width:700px)').matches?'m':'d'}),keepalive:true}).then(r=>{if(r.ok)localStorage.setItem('ps_vday',dk)}).catch(()=>{});}}}catch(_){}
+},2500);
 
 $('advsw').onchange=()=>{try{localStorage.setItem('ps_adv',$('advsw').checked?'1':'0')}catch(_){}renderDet();};$('telesw').onchange=()=>{try{localStorage.setItem('ps_tele',$('telesw').checked?'1':'0')}catch(_){}flash($('telesw').checked?'Спасибо! Помогаешь улучшать базу':'Отправка выключена');};
 
@@ -1504,4 +1506,5 @@ try{if(localStorage.getItem('ps_fsv')!=='3'){localStorage.removeItem('ps_fs');lo
 $('hint').textContent=HINT;applyFont();search();$('q').focus();
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "524c33db6b424c12aeabd2526ac33be5"}'></script><!-- End Cloudflare Web Analytics -->
 </body></html>
